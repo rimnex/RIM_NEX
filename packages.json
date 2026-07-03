@@ -2,8 +2,8 @@
   "name": "RIM_NEX",
   "identifier": "com.rimnex.store",
   "subtitle": "تطبيقات وألعاب مخصصة",
-  "description": "متجر RIM_NEX لتثبيت تطبيقات الـ IPA الخاص عبر Feather.",
-  "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/image_4.png",
+  "description": "تطبيقات الـ RIM_NEX متجر",
+  "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/IMG_2567.png",
   "apps": [
     {
       "name": "RIM_NEX App",
