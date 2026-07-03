@@ -3,18 +3,18 @@
   "identifier": "com.rimnex.store",
   "subtitle": "تطبيقات وألعاب مخصصة",
   "description": "متجر RIM_NEX الخاص لتثبيت تطبيقات الـ IPA عبر Feather.",
-  "iconURL": "https://raw.githubusercontent.com/username/repo/main/image_4.png",
+  "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/image_4.png",
   "apps": [
     {
-      "name": "تطبيق تجريبي (مثال)",
+      "name": "RIM_NEX App",
       "bundleIdentifier": "com.example.testapp",
       "developerName": "RIM_NEX",
       "version": "1.0.0",
       "versionDate": "2026-07-03",
-      "downloadURL": "https://raw.githubusercontent.com/username/repo/main/test.ipa",
-      "iconURL": "https://raw.githubusercontent.com/username/repo/main/app_icon.png",
+      "downloadURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/test.ipa",
+      "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/app_icon.png",
       "size": 10485760,
-      "subtitle": "وصف قصير للتطبيق التجريبي",
+      "subtitle": "وصف قصير للتطبيقRIM_NEX App",
       "description": "هذا مجرد تطبيق تجريبي للتأكد من عمل المتجر بنجاح."
     }
   ]
