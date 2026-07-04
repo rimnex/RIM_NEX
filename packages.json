@@ -2,7 +2,7 @@
   "name": "RIM_NEX",
   "identifier": "com.rimnex.store",
   "subtitle": "تطبيقات وألعاب مخصصة",
-  "description": "تطبيقات الـ RIM_NEX متجر",
+  "description": "متجر RIM_NEX تطبيقات الـ",
   "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/IMG_2567.png",
   "apps": [
     {
@@ -12,7 +12,7 @@
       "version": "1.0.0",
       "versionDate": "2026-07-03",
       "downloadURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/feather_v1.4.0.ipa",
-      "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/app_icon.png",
+      "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/IMG_2567.png",
       "size": 10485760,
       "subtitle": "وصف قصير للتطبيق",
       "description": "تطبيق تجريبي للتأكد من عمل المتجر بنجاح"
