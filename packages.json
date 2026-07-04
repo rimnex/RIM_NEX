@@ -3,7 +3,7 @@
   "identifier": "com.rimnex.store",
   "subtitle": "تطبيقات وألعاب مخصصة",
   "description": "تطبيقات الـ RIM_NEX متجر",
-  "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/refs/heads/main/IMG_2567.png",
+  "iconURL": "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/IMG_2567.png",
   "apps": [
     {
       "name": "RIM_NEX App",
