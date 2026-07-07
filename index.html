@@ -1,158 +1,31 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIM_NEX App Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --gold-gradient: linear-gradient(135deg, #FFDF00 0%, #D4AF37 100%);
-            --metallic-bg: linear-gradient(145deg, #111111 0%, #292929 100%);
-            --text-gold: #D4AF37;
-        }
-        body {
-            background-color: #0d0d0d;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        .header {
-            margin-bottom: 30px;
-        }
-        h1 {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #b3b3b3;
-            font-size: 16px;
-        }
-        .status {
-            display: inline-block;
-            background: #1a1a1a;
-            border: 1px solid var(--text-gold);
-            padding: 10px 20px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            font-weight: bold;
-            color: var(--text-gold);
-        }
-        .app-list {
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: right;
-        }
-        .app-item {
-            background: var(--metallic-bg);
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: transform 0.2s;
-        }
-        .app-item:hover {
-            transform: translateY(-3px);
-            border-color: var(--text-gold);
-        }
-        .app-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .app-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--text-gold);
-        }
-        .app-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .install-btn {
-            background: var(--gold-gradient);
-            color: #000000;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .install-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>RIM_NEX</h1>
-        <p>التطبيقات موقعة بشهادة مجانية.</p>
-        <p>بواسطة: <span style="color: var(--text-gold);">RIM_NEX</span></p>
-    </div>
-
-    <div class="status">
-        <i class="fa-solid fa-eye"></i> الزوار: متصل
-    </div>
-
-    <div class="app-list">
-
-        <div class="app-item">
-            <div class="app-info">
-                <div class="app-icon"><i class="fa-brands fa-tiktok"></i></div>
-                <div class="app-name">تيك توك</div>
-            </div>
-            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/TikTok23_45.6.0_1783392120.ipa" class="install-btn">تثبيت</a>
-        </div>
-
-        <div class="app-item">
-            <div class="app-info">
-                <div class="app-icon"><i class="fa-brands fa-telegram"></i></div>
-                <div class="app-name">تيليجرام</div>
-            </div>
-            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/Teledark2_12.8_1783392067.ipa" class="install-btn">تثبيت</a>
-        </div>
-
-        <div class="app-item">
-            <div class="app-info">
-                <div class="app-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                <div class="app-name">واتساب</div>
-            </div>
-            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/WhatsApp_26.22.76_1783391954.ipa" class="install-btn">تثبيت</a>
-        </div>
-
-        <div class="app-item">
-            <div class="app-info">
-                <div class="app-icon"><i class="fa-brands fa-youtube"></i></div>
-                <div class="app-name">يوتيوب</div>
-            </div>
-            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/YouTube_21.17.3_1783391992.ipa" class="install-btn">تثبيت</a>
-        </div>
-
-        <div class="app-item">
-            <div class="app-info">
-                <div class="app-icon"><i class="fa-brands fa-netflix"></i></div>
-                <div class="app-name">نتفليكس</div>
-            </div>
-            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/Netflix-ipaomtk_3.0_1783392093.ipa" class="install-btn">تثبيت</a>
-        </div>
-
-    </div>
-</body>
-</html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>items</key>
+    <array>
+        <dict>
+            <key>assets</key>
+            <array>
+                <dict>
+                    <key>kind</key>
+                    <string>software-package</string>
+                    <key>url</key>
+                    <string>رابط_ملف_الـ_ipa_هنا</string>
+                </dict>
+            </array>
+            <key>metadata</key>
+            <dict>
+                <key>bundle-identifier</key>
+                <string>net.whatsapp.wpplus</string>
+                <key>bundle-version</key>
+                <string>2.24</string>
+                <key>kind</key>
+                <string>software</string>
+                <key>title</key>
+                <string>واتساب بلس</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
