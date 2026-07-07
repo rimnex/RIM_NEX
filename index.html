@@ -61,7 +61,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 10px #FFD700;
         }
         .app-info {
             display: flex;
@@ -69,10 +69,12 @@
             font-size: 1.2em;
             color: #FFFFFF;
         }
-        .app-info i {
+        .app-info i, .app-info .netflix-icon {
             margin-left: 10px;
             font-size: 1.5em;
             color: #FFD700;
+            width: 30px;
+            text-align: center;
         }
         .install-btn {
             background: var(--gold-gradient);
@@ -131,7 +133,7 @@
             </li>
             <li class="app-item">
                 <div class="app-info">
-                    <i class="fa-brands fa-netflix"></i>
+                    <span class="netflix-icon">N</span>
                     <span>نتفليكس</span>
                 </div>
                 <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/netflix.plist">تثبيت</a>
