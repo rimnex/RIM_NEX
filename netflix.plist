@@ -1,31 +1,142 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>items</key>
-    <array>
-        <dict>
-            <key>assets</key>
-            <array>
-                <dict>
-                    <key>kind</key>
-                    <string>software-package</string>
-                    <key>url</key>
-                    <string>https://rim-nex.vercel.app/netflix.ipa</string>
-                </dict>
-            </array>
-            <key>metadata</key>
-            <dict>
-                <key>bundle-identifier</key>
-                <string>com.netflix.Netflix</string>
-                <key>bundle-version</key>
-                <string>16.20</string>
-                <key>kind</key>
-                <string>software</string>
-                <key>title</key>
-                <string>نتفليكس</string>
-            </dict>
-        </dict>
-    </array>
-</dict>
-</plist>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIM_NEX App Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            --metallic-bg: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+            --text-gold: #FFD700;
+        }
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .header h1 {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #CCCCCC;
+            margin-bottom: 5px;
+        }
+        .byline {
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        .status {
+            display: inline-block;
+            background: #222;
+            color: #FFD700;
+            padding: 5px 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #FFD700;
+        }
+        .app-list {
+            list-style: none;
+            padding: 0;
+        }
+        .app-item {
+            background: var(--metallic-bg);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            margin: 15px auto;
+            padding: 15px;
+            width: 90%;
+            max-width: 450px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+        .app-info {
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+            color: #FFFFFF;
+        }
+        .app-info i {
+            margin-left: 10px;
+            font-size: 1.5em;
+            color: #FFD700;
+        }
+        .install-btn {
+            background: var(--gold-gradient);
+            color: #000000;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1em;
+            transition: transform 0.2s;
+        }
+        .install-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RIM_NEX</h1>
+        </div>
+        <p class="subtitle">التطبيقات موقعة بشهادة مجانية</p>
+        <p class="byline">بواسطة: RIM_NEX</p>
+        <div class="status"><i class="fa-solid fa-eye"></i> الزوار: متصل</div>
+        
+        <ul class="app-list">
+            <li class="app-item">
+                <div class="app-info">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>تيك توك</span>
+                </div>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/tiktok.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <div class="app-info">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span>تيليجرام</span>
+                </div>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/telegram.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <div class="app-info">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>واتساب</span>
+                </div>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/whatsapp.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <div class="app-info">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>يوتيوب</span>
+                </div>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/youtube.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <div class="app-info">
+                    <i class="fa-brands fa-netflix"></i>
+                    <span>نتفليكس</span>
+                </div>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/netflix.plist">تثبيت</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
