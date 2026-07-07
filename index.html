@@ -1,31 +1,88 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>items</key>
-    <array>
-        <dict>
-            <key>assets</key>
-            <array>
-                <dict>
-                    <key>kind</key>
-                    <string>software-package</string>
-                    <key>url</key>
-                    <string>رابط_ملف_الـ_ipa_هنا</string>
-                </dict>
-            </array>
-            <key>metadata</key>
-            <dict>
-                <key>bundle-identifier</key>
-                <string>net.whatsapp.wpplus</string>
-                <key>bundle-version</key>
-                <string>2.24</string>
-                <key>kind</key>
-                <string>software</string>
-                <key>title</key>
-                <string>واتساب بلس</string>
-            </dict>
-        </dict>
-    </array>
-</dict>
-</plist>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIM_NEX App Store</title>
+    <style>
+        :root {
+            --gold-gradient: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            --metallic-bg: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+            --text-gold: #FFD700;
+        }
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .app-list {
+            list-style: none;
+            padding: 0;
+        }
+        .app-item {
+            background: var(--metallic-bg);
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            margin: 15px auto;
+            padding: 15px;
+            width: 80%;
+            max-width: 400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        .install-btn {
+            background: var(--gold-gradient);
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RIM_NEX</h1>
+        <p>التطبيقات موقعة بشهادة مجانية</p>
+        <ul class="app-list">
+            <li class="app-item">
+                <span>تيك توك</span>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/tiktok.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <span>تيليجرام</span>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/telegram.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <span>واتساب</span>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/whatsapp.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <span>يوتيوب</span>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/youtube.plist">تثبيت</a>
+            </li>
+            <li class="app-item">
+                <span>نتفليكس</span>
+                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/netflix.plist">تثبيت</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
