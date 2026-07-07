@@ -1,153 +1,65 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIM_NEX App Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --bg-color: #0a0a0a;
-            --card-bg: #141414;
-            --btn-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #aa771c);
-        }
-        body {
-            background-color: var(--bg-color);
-            color: #FFFFFF;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            padding: 20px;
-        }
-        .header h1 {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            font-weight: bold;
-        }
-        .subtitle {
-            color: #FFFFFF;
-            margin-bottom: 5px;
-        }
-        .byline {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .status {
-            display: inline-block;
-            background: #1a1a1a;
-            color: #bf953f;
-            padding: 5px 20px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            border: 2px solid;
-            border-image: var(--gold-gradient) 1;
-            font-weight: bold;
-        }
-        .app-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 auto;
-            max-width: 500px;
-        }
-        .app-item {
-            background: var(--card-bg);
-            border: 1px solid;
-            border-image: var(--gold-gradient) 1;
-            border-radius: 12px;
-            margin: 15px 0;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .app-info {
-            display: flex;
-            align-items: center;
-            font-size: 1.2em;
-            color: #FFFFFF;
-            font-weight: bold;
-        }
-        .app-info i, .app-info .netflix-icon {
-            margin-left: 15px;
-            font-size: 1.5em;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .install-btn {
-            background: var(--btn-gradient);
-            color: #FFFFFF;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 1em;
-            transition: transform 0.2s;
-        }
-        .install-btn:hover {
-            transform: scale(1.05);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>RIM_NEX</h1>
-        </div>
-        <p class="subtitle">التطبيقات موقعة بشهادة مجانية</p>
-        <p class="byline">بواسطة: RIM_NEX</p>
-        <div class="status">الزوار: 1,300 شخص</div>
-        
-        <ul class="app-list">
-            <li class="app-item">
-                <div class="app-info">
-                    <i class="fa-brands fa-tiktok"></i>
-                    <span>تيك توك</span>
-                </div>
-                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/tiktok.plist">تثبيت</a>
-            </li>
-            <li class="app-item">
-                <div class="app-info">
-                    <i class="fa-brands fa-telegram"></i>
-                    <span>تيليجرام</span>
-                </div>
-                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/telegram.plist">تثبيت</a>
-            </li>
-            <li class="app-item">
-                <div class="app-info">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <span>واتساب</span>
-                </div>
-                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/whatsapp.plist">تثبيت</a>
-            </li>
-            <li class="app-item">
-                <div class="app-info">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span>يوتيوب</span>
-                </div>
-                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/youtube.plist">تثبيت</a>
-            </li>
-            <li class="app-item">
-                <div class="app-info">
-                    <span class="netflix-icon">N</span>
-                    <span>نتفليكس</span>
-                </div>
-                <a class="install-btn" href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/netflix.plist">تثبيت</a>
-            </li>
-        </ul>
-    </div>
-</body>
-</html>
+أنشئ صفحة HTML كاملة بتصميم فاخر وحديث.
+
+المتطلبات:
+
+- خلفية سوداء داكنة جدًا (#050505 أو #0A0A0A) مع تدرج خفيف يمنح إحساسًا بالعمق.
+- استخدم لونًا ذهبيًا معدنيًا (Metallic Gold)، وليس أصفر عادي.
+- اجعل جميع العناوين والأزرار والنصوص المهمة تستخدم تدرجًا ذهبيًا مثل:
+
+linear-gradient(
+135deg,
+#5b3a00 0%,
+#8a5a00 12%,
+#c9971a 25%,
+#ffe08a 40%,
+#fff5c3 50%,
+#ffd86b 60%,
+#c08a12 75%,
+#7a4d00 100%
+);
+
+- استخدم:
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+لإظهار تأثير الذهب الحقيقي.
+
+- أضف Glow ذهبيًا خفيفًا عبر text-shadow و box-shadow دون مبالغة.
+
+- الأزرار:
+  - حواف دائرية (12px).
+  - تأثير انعكاس معدني.
+  - عند المرور بالماوس تكبر قليلًا (scale 1.05).
+  - ظل ذهبي متوهج.
+
+- البطاقات:
+  - خلفية سوداء شفافة.
+  - إطار ذهبي خفيف.
+  - تأثير Glassmorphism.
+  - ظل داخلي وخارجي.
+
+- أضف خطوطًا حديثة مثل:
+  - Poppins
+  - Cairo
+
+- استخدم أيقونات Font Awesome.
+
+- اجعل التصميم Responsive بالكامل لجميع الهواتف والأجهزة.
+
+- أضف حركة Fade In عند تحميل الصفحة.
+
+- أضف حركة لمعان (Shine Animation) تمر فوق الأزرار والعناوين كل عدة ثوانٍ لتعطي إحساس الذهب المصقول.
+
+- عداد الزوار:
+  - يظهر داخل بطاقة أنيقة.
+  - أيقونة مستخدم ذهبية.
+  - النص:
+    "عدد الزوار"
+  - الرقم يجب أن يكون:
+    1,300
+  - اجعل الرقم كبيرًا وذهبيًا مع تأثير توهج خفيف.
+
+- استخدم CSS احترافي ومنظم مع تعليقات توضح الأقسام.
+
+- لا تستخدم أي مكتبات CSS خارجية مثل Bootstrap، واعتمد فقط على HTML وCSS وJavaScript.
