@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --gold-gradient: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --bg-color: #0a0a0a;
-            --card-bg: #141414;
-            --btn-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #aa771c);
+            --gold-metallic: #D4AF37;
+            --bg-color: #000000;
+            --card-bg: #111111;
+            --btn-gradient: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%);
         }
         body {
             background-color: var(--bg-color);
@@ -24,34 +24,28 @@
             padding: 20px;
         }
         .header h1 {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--gold-metallic);
             font-size: 3.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            font-weight: bold;
         }
         .subtitle {
             color: #FFFFFF;
             margin-bottom: 5px;
         }
         .byline {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--gold-metallic);
             margin-bottom: 15px;
             font-weight: bold;
         }
         .status {
             display: inline-block;
-            background: #1a1a1a;
-            color: #bf953f;
+            background: #222;
+            color: var(--gold-metallic);
             padding: 5px 20px;
             border-radius: 20px;
             margin-bottom: 30px;
-            border: 2px solid;
-            border-image: var(--gold-gradient) 1;
+            border: 2px solid var(--gold-metallic);
             font-weight: bold;
         }
         .app-list {
@@ -62,8 +56,7 @@
         }
         .app-item {
             background: var(--card-bg);
-            border: 1px solid;
-            border-image: var(--gold-gradient) 1;
+            border: 1px solid var(--gold-metallic);
             border-radius: 12px;
             margin: 15px 0;
             padding: 15px;
@@ -81,9 +74,7 @@
         .app-info i, .app-info .netflix-icon {
             margin-left: 15px;
             font-size: 1.5em;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--gold-metallic);
         }
         .install-btn {
             background: var(--btn-gradient);
@@ -109,7 +100,7 @@
         </div>
         <p class="subtitle">التطبيقات موقعة بشهادة مجانية</p>
         <p class="byline">بواسطة: RIM_NEX</p>
-        <div class="status">الزوار: 1,300 شخص</div>
+        <div class="status">الزوار: متصل</div>
         
         <ul class="app-list">
             <li class="app-item">
