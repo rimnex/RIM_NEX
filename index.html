@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --gold-color: #FFD700;
+            --primary-color: #FFD700;
             --bg-color: #000000;
             --card-bg: #1A1A1A;
         }
@@ -23,27 +23,29 @@
             padding: 20px;
         }
         .header h1 {
-            color: var(--gold-color);
+            color: var(--primary-color);
             font-size: 3.5em;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
         }
         .subtitle {
             color: #FFFFFF;
             margin-bottom: 5px;
         }
         .byline {
-            color: var(--gold-color);
+            color: var(--primary-color);
             margin-bottom: 15px;
             font-weight: bold;
         }
         .status {
             display: inline-block;
             background: #222;
-            color: var(--gold-color);
+            color: var(--primary-color);
             padding: 5px 20px;
             border-radius: 20px;
             margin-bottom: 30px;
-            border: 2px solid var(--gold-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
             font-weight: bold;
         }
         .app-list {
@@ -54,13 +56,14 @@
         }
         .app-item {
             background: var(--card-bg);
-            border: 2px solid var(--gold-color);
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             margin: 15px 0;
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 0 10px var(--primary-color);
         }
         .app-info {
             display: flex;
@@ -72,10 +75,10 @@
         .app-info i, .app-info .netflix-icon {
             margin-left: 15px;
             font-size: 1.5em;
-            color: var(--gold-color);
+            color: var(--primary-color);
         }
         .install-btn {
-            background: var(--gold-color);
+            background: var(--primary-color);
             color: #000000;
             border: none;
             padding: 10px 30px;
@@ -84,6 +87,7 @@
             cursor: pointer;
             text-decoration: none;
             font-size: 1em;
+            box-shadow: 0 0 10px var(--primary-color);
             transition: transform 0.2s;
         }
         .install-btn:hover {
