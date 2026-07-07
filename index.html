@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIM_NEX App Store</title>
+    <style>
+        body {
+            background-color: #0f0f0f; /* لون خلفية أسود داكن */
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #d4af37; /* لون ذهبي فخم */
+            margin-bottom: 5px;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+        .header p {
+            color: #cccccc;
+            font-size: 14px;
+        }
+        .author {
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .visitor-badge {
+            display: inline-block;
+            border: 1px solid #d4af37;
+            background-color: #1a1a1a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #d4af37;
+            margin-top: 15px;
+        }
+        .app-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 20px auto 0;
+        }
+        .app-item {
+            background-color: #1a1a1a;
+            border: 1px solid #d4af37; /* إطار ذهبي للتطبيقات */
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(212, 175, 55, 0.1);
+        }
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #000;
+            border: 1px solid #333;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .install-btn {
+            /* زر بتدرج لوني ذهبي */
+            background-image: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            color: #000000;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .install-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>RIM_NEX</h1>
+        <p>التطبيقات موقعة بشهادة مجانية.</p>
+        <div class="author">بواسطة: RIM_NEX</div>
+        <div class="visitor-badge">👁️ الزوار: متصل</div>
+    </div>
+
+    <div class="app-list">
+        <!-- التطبيق الأول -->
+        <div class="app-item">
+            <div class="app-info">
+                <div class="app-icon">🎬</div>
+                <h3>سينمانا</h3>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+
+        <!-- التطبيق الثاني -->
+        <div class="app-item">
+            <div class="app-info">
+                <div class="app-icon">🍿</div>
+                <h3>فودو</h3>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+        
+        <!-- التطبيق الثالث -->
+        <div class="app-item">
+            <div class="app-info">
+                <div class="app-icon">🌐</div>
+                <h3>Beegram</h3>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+
+        <!-- التطبيق الرابع -->
+        <div class="app-item">
+            <div class="app-info">
+                <div class="app-icon">✈️</div>
+                <h3>تلي دارك</h3>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+        
+         <!-- التطبيق الخامس -->
+        <div class="app-item">
+            <div class="app-info">
+                <div class="app-icon">▶️</div>
+                <h3>يوتيوب</h3>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+    </div>
+
+</body>
+</html>
 
