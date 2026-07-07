@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIM_NEX App Store</title>
-    <!-- تضمين مكتبة Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --gold-gradient: linear-gradient(135deg, #FFDF00 0%, #D4AF37 25%, #FFF4B8 50%, #C59B27 75%, #9A6C00 100%);
-            --metallic-bg: linear-gradient(145deg, #1A1A1A, #0A0A0A);
+            --gold-gradient: linear-gradient(135deg, #FFDF00 0%, #D4AF37 100%);
+            --metallic-bg: linear-gradient(145deg, #111111 0%, #292929 100%);
             --text-gold: #D4AF37;
         }
-
         body {
             background-color: #0d0d0d;
             color: #ffffff;
@@ -21,147 +19,106 @@
             margin: 0;
             padding: 20px;
         }
-
         .header {
             margin-bottom: 30px;
         }
-
-        .header h1 {
+        h1 {
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 42px;
-            margin-bottom: 5px;
-            letter-spacing: 3px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
         }
-
-        .header p {
+        p {
             color: #b3b3b3;
-            margin: 5px 0;
+            font-size: 16px;
         }
-
-        .creator {
-            color: var(--text-gold);
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
         .status {
             display: inline-block;
-            border: 2px solid;
-            border-image: var(--gold-gradient) 1;
-            background-color: #1a1a1a;
-            padding: 8px 25px;
-            border-radius: 25px;
-            font-size: 14px;
-            color: #FFDF00;
-            margin-top: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            background: #1a1a1a;
+            border: 1px solid var(--text-gold);
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: var(--text-gold);
         }
-
         .app-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 450px;
-            margin: 20px auto 0;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: right;
         }
-
         .app-item {
             background: var(--metallic-bg);
-            border: 1px solid;
-            border-image: var(--gold-gradient) 1;
-            border-radius: 15px;
+            border: 1px solid #333;
+            border-radius: 12px;
             padding: 15px;
+            margin-bottom: 15px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            transition: transform 0.3s ease;
+            justify-content: space-between;
+            transition: transform 0.2s;
         }
-
         .app-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+            transform: translateY(-3px);
+            border-color: var(--text-gold);
         }
-
         .app-info {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
         .app-icon {
-            width: 55px;
-            height: 55px;
-            background-color: #000;
-            border: 1px solid #D4AF37;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
+            font-size: 24px;
             color: var(--text-gold);
-            box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.5);
         }
-
-        /* تنسيق خاص لحرف N لنتفليكس */
-        .netflix-icon {
-            font-family: 'Arial Black', Impact, sans-serif;
-            font-weight: 900;
-            font-size: 32px;
-        }
-
         .app-name {
             font-size: 18px;
             font-weight: bold;
-            color: #ffffff;
         }
-
         .install-btn {
             background: var(--gold-gradient);
             color: #000000;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 10px;
-            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: bold;
             text-decoration: none;
             font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
         }
-
         .install-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-            filter: brightness(1.1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
     </style>
 </head>
 <body>
-
     <div class="header">
         <h1>RIM_NEX</h1>
         <p>التطبيقات موقعة بشهادة مجانية.</p>
-        <p>بواسطة: <span class="creator">RIM_NEX</span></p>
+        <p>بواسطة: <span style="color: var(--text-gold);">RIM_NEX</span></p>
     </div>
 
     <div class="status">
-        <i class="fa-solid fa-eye"></i> الزوّار: متصل
+        <i class="fa-solid fa-eye"></i> الزوار: متصل
     </div>
 
     <div class="app-list">
+
         <div class="app-item">
             <div class="app-info">
                 <div class="app-icon"><i class="fa-brands fa-tiktok"></i></div>
                 <div class="app-name">تيك توك</div>
             </div>
-            <a href="#" class="install-btn">تثبيت</a>
+            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/TikTok23_45.6.0_1783392120.ipa" class="install-btn">تثبيت</a>
         </div>
 
         <div class="app-item">
@@ -169,7 +126,7 @@
                 <div class="app-icon"><i class="fa-brands fa-telegram"></i></div>
                 <div class="app-name">تيليجرام</div>
             </div>
-            <a href="#" class="install-btn">تثبيت</a>
+            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/Teledark2_12.8_1783392067.ipa" class="install-btn">تثبيت</a>
         </div>
 
         <div class="app-item">
@@ -177,7 +134,7 @@
                 <div class="app-icon"><i class="fa-brands fa-whatsapp"></i></div>
                 <div class="app-name">واتساب</div>
             </div>
-            <a href="#" class="install-btn">تثبيت</a>
+            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/WhatsApp_26.22.76_1783391954.ipa" class="install-btn">تثبيت</a>
         </div>
 
         <div class="app-item">
@@ -185,18 +142,17 @@
                 <div class="app-icon"><i class="fa-brands fa-youtube"></i></div>
                 <div class="app-name">يوتيوب</div>
             </div>
-            <a href="#" class="install-btn">تثبيت</a>
+            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/YouTube_21.17.3_1783391992.ipa" class="install-btn">تثبيت</a>
         </div>
 
         <div class="app-item">
             <div class="app-info">
-                <!-- تم استبدال الأيقونة بحرف N أنيق لعدم توفر أيقونة لنتفليكس في المكتبة المجانية -->
-                <div class="app-icon"><span class="netflix-icon">N</span></div>
-                <div class="app-name">Netflix</div>
+                <div class="app-icon"><i class="fa-brands fa-netflix"></i></div>
+                <div class="app-name">نتفليكس</div>
             </div>
-            <a href="#" class="install-btn">تثبيت</a>
+            <a href="https://github.com/rimnex/RIM_NEX/releases/download/V2/Netflix-ipaomtk_3.0_1783392093.ipa" class="install-btn">تثبيت</a>
         </div>
-    </div>
 
+    </div>
 </body>
 </html>
