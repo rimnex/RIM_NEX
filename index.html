@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #FFD700;
+            --gold-metallic: #D4AF37;
             --bg-color: #000000;
-            --card-bg: #1A1A1A;
+            --card-bg: #111111;
+            --btn-gradient: linear-gradient(135deg, #D4AF37 0%, #AA771C 100%);
         }
         body {
             background-color: var(--bg-color);
@@ -23,29 +24,28 @@
             padding: 20px;
         }
         .header h1 {
-            color: var(--primary-color);
+            color: var(--gold-metallic);
             font-size: 3.5em;
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
         .subtitle {
             color: #FFFFFF;
             margin-bottom: 5px;
         }
         .byline {
-            color: var(--primary-color);
+            color: var(--gold-metallic);
             margin-bottom: 15px;
             font-weight: bold;
         }
         .status {
             display: inline-block;
             background: #222;
-            color: var(--primary-color);
+            color: var(--gold-metallic);
             padding: 5px 20px;
             border-radius: 20px;
             margin-bottom: 30px;
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 0 10px var(--primary-color);
+            border: 2px solid var(--gold-metallic);
             font-weight: bold;
         }
         .app-list {
@@ -56,14 +56,13 @@
         }
         .app-item {
             background: var(--card-bg);
-            border: 2px solid var(--primary-color);
+            border: 1px solid var(--gold-metallic);
             border-radius: 12px;
             margin: 15px 0;
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 0 10px var(--primary-color);
         }
         .app-info {
             display: flex;
@@ -75,11 +74,11 @@
         .app-info i, .app-info .netflix-icon {
             margin-left: 15px;
             font-size: 1.5em;
-            color: var(--primary-color);
+            color: var(--gold-metallic);
         }
         .install-btn {
-            background: var(--primary-color);
-            color: #000000;
+            background: var(--btn-gradient);
+            color: #FFFFFF;
             border: none;
             padding: 10px 30px;
             border-radius: 8px;
@@ -87,7 +86,6 @@
             cursor: pointer;
             text-decoration: none;
             font-size: 1em;
-            box-shadow: 0 0 10px var(--primary-color);
             transition: transform 0.2s;
         }
         .install-btn:hover {
