@@ -109,6 +109,13 @@
             box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
+        /* تنسيق خاص لحرف N لنتفليكس */
+        .netflix-icon {
+            font-family: 'Arial Black', Impact, sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+        }
+
         .app-name {
             font-size: 18px;
             font-weight: bold;
@@ -183,7 +190,8 @@
 
         <div class="app-item">
             <div class="app-info">
-                <div class="app-icon"><i class="fa-brands fa-netflix"></i></div>
+                <!-- تم استبدال الأيقونة بحرف N أنيق لعدم توفر أيقونة لنتفليكس في المكتبة المجانية -->
+                <div class="app-icon"><span class="netflix-icon">N</span></div>
                 <div class="app-name">Netflix</div>
             </div>
             <a href="#" class="install-btn">تثبيت</a>
