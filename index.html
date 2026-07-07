@@ -1,9 +1,185 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-...
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر RIM_NEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* إعدادات الخلفية السوداء العميقة */
+        body {
+            background-color: #000000;
+            background-image: radial-gradient(circle at top, #111111, #000000);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* تأثير الذهب المعدني اللامع للنصوص */
+        .gold-text {
+            background: linear-gradient(to left, #aa771c, #fcf6ba, #bf953f, #fbf5b7, #a67c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #aaaaaa;
+            margin-bottom: 25px;
+        }
+
+        /* تصميم عداد الزوار بإطار ذهبي أنيق */
+        .visitor-badge {
+            display: inline-block;
+            background: linear-gradient(to bottom, #1a1a1a, #000000);
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .visitor-badge::before {
+            content: '';
+            position: absolute;
+            top: -2px; bottom: -2px;
+            left: -2px; right: -2px;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #aa771c);
+            z-index: -1;
+            border-radius: 30px;
+        }
+
+        /* قائمة التطبيقات */
+        .app-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* بطاقة التطبيق (سوداء مع لمعة ذهبية عند التمرير) */
+        .app-card {
+            background: linear-gradient(145deg, #0f0f0f, #050505);
+            border: 1px solid #222;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            border-color: #bf953f;
+            box-shadow: 0 0 20px rgba(191, 149, 63, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .app-icon {
+            font-size: 2.2rem;
+        }
+
+        .app-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #eeeeee;
+        }
+
+        /* زر التثبيت - سبيكة ذهبية لامعة */
+        .install-btn {
+            background: linear-gradient(to bottom, #fdf6cc, #d4af37, #996515);
+            color: #000000; /* النص أسود لزيادة التباين وإبراز لون الذهب */
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+            border: 1px solid #ffe57f;
+            transition: all 0.2s ease;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+        }
+
+        .install-btn:hover {
+            background: linear-gradient(to bottom, #ffffff, #e6c27a, #aa771c);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.9), 0 0 15px rgba(212, 175, 55, 0.5);
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-...
+    <div class="container">
+        <h1 class="gold-text">RIM_NEX</h1>
+        <p class="subtitle">التطبيقات موقعة بشهادة مجانية</p>
+        
+        <div class="visitor-badge">
+            <span class="gold-text">الزوار: 1,300 شخص</span>
+        </div>
+
+        <ul class="app-list">
+            <li class="app-card">
+                <div class="app-info">
+                    <i class="fa-brands fa-tiktok app-icon gold-text"></i>
+                    <span class="app-name">تيك توك</span>
+                </div>
+                <a href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/tiktok.plist" class="install-btn">تثبيت</a>
+            </li>
+            <li class="app-card">
+                <div class="app-info">
+                    <i class="fa-brands fa-telegram app-icon gold-text"></i>
+                    <span class="app-name">تيليجرام</span>
+                </div>
+                <a href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/telegram.plist" class="install-btn">تثبيت</a>
+            </li>
+            <li class="app-card">
+                <div class="app-info">
+                    <i class="fa-brands fa-whatsapp app-icon gold-text"></i>
+                    <span class="app-name">واتساب</span>
+                </div>
+                <a href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/whatsapp.plist" class="install-btn">تثبيت</a>
+            </li>
+            <li class="app-card">
+                <div class="app-info">
+                    <i class="fa-brands fa-youtube app-icon gold-text"></i>
+                    <span class="app-name">يوتيوب</span>
+                </div>
+                <a href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/youtube.plist" class="install-btn">تثبيت</a>
+            </li>
+            <li class="app-card">
+                <div class="app-info">
+                    <span class="app-icon gold-text" style="font-family: Arial; font-weight: 900;">N</span>
+                    <span class="app-name">نتفليكس</span>
+                </div>
+                <a href="itms-services://?action=download-manifest&url=https://rim-nex.vercel.app/netflix.plist" class="install-btn">تثبيت</a>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
