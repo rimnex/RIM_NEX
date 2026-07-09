@@ -3,141 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجري الخاص</title>
+    <title>Premium Cloud Signer</title>
     <style>
-        /* الإعدادات الأساسية للخطوط والألوان */
+        /* الإعدادات الأساسية والخلفية الداكنة */
         body {
-            background-color: #000000;
+            background-color: #0a0a0a;
             color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* تصميم ترويسة الموقع */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            margin-top: 20px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-        .header p {
-            color: #8e8e93;
-            font-size: 15px;
-            margin-top: 5px;
-        }
-
-        /* تصميم حاوية التطبيقات */
-        .app-list {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        /* تصميم كرت التطبيق الواحد */
-        .app-card {
-            background-color: #1c1c1e;
-            border-radius: 16px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        /* معلومات التطبيق (الرمز والاسم) */
-        .app-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* أيقونة التطبيق */
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            background-color: #3a3a3c;
-            border-radius: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
-        }
-
-        .app-details h3 {
-            margin: 0 0 5px 0;
-            font-size: 17px;
-        }
-        .app-details p {
+            min-height: 100vh;
             margin: 0;
-            font-size: 13px;
-            color: #8e8e93;
         }
 
-        /* زر التحميل */
-        .install-btn {
-            background-color: #007aff;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 8px 22px;
+        /* الحاوية الرئيسية للتصميم */
+        .signer-container {
+            background-color: #121212;
+            width: 90%;
+            max-width: 400px;
             border-radius: 20px;
-            font-weight: 600;
-            font-size: 15px;
-            transition: background-color 0.2s;
+            padding: 30px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #2a2a2a;
         }
 
-        .install-btn:hover {
-            background-color: #0056b3;
+        /* العناوين باللون الذهبي */
+        .title {
+            text-align: center;
+            color: #d4af37; /* لون ذهبي */
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* تنسيق الحقول */
+        .form-group {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: border-color 0.3s;
+        }
+
+        .form-group:hover {
+            border-color: #d4af37;
+        }
+
+        /* زر التبديل للشهادة المجانية */
+        .toggle-label {
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+        .switch input { display: none; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333;
+            border-radius: 20px;
+            transition: .4s;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 2px; bottom: 2px;
+            background-color: #888;
+            border-radius: 50%;
+            transition: .4s;
+        }
+        input:checked + .slider { background-color: #d4af37; }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+            background-color: #fff;
+        }
+
+        /* القائمة المنسدلة للتطبيقات */
+        select {
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            width: 100%;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+        }
+        select option { background-color: #1a1a1a; }
+
+        /* حقول رفع الملفات */
+        .file-upload {
+            flex-direction: column;
+            align-items: flex-start;
+            cursor: pointer;
+            position: relative;
+        }
+        .file-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+        .file-title {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .file-desc {
+            color: #666;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* حقل كلمة المرور */
+        input[type="password"] {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            width: 100%;
+            font-size: 14px;
+            outline: none;
+            text-align: center;
+        }
+
+        /* زر البدء بالتوقيع */
+        .submit-btn {
+            background: linear-gradient(90deg, #b8860b, #ffd700, #b8860b);
+            color: #000;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: opacity 0.3s;
+        }
+        .submit-btn:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>متجري الخاص</h1>
-        <p>التطبيقات الأساسية فقط، بدون إعلانات مزعجة.</p>
-    </div>
+    <div class="signer-container">
+        <div class="title">IPA BLACK</div>
+        <div class="subtitle">PREMIUM CLOUD SIGNER</div>
 
-    <div class="app-list">
-        
-        <!-- التطبيق الأول -->
-        <div class="app-card">
-            <div class="app-info">
-                <div class="app-icon">🎬</div>
-                <div class="app-details">
-                    <h3>Cinemana</h3>
-                    <p>لمشاهدة الأفلام والمسلسلات</p>
-                </div>
-            </div>
-            <a href="#" class="install-btn">تثبيت</a>
+        <div class="form-group">
+            <span class="toggle-label">$ الشهادة المجانية</span>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
         </div>
 
-        <!-- التطبيق الثاني -->
-        <div class="app-card">
-            <div class="app-info">
-                <div class="app-icon">✍️</div>
-                <div class="app-details">
-                    <h3>ESign</h3>
-                    <p>لتوقيع وتثبيت التطبيقات</p>
-                </div>
-            </div>
-            <a href="#" class="install-btn">تثبيت</a>
+        <div class="form-group">
+            <select>
+                <option value="esign">ESign</option>
+                <option value="scarlet">Scarlet</option>
+                <option value="feather">Feather</option>
+                <option value="gbox">GBox</option>
+            </select>
         </div>
 
-        <!-- التطبيق الثالث -->
-        <div class="app-card">
-            <div class="app-info">
-                <div class="app-icon">🔑</div>
-                <div class="app-details">
-                    <h3>KSign</h3>
-                    <p>أداة التوقيع البديلة</p>
+        <div class="form-group file-upload">
+            <input type="file" accept=".p12">
+            <div class="file-info">
+                <div>
+                    <div class="file-title">ملف P12</div>
+                    <div class="file-desc">اضغط لاختيار الشهادة</div>
                 </div>
+                <span>📤</span>
             </div>
-            <a href="#" class="install-btn">تثبيت</a>
         </div>
 
+        <div class="form-group file-upload">
+            <input type="file" accept=".mobileprovision">
+            <div class="file-info">
+                <div>
+                    <div class="file-title">ملف Provision</div>
+                    <div class="file-desc">اضغط لاختيار التكوين</div>
+                </div>
+                <span>📄</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="password" placeholder="كلمة المرور">
+        </div>
+
+        <button class="submit-btn">بدء التوقيع</button>
     </div>
 
 </body>
