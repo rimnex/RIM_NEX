@@ -1,77 +1,67 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIM_NEX App Store</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #d4af37;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #d4af37;
-            text-shadow: 0 0 15px #d4af37;
-            margin-bottom: 10px;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
-        }
-        .app-card {
-            background-color: #111;
-            border: 2px solid #d4af37;
-            border-radius: 12px;
-            padding: 20px;
-            width: 160px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .app-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 0 30px #d4af37;
-        }
-        a {
-            color: #d4af37;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            display: block;
-            margin-top: 15px;
-        }
-    </style>
-</head>
-<body>
-    <h1>RIM_NEX App Store</h1>
-    <p>متجر تطبيقات iOS وخدمات VIP</p>
-    <div class="container">
-        <div class="app-card">
-            <h3>ESign</h3>
-            <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/esign.plist">تثبيت</a>
+<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%2334C759'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>G</text></svg>" class="app-logo" alt="GBox"> 
+                        GBox
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="app-card">
-            <h3>KSign</h3>
-            <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/ksign.plist">تثبيت</a>
+
+        <div class="form-group file-upload">
+            <input type="file" accept=".p12">
+            <div class="file-info">
+                <div>
+                    <div class="file-title">ملف P12</div>
+                    <div class="file-desc">اضغط لاختيار الشهادة</div>
+                </div>
+                <span>📤</span>
+            </div>
         </div>
-        <div class="app-card">
-            <h3>GBox</h3>
-            <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/gbox.plist">تثبيت</a>
+
+        <div class="form-group file-upload">
+            <input type="file" accept=".mobileprovision">
+            <div class="file-info">
+                <div>
+                    <div class="file-title">ملف Provision</div>
+                    <div class="file-desc">اضغط لاختيار التكوين</div>
+                </div>
+                <span>📄</span>
+            </div>
         </div>
-        <div class="app-card">
-            <h3>Scarlet</h3>
-            <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/scarlet.plist">تثبيت</a>
+
+        <div class="form-group">
+            <input type="password" placeholder="كلمة المرور للشهادة">
         </div>
-        <div class="app-card">
-            <h3>Feather</h3>
-            <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/feather.plist">تثبيت</a>
-        </div>
+
+        <button class="submit-btn">بدء التوقيع</button>
+
+        <a href="https://t.me/PUBG_RIM" target="_blank" class="telegram-btn">
+            <span>انضم إلى قناتنا على تيليجرام</span>
+            <span>✈️</span>
+        </a>
     </div>
+
+    <script>
+        const customSelect = document.querySelector(".custom-select");
+        const selectSelected = document.querySelector(".select-selected");
+        const selectItems = document.querySelector(".select-items");
+        const options = document.querySelectorAll(".select-items div");
+        
+        selectSelected.addEventListener("click", function(e) {
+            e.stopPropagation();
+            selectItems.classList.toggle("select-hide");
+        });
+
+        options.forEach(option => {
+            option.addEventListener("click", function() {
+                const content = this.innerHTML;
+                selectSelected.querySelector('.app-icon-text').innerHTML = content;
+                selectItems.classList.add("select-hide");
+            });
+        });
+
+        document.addEventListener("click", function(e) {
+            if (!customSelect.contains(e.target)) {
+                selectItems.classList.add("select-hide");
+            }
+        });
+    </script>
 </body>
-</html>
