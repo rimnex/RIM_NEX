@@ -1,15 +1,107 @@
-"أريد منك كتابة كود برمجي (HTML, CSS, JavaScript) لإنشاء واجهة ويب لمتجر تطبيقات، مطابقة تماماً لواجهة (IPA BLACK) المخصصة لتوقيع ملفات IPA.
-المواصفات المطلوبة:
-1. التصميم البصري: ثيمة مظلمة (Dark Mode) احترافية جداً، الخلفية بلون أسود داكن (⁠#0d0d0d⁠) مع عناصر واجهة المستخدم بلون رمادي داكن (⁠#141414⁠). استخدم اللون الذهبي اللامع (⁠#d4af37⁠) للعناصر الأساسية والأزرار.
-2. عناصر الواجهة:
- عنوان الصفحة (H1) باسم 'IPA BLACK' باللون الذهبي.
- زر تبديل (Toggle Switch) بتصميم عصري لخيار 'الشهادة المجانية'.
- قائمة منسدلة (Select Box) لاختيار تطبيق التوقيع (ESign, KSign, Scarlet, GBox, Feather).
- مساحتان لرفع الملفات (File Upload Areas) بتصميم (Dashed Border) عند الضغط عليهما يتم فتح اختيار الملف (P12, Provision).
- حقل إدخال كلمة المرور (Password Input) بتصميم متناسق.
- زر كبير (Button) بتدرج لوني ذهبي (Gold Gradient) مكتوب عليه 'بدء التوقيع'.
-3. الجودة البرمجية:
- الكود يجب أن يكون (Responsive) ليتناسب مع شاشات الهواتف.
- استخدم (CSS Flexbox) لتوزيع العناصر بشكل مثالي في المنتصف.
- اجعل الألوان والتنسيقات تحاكي تطبيقات الـ Sideloading الاحترافية (IPA Signers).
- قم بتنسيق الكود ليظهر بشكل منظم ومحترف."
+Create a single-file web application using HTML, CSS, and JavaScript only (no frameworks).
+
+Design a premium IPA signing interface inspired by modern iOS sideloading applications (IPA BLACK style), but with an original implementation.
+
+Requirements:
+
+• Responsive mobile-first layout.
+• Dark premium UI.
+• Background: #0d0d0d
+• Cards: #141414
+• Borders: rgba(255,255,255,.08)
+• Primary Gold: #d4af37
+• Gold Gradient:
+  linear-gradient(135deg,#8f6b1f,#d4af37,#f7d774,#b8860b)
+
+Layout:
+- Everything centered using Flexbox.
+- Maximum container width: 430px.
+- Large rounded card.
+- Glass-like subtle effect.
+- Soft shadows.
+- Smooth animations.
+
+Header:
+- Large title:
+RIM_NEX
+- Metallic Gold Gradient text.
+- Small subtitle:
+IPA Signing Center
+
+Controls:
+
+1. Modern iOS Toggle
+Label:
+الشهادة المجانية
+
+2. Custom Select Menu
+Label:
+اختر تطبيق التوقيع
+
+Options:
+- ESign
+- KSign
+- Scarlet
+- GBox
+- Feather
+
+3. Upload Area (P12)
+
+Large dashed upload card with:
+📄
+Drop P12 Certificate
+or click to browse
+
+Hidden input opens when clicking.
+
+4. Upload Area (Provision)
+
+Same design with:
+📁
+Drop Provision Profile
+or click to browse
+
+5. Password Input
+
+Rounded input
+Password icon
+Placeholder:
+Password
+
+6. Large Gold Button
+
+Text:
+بدء التوقيع
+
+Full width
+
+Gold metallic gradient
+
+Hover animation
+
+Active press animation
+
+Loading animation
+
+Extras:
+
+• Ripple button effect.
+• Fade-in animations.
+• Smooth transitions.
+• Hover lift.
+• Rounded corners (20px).
+• Professional typography.
+• Custom scrollbar.
+• Focus glow in gold.
+• Icons from Font Awesome CDN.
+• Display selected filenames below upload boxes.
+• Validate required fields before signing.
+• Fake loading progress bar.
+• Success notification popup.
+• Error notification popup.
+• Mobile optimized spacing.
+• Clean semantic HTML.
+• Well-organized CSS.
+• Vanilla JavaScript only.
+
+The final result should look like a premium iOS sideloading/signing application with luxurious gold accents and an elegant dark interface.
