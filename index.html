@@ -7,7 +7,7 @@
     <style>
         body {
             background-color: #0a0a0a;
-            color: #ffffff;
+            color: #d4af37;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -18,13 +18,14 @@
             box-sizing: border-box;
         }
         .container {
-            background-color: #121212;
+            background-color: #1a1a1a;
             width: 100%;
             max-width: 400px;
             border-radius: 12px;
             padding: 25px;
             box-sizing: border-box;
-            border: 1px solid #333;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
         h2, h3 {
             text-align: center;
@@ -33,7 +34,7 @@
         }
         h3 {
             font-size: 14px;
-            color: #888;
+            color: #fff;
             margin-bottom: 20px;
         }
         .form-group {
@@ -42,15 +43,15 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #ccc;
+            color: #fff;
         }
         .select-btn {
             width: 100%;
             padding: 12px;
             border-radius: 6px;
-            border: 1px solid #444;
-            background-color: #1a1a1a;
-            color: #fff;
+            border: 1px solid #d4af37;
+            background-color: #0a0a0a;
+            color: #d4af37;
             text-align: right;
             cursor: pointer;
             box-sizing: border-box;
@@ -63,7 +64,7 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 10px;
-            color: #888;
+            color: #d4af37;
         }
         .options-overlay {
             display: none;
@@ -72,18 +73,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
         .options-content {
-            background-color: #222;
+            background-color: #1a1a1a;
             width: 90%;
             max-width: 350px;
             border-radius: 12px;
             padding: 15px;
             box-sizing: border-box;
+            border: 1px solid #d4af37;
         }
         .option-item {
             padding: 12px;
@@ -91,12 +93,14 @@
             align-items: center;
             border-bottom: 1px solid #333;
             cursor: pointer;
+            color: #fff;
         }
         .option-item:last-child {
             border-bottom: none;
         }
         .option-item:hover {
             background-color: #333;
+            color: #d4af37;
         }
         .icon {
             display: inline-block;
@@ -108,22 +112,26 @@
             justify-content: center;
             align-items: center;
             font-weight: bold;
+            color: #000;
         }
-        .icon-e { background-color: #ff9900; color: #fff; }
-        .icon-k { background-color: #3366cc; color: #fff; }
-        .icon-s { background-color: #cc0000; color: #fff; }
-        .icon-f { background-color: #009933; color: #fff; }
-        .icon-g { background-color: #6600cc; color: #fff; }
+        .icon-e { background-color: #ff9900; }
+        .icon-k { background-color: #3366cc; }
+        .icon-s { background-color: #cc0000; }
+        .icon-f { background-color: #009933; }
+        .icon-g { background-color: #6600cc; }
         .file-upload {
             width: 100%;
             padding: 15px;
             border-radius: 6px;
             border: 2px dashed #d4af37;
-            background-color: #1a1a1a;
-            color: #fff;
+            background-color: #0a0a0a;
+            color: #d4af37;
             text-align: center;
             cursor: pointer;
             box-sizing: border-box;
+        }
+        .file-upload:hover {
+            background-color: #1a1a1a;
         }
         .file-upload input {
             display: none;
@@ -132,8 +140,8 @@
             width: 100%;
             padding: 12px;
             border-radius: 6px;
-            border: 1px solid #444;
-            background-color: #1a1a1a;
+            border: 1px solid #d4af37;
+            background-color: #0a0a0a;
             color: #fff;
             box-sizing: border-box;
             text-align: right;
@@ -143,12 +151,15 @@
             padding: 14px;
             border: none;
             border-radius: 6px;
-            background-color: #d4af37;
+            background: linear-gradient(90deg, #b8860b, #ffd700);
             color: #000;
             font-weight: bold;
             cursor: pointer;
             margin-top: 15px;
             font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            opacity: 0.9;
         }
         .telegram-link {
             display: block;
@@ -183,7 +194,7 @@
         <div class="form-group">
             <label>ملف Provision</label>
             <div class="file-upload" onclick="document.getElementById('provisionInput').click()">
-                اضغط لاختيار التكون
+                اضغط لاختيار التكوين
                 <input type="file" id="provisionInput" accept=".mobileprovision" required>
             </div>
         </div>
@@ -201,18 +212,19 @@
 
 <div class="options-overlay" id="appOverlay" onclick="if(event.target === this) this.style.display = 'none'">
     <div class="options-content">
-        <div class="option-item" onclick="selectApp('ESign')"><span class="icon icon-e">E</span> ESign</div>
-        <div class="option-item" onclick="selectApp('KSign')"><span class="icon icon-k">K</span> KSign</div>
-        <div class="option-item" onclick="selectApp('Scarlet')"><span class="icon icon-s">S</span> Scarlet</div>
-        <div class="option-item" onclick="selectApp('Feather')"><span class="icon icon-f">F</span> Feather</div>
-        <div class="option-item" onclick="selectApp('GBox')"><span class="icon icon-g">G</span> GBox</div>
+        <div class="option-item" onclick="selectApp('ESign', 'ESign.plist')"><span class="icon icon-e">E</span> ESign</div>
+        <div class="option-item" onclick="selectApp('KSign', 'KSign.plist')"><span class="icon icon-k">K</span> KSign</div>
+        <div class="option-item" onclick="selectApp('Scarlet', 'Scarlet.plist')"><span class="icon icon-s">S</span> Scarlet</div>
+        <div class="option-item" onclick="selectApp('Feather', 'Feather.plist')"><span class="icon icon-f">F</span> Feather</div>
+        <div class="option-item" onclick="selectApp('GBox', 'GBox.plist')"><span class="icon icon-g">G</span> GBox</div>
     </div>
 </div>
 
 <script>
-    function selectApp(appName) {
+    function selectApp(appName, plistFile) {
         document.getElementById('appSelectBtn').innerText = appName;
         document.getElementById('appOverlay').style.display = 'none';
+        console.log('Selected App:', appName, 'with plist:', plistFile);
     }
 </script>
 
