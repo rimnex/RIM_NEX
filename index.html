@@ -6,210 +6,119 @@
     <title>RIM_NEX Signer</title>
     <style>
         body {
-            background-color: #0a0a0a;
+            background-color: #1a1a1a;
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            box-sizing: border-box;
         }
-        .signer-container {
-            background-color: #121212;
+        .container {
+            background-color: #000000;
             width: 100%;
             max-width: 400px;
-            border-radius: 20px;
-            padding: 30px 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            border: 1px solid #2a2a2a;
-            box-sizing: border-box;
-        }
-        .title {
-            text-align: center;
-            color: #d4af37;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #888;
-            font-size: 12px;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ccc;
-            font-size: 14px;
-        }
-        .custom-select-wrapper {
-            position: relative;
-            user-select: none;
-            width: 100%;
-        }
-        .custom-select {
-            width: 100%;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 12px;
-            color: #fff;
-            cursor: pointer;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .select-items {
-            position: absolute;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            top: 100%;
-            left: 0;
-            right: 0;
-            z-index: 99;
-            margin-top: 5px;
-            display: none;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .select-items div {
-            padding: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #222;
-        }
-        .select-items div:hover {
-            background-color: #222;
-        }
-        .app-initial {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            text-align: center;
-            line-height: 24px;
-            margin-right: 10px;
-            font-weight: bold;
-            font-size: 12px;
-            color: #000;
-        }
-        .init-rn { background-color: #d4af37; }
-        .init-e { background-color: #ff9900; }
-        .init-k { background-color: #3399ff; }
-        .init-s { background-color: #cc0000; }
-        .init-f { background-color: #00cc44; }
-        .init-g { background-color: #9933ff; }
-        .file-upload {
-            border: 2px dashed #d4af37;
             border-radius: 12px;
             padding: 20px;
+            box-sizing: border-box;
+        }
+        h2, h3 {
+            text-align: center;
+            color: #d4af37;
+            margin: 10px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        select, input[type="password"], .file-upload {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+            background-color: #222;
+            color: #fff;
+            box-sizing: border-box;
+            text-align: right;
+        }
+        .file-upload {
+            border: 2px dashed #d4af37;
             text-align: center;
             cursor: pointer;
-            transition: background-color 0.3s;
-            background-color: #1a1a1a;
-        }
-        .file-upload:hover {
-            background-color: #222;
+            padding: 15px;
         }
         .file-upload input {
             display: none;
         }
-        .input-field {
+        button {
             width: 100%;
             padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background-color: #1a1a1a;
-            color: #fff;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
             border: none;
-            background: linear-gradient(90deg, #b8860b, #ffd700);
+            border-radius: 6px;
+            background-color: #d4af37;
             color: #000;
-            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
-            transition: opacity 0.3s;
-        }
-        .submit-btn:hover {
-            opacity: 0.9;
+            margin-top: 15px;
+            font-size: 16px;
         }
         .telegram-link {
             display: block;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             color: #d4af37;
             text-decoration: none;
-            font-weight: bold;
             font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-<div class="signer-container">
-    <div class="title">RIM_NEX</div>
-    <div class="subtitle">CLOUD SIGNER</div>
+<div class="container">
+    <h2>RIM_NEX</h2>
+    <h3>CLOUD SIGNER</h3>
 
     <div class="form-group">
         <label>اختر التطبيق...</label>
-        <div class="custom-select-wrapper">
-            <div class="custom-select" onclick="document.querySelector('.select-items').style.toggle('display')">
-                <span>اختر التطبيق...</span>
-                <span>&#9660;</span>
-            </div>
-            <div class="select-items">
-                <div onclick="console.log('ESign')"><span class="app-initial init-e">E</span>ESign</div>
-                <div onclick="console.log('KSign')"><span class="app-initial init-k">K</span>KSign</div>
-                <div onclick="console.log('Scarlet')"><span class="app-initial init-s">S</span>Scarlet</div>
-                <div onclick="console.log('Feather')"><span class="app-initial init-f">F</span>Feather</div>
-                <div onclick="console.log('GBox')"><span class="app-initial init-g">G</span>GBox</div>
-            </div>
-        </div>
+        <select>
+            <option>ESign</option>
+            <option>KSign</option>
+            <option>Scarlet</option>
+            <option>Feather</option>
+            <option>GBox</option>
+        </select>
     </div>
 
     <div class="form-group">
         <label>ملف P12</label>
-        <div class="file-upload" onclick="document.getElementById('p12-file').click()">
+        <div class="file-upload" onclick="document.getElementById('p12').click()">
             اضغط لاختيار الشهادة
-            <input type="file" id="p12-file" accept=".p12">
+            <input type="file" id="p12" accept=".p12">
         </div>
     </div>
 
     <div class="form-group">
         <label>ملف Provision</label>
-        <div class="file-upload" onclick="document.getElementById('provision-file').click()">
+        <div class="file-upload" onclick="document.getElementById('provision').click()">
             اضغط لاختيار التكوين
-            <input type="file" id="provision-file" accept=".mobileprovision">
+            <input type="file" id="provision" accept=".mobileprovision">
         </div>
     </div>
 
     <div class="form-group">
         <label>كلمة المرور للشهادة</label>
-        <input type="password" class="input-field" placeholder="أدخل كلمة المرور">
+        <input type="password" placeholder="أدخل كلمة المرور">
     </div>
 
-    <button class="submit-btn">بدء التوقيع</button>
+    <button>بدء التوقيع</button>
 
-    <a href="https://t.me/PUBG_RIM" target="_blank" class="telegram-link">انضم إلى قناتنا على تيليجرام</a>
+    <a href="https://t.me/PUBG_RIM" class="telegram-link">انضم إلى قناتنا على تيليجرام</a>
 </div>
 
 </body>
