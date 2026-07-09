@@ -1,191 +1,103 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIM_NEX | IPA Signing Center</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #0d0d0d;
-            --card: #141414;
-            --border: rgba(255, 255, 255, 0.08);
-            --gold: #d4af37;
-            --gold-grad: linear-gradient(135deg, #8f6b1f, #d4af37, #f7d774, #b8860b);
-            --text: #ffffff;
-            --text-dim: #888;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 430px;
-            background: var(--card);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        header { text-align: center; margin-bottom: 30px; }
-        h1 { 
-            font-size: 2.5rem; 
-            background: var(--gold-grad); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-        p { color: var(--text-dim); font-size: 0.9rem; }
-
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 0.9rem; }
-
-        /* Toggle */
-        .toggle-container { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 15px; border-radius: 12px; }
-        .switch { position: relative; width: 50px; height: 26px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background: var(--gold); }
-        input:checked + .slider:before { transform: translateX(24px); }
-
-        /* Select & Inputs */
-        select, input[type="password"] {
-            width: 100%;
-            padding: 15px;
-            background: #1a1a1a;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: white;
-            outline: none;
-            transition: 0.3s;
-        }
-        select:focus, input:focus { border-color: var(--gold); }
-
-        /* Upload Areas */
-        .upload-box {
-            border: 2px dashed var(--border);
-            padding: 20px;
-            text-align: center;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 10px;
-        }
-        .upload-box:hover { border-color: var(--gold); }
-        .upload-box i { font-size: 2rem; margin-bottom: 10px; display: block; color: var(--gold); }
-        .file-name { font-size: 0.75rem; color: var(--gold); margin-top: 5px; min-height: 1em; }
-
-        /* Button */
-        #sign-btn {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            background: var(--gold-grad);
-            color: #000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        #sign-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); }
-
-        /* Progress & Notifications */
-        #progress-bar { height: 4px; background: var(--gold); width: 0%; transition: width 0.3s; margin-top: 20px; display: none; }
-        .notification { position: fixed; top: 20px; padding: 15px 25px; border-radius: 10px; display: none; z-index: 100; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RIM_NEX | IPA Signing Center</title>
+<link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css)">
+<style>
+:root {
+--bg-color: #0d0d0d;
+--card-color: #141414;
+--border: rgba(255,255,255,.08);
+--gold: #d4af37;
+--gold-gradient: linear-gradient(135deg,#8f6b1f,#d4af37,#f7d774,#b8860b);
+--text-main: #ffffff;
+--text-dim: #888;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+body { background-color: var(--bg-color); color: var(--text-main); display: flex; justify-content: center; padding: 20px; min-height: 100vh; }
+.container { width: 100%; max-width: 430px; animation: fadeIn 0.8s ease-out; }
+.card { background: var(--card-color); border: 1px solid var(--border); border-radius: 20px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+h1 { font-size: 24px; text-align: center; margin-bottom: 5px; }
+p { color: var(--text-dim); text-align: center; font-size: 14px; margin-bottom: 20px; }
+.toggle-group { display: flex; justify-content: space-between; align-items: center; padding: 15px; border: 1px solid var(--border); border-radius: 15px; margin-bottom: 20px; }
+.switch { width: 45px; height: 24px; background: #333; border-radius: 12px; position: relative; cursor: pointer; }
+.switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.3s; }
+.switch.active { background: var(--gold); }
+.switch.active::after { left: 23px; }
+.dropdown { position: relative; margin-bottom: 20px; }
+.select-btn { width: 100%; padding: 15px; background: #1a1a1a; border: 1px solid var(--border); border-radius: 15px; display: flex; align-items: center; cursor: pointer; }
+.dropdown-menu { display: none; position: absolute; top: 100%; width: 100%; background: #1a1a1a; border: 1px solid var(--border); border-radius: 15px; margin-top: 5px; z-index: 10; }
+.dropdown-menu.show { display: block; }
+.option { padding: 12px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.option:hover { background: #252525; }
+.app-icon { width: 30px; height: 30px; border-radius: 8px; background: #333; display: flex; align-items: center; justify-content: center; }
+.upload-zone { border: 2px dashed var(--border); border-radius: 20px; padding: 30px; text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
+.upload-zone:hover { border-color: var(--gold); }
+input[type="password"] { width: 100%; padding: 15px; background: #1a1a1a; border: 1px solid var(--border); border-radius: 20px; color: white; outline: none; margin-bottom: 20px; }
+input[type="password"]:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+.btn-sign { width: 100%; padding: 18px; border: none; border-radius: 20px; background: var(--gold-gradient); color: black; font-weight: bold; cursor: pointer; transition: 0.3s; }
+.btn-sign:active { transform: scale(0.98); }
+#progressBar { height: 4px; background: var(--gold); width: 0%; margin-top: 20px; transition: 0.3s; border-radius: 2px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
 </head>
 <body>
-
 <div class="container">
-    <header>
-        <h1>RIM_NEX</h1>
-        <p>IPA Signing Center</p>
-    </header>
-
-    <div class="form-group toggle-container">
-        <label>الشهادة المجانية</label>
-        <label class="switch"><input type="checkbox"><span class="slider"></span></label>
-    </div>
-
-    <div class="form-group">
-        <label>اختر تطبيق التوقيع</label>
-        <select id="app-select">
-            <option>ESign</option><option>KSign</option><option>Scarlet</option><option>GBox</option><option>Feather</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <div class="upload-box" onclick="document.getElementById('p12-file').click()">
-            <i class="fa-solid fa-file-contract"></i>
-            <span>Drop P12 Certificate</span>
-            <input type="file" id="p12-file" hidden onchange="updateFile(this)">
-            <div class="file-name" id="p12-name"></div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="upload-box" onclick="document.getElementById('prov-file').click()">
-            <i class="fa-solid fa-folder-open"></i>
-            <span>Drop Provision Profile</span>
-            <input type="file" id="prov-file" hidden onchange="updateFile(this)">
-            <div class="file-name" id="prov-name"></div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <input type="password" id="pass" placeholder="Password">
-    </div>
-
-    <button id="sign-btn">بدء التوقيع</button>
-    <div id="progress-bar"></div>
+<h1>RIM_NEX</h1>
+<p>IPA Signing Center</p>
+<div class="card">
+<div class="toggle-group">
+<span>الشهادة المجانية</span>
+<div class="switch" onclick="this.classList.toggle('active')"></div>
 </div>
-
+<div class="dropdown">
+<div class="select-btn" onclick="document.querySelector('.dropdown-menu').classList.toggle('show')">
+<span id="selectedApp">اختر تطبيق التوقيع</span>
+</div>
+<div class="dropdown-menu">
+<div class="option" onclick="selectApp('ESign')"><div class="app-icon"><i class="fa-solid fa-pen-nib"></i></div> ESign</div>
+<div class="option" onclick="selectApp('KSign')"><div class="app-icon"><i class="fa-solid fa-key"></i></div> KSign</div>
+<div class="option" onclick="selectApp('Scarlet')"><div class="app-icon"><i class="fa-solid fa-cloud-arrow-down"></i></div> Scarlet</div>
+</div>
+</div>
+<div class="upload-zone" onclick="document.getElementById('p12File').click()">
+<i class="fa-solid fa-file-lines"></i>
+Drop P12 Certificate
+<input type="file" id="p12File" hidden>
+</div>
+<div class="upload-zone" onclick="document.getElementById('mobileprovision').click()">
+<i class="fa-solid fa-folder"></i>
+Drop Provision Profile
+<input type="file" id="mobileprovision" hidden>
+</div>
+<input type="password" placeholder="Password">
+<button class="btn-sign" onclick="startSigning()">بدء التوقيع</button>
+<div id="progressBar"></div>
+</div>
+</div>
 <script>
-    function updateFile(el) {
-        document.getElementById(el.id.replace('-file', '-name')).innerText = el.files[0].name;
-    }
-
-    document.getElementById('sign-btn').addEventListener('click', function() {
-        const p12 = document.getElementById('p12-file').value;
-        const pass = document.getElementById('pass').value;
-
-        if(!p12 || !pass) {
-            alert("يرجى تعبئة جميع الحقول المطلوبة");
-            return;
-        }
-
-        const bar = document.getElementById('progress-bar');
-        bar.style.display = 'block';
-        let width = 0;
-        const interval = setInterval(() => {
-            if(width >= 100) {
-                clearInterval(interval);
-                alert("تم التوقيع بنجاح!");
-                bar.style.display = 'none';
-            } else {
-                width += 10;
-                bar.style.width = width + '%';
-            }
-        }, 300);
-    });
+function selectApp(name) {
+document.getElementById('selectedApp').innerText = name;
+document.querySelector('.dropdown-menu').classList.remove('show');
+}
+function startSigning() {
+const btn = document.querySelector('.btn-sign');
+const progress = document.getElementById('progressBar');
+btn.disabled = true;
+let width = 0;
+const interval = setInterval(() => {
+if (width >= 100) {
+clearInterval(interval);
+alert('تم التوقيع بنجاح!');
+btn.disabled = false;
+} else {
+width += 5;
+progress.style.width = width + '%';
+}
+}, 100);
+}
 </script>
-
 </body>
 </html>
