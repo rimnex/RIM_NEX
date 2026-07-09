@@ -2,32 +2,48 @@
 <html lang="ar" dir="rtl">
 <head>
     <style>
-        .signature-container {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            border: 1px solid #e0e0e0;
-            padding: 20px;
-            max-width: 400px;
-            border-radius: 10px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        body {
+            background-color: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
         }
-        .name { font-weight: bold; font-size: 18px; color: #333; margin-bottom: 5px; }
-        .title { color: #666; font-size: 14px; margin-bottom: 15px; }
-        .contact-info { font-size: 13px; color: #444; }
-        .contact-info div { margin-bottom: 5px; }
-        .link { color: #007bff; text-decoration: none; }
+        .rim-nex-container {
+            border: 2px solid #d4af37; /* ذهبي */
+            padding: 30px;
+            background: #1a1a1a;
+            color: #d4af37;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+        .sig-box {
+            background: #000;
+            border: 1px solid #333;
+            width: 300px;
+            height: 150px;
+            margin: 20px 0;
+            cursor: crosshair;
+        }
+        button {
+            background: #d4af37;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-<div class="signature-container">
-    <div class="name">الاسم الكريم</div>
-    <div class="title">المسمى الوظيفي الخاص بك</div>
-    <div class="contact-info">
-        <div>📱 الهاتف: 00966xxxxxxxx</div>
-        <div>📧 البريد: email@example.com</div>
-        <div>🌐 الموقع: <a href="#" class="link">www.yourwebsite.com</a></div>
-    </div>
+<div class="rim-nex-container">
+    <h2>توقيع الاعتماد - RIM_NEX</h2>
+    <div class="sig-box" id="sig-pad"></div>
+    <button onclick="alert('تم حفظ التوقيع بنجاح')">اعتماد التوقيع</button>
 </div>
 
 </body>
