@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIM_NEX Signer</title>
     <style>
-        /* الإعدادات الأساسية والخلفية الداكنة */
+        /* الإعدادات الأساسية للخلفية والخطوط */
         body {
             background-color: #0a0a0a;
             color: #ffffff;
@@ -15,20 +15,23 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         /* الحاوية الرئيسية للتصميم */
         .signer-container {
             background-color: #121212;
-            width: 90%;
+            width: 100%;
             max-width: 400px;
             border-radius: 20px;
             padding: 30px 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             border: 1px solid #2a2a2a;
+            box-sizing: border-box;
         }
 
-        /* العناوين باللون الذهبي - تم تغيير الاسم إلى RIM_NEX */
+        /* العناوين باللون الذهبي */
         .title {
             text-align: center;
             color: #d4af37;
@@ -57,14 +60,14 @@
             align-items: center;
             justify-content: space-between;
             transition: border-color 0.3s;
-            position: relative; /* مهم للقائمة المنسدلة */
+            position: relative;
         }
 
         .form-group:hover {
             border-color: #d4af37;
         }
 
-        /* --- تصميم القائمة المنسدلة المخصصة مع الأيقونات --- */
+        /* تصميم القائمة المنسدلة المخصصة مع الأيقونات */
         .custom-select {
             width: 100%;
             cursor: pointer;
@@ -134,6 +137,8 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            top: 0;
+            left: 0;
             opacity: 0;
             cursor: pointer;
         }
@@ -175,20 +180,45 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 10px;
             transition: opacity 0.3s;
         }
         .submit-btn:hover {
             opacity: 0.9;
+        }
+
+        /* زر التوجيه إلى تيليجرام */
+        .telegram-btn {
+            background-color: #2481cc;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+            box-sizing: border-box;
+            transition: background-color 0.3s;
+        }
+
+        .telegram-btn:hover {
+            background-color: #1d69a6;
         }
     </style>
 </head>
 <body>
 
     <div class="signer-container">
+        
         <div class="title">RIM_NEX</div>
         <div class="subtitle">CLOUD SIGNER</div>
 
+        <!-- القائمة المنسدلة لاختيار التطبيق -->
         <div class="form-group" style="padding: 0;">
             <div class="custom-select" style="padding: 15px;">
                 <div class="select-selected">
@@ -199,8 +229,10 @@
                     <span>▼</span>
                 </div>
                 
+                <!-- خيارات التطبيقات مع إضافة KSign والأيقونات -->
                 <div class="select-items select-hide">
                     <div><span>✍️</span> ESign</div>
+                    <div><span>🔑</span> KSign</div>
                     <div><span>🔴</span> Scarlet</div>
                     <div><span>🪶</span> Feather</div>
                     <div><span>📦</span> GBox</div>
@@ -208,6 +240,7 @@
             </div>
         </div>
 
+        <!-- رفع ملف P12 -->
         <div class="form-group file-upload">
             <input type="file" accept=".p12">
             <div class="file-info">
@@ -219,6 +252,7 @@
             </div>
         </div>
 
+        <!-- رفع ملف Provision -->
         <div class="form-group file-upload">
             <input type="file" accept=".mobileprovision">
             <div class="file-info">
@@ -230,20 +264,29 @@
             </div>
         </div>
 
+        <!-- كلمة المرور -->
         <div class="form-group">
             <input type="password" placeholder="كلمة المرور للشهادة">
         </div>
 
+        <!-- زر التوقيع -->
         <button class="submit-btn">بدء التوقيع</button>
+
+        <!-- زر تيليجرام الجديد -->
+        <a href="https://t.me/PUBG_RIM" target="_blank" class="telegram-btn">
+            <span>انضم إلى قناتنا على تيليجرام</span>
+            <span>✈️</span>
+        </a>
+
     </div>
 
+    <!-- كود الجافاسكربت لتشغيل القائمة المنسدلة -->
     <script>
         const customSelect = document.querySelector(".custom-select");
         const selectSelected = document.querySelector(".select-selected");
         const selectItems = document.querySelector(".select-items");
         const options = document.querySelectorAll(".select-items div");
-        const selectedAppText = document.getElementById("selected-app-text");
-
+        
         // فتح وإغلاق القائمة عند الضغط
         selectSelected.addEventListener("click", function(e) {
             e.stopPropagation();
