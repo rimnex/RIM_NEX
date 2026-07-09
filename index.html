@@ -8,7 +8,7 @@
         body {
             background-color: #0a0a0a;
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,139 +17,138 @@
             padding: 20px;
             box-sizing: border-box;
         }
-        .signer-container {
+        .container {
             background-color: #121212;
             width: 100%;
             max-width: 400px;
-            border-radius: 20px;
-            padding: 30px 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 25px;
             box-sizing: border-box;
+            border: 1px solid #333;
         }
-        .title {
+        h2, h3 {
             text-align: center;
             color: #d4af37;
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
+            margin: 5px 0;
         }
-        .subtitle {
-            text-align: center;
+        h3 {
+            font-size: 14px;
             color: #888;
-            font-size: 12px;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            margin-bottom: 20px;
         }
         .form-group {
             margin-bottom: 20px;
         }
-        .form-group label {
+        label {
             display: block;
             margin-bottom: 8px;
             color: #ccc;
-            font-size: 14px;
         }
-        .custom-select-wrapper {
-            position: relative;
-            user-select: none;
+        .select-btn {
             width: 100%;
-        }
-        .custom-select {
-            width: 100%;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
             padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background-color: #1a1a1a;
             color: #fff;
+            text-align: right;
             cursor: pointer;
             box-sizing: border-box;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: relative;
         }
-        .select-items {
+        .select-btn::after {
+            content: '▼';
             position: absolute;
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            top: 100%;
-            left: 0;
-            right: 0;
-            z-index: 99;
-            margin-top: 5px;
-            display: none;
-            max-height: 200px;
-            overflow-y: auto;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: #888;
         }
-        .select-items div {
+        .options-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .options-content {
+            background-color: #222;
+            width: 90%;
+            max-width: 350px;
+            border-radius: 12px;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .option-item {
             padding: 12px;
-            cursor: pointer;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
         }
-        .select-items div:hover {
-            background-color: #222;
+        .option-item:last-child {
+            border-bottom: none;
         }
-        .app-initial {
+        .option-item:hover {
+            background-color: #333;
+        }
+        .icon {
             display: inline-block;
-            width: 24px;
-            height: 24px;
+            width: 30px;
+            height: 30px;
             border-radius: 6px;
-            text-align: center;
-            line-height: 24px;
-            margin-right: 10px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-weight: bold;
-            font-size: 12px;
-            color: #000;
         }
-        .init-e { background-color: #ff9900; }
-        .init-k { background-color: #3399ff; }
-        .init-s { background-color: #cc0000; }
-        .init-f { background-color: #00cc44; }
-        .init-g { background-color: #9933ff; }
+        .icon-e { background-color: #ff9900; color: #fff; }
+        .icon-k { background-color: #3366cc; color: #fff; }
+        .icon-s { background-color: #cc0000; color: #fff; }
+        .icon-f { background-color: #009933; color: #fff; }
+        .icon-g { background-color: #6600cc; color: #fff; }
         .file-upload {
+            width: 100%;
+            padding: 15px;
+            border-radius: 6px;
             border: 2px dashed #d4af37;
-            border-radius: 12px;
-            padding: 20px;
+            background-color: #1a1a1a;
+            color: #fff;
             text-align: center;
             cursor: pointer;
-            transition: background-color 0.3s;
-            background-color: #1a1a1a;
-        }
-        .file-upload:hover {
-            background-color: #222;
+            box-sizing: border-box;
         }
         .file-upload input {
             display: none;
         }
-        .input-field {
+        input[type="password"] {
             width: 100%;
             padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333;
+            border-radius: 6px;
+            border: 1px solid #444;
             background-color: #1a1a1a;
             color: #fff;
             box-sizing: border-box;
-            font-size: 16px;
+            text-align: right;
         }
-        .submit-btn {
+        button[type="submit"] {
             width: 100%;
             padding: 14px;
-            border-radius: 12px;
             border: none;
-            background: linear-gradient(90deg, #b8860b, #ffd700);
+            border-radius: 6px;
+            background-color: #d4af37;
             color: #000;
-            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
-            transition: opacity 0.3s;
-        }
-        .submit-btn:hover {
-            opacity: 0.9;
+            margin-top: 15px;
+            font-size: 16px;
         }
         .telegram-link {
             display: block;
@@ -157,59 +156,65 @@
             margin-top: 20px;
             color: #d4af37;
             text-decoration: none;
-            font-weight: bold;
             font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-<div class="signer-container">
-    <div class="title">RIM_NEX</div>
-    <div class="subtitle">CLOUD SIGNER</div>
+<div class="container">
+    <h2>RIM_NEX</h2>
+    <h3>CLOUD SIGNER</h3>
 
-    <div class="form-group">
-        <label>اختر التطبيق...</label>
-        <div class="custom-select-wrapper">
-            <div class="custom-select" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block'">
-                <span>اختر التطبيق...</span>
-                <span>&#9660;</span>
-            </div>
-            <div class="select-items" style="display: none;">
-                <div onclick="console.log('ESign')"><span class="app-initial init-e">E</span>ESign</div>
-                <div onclick="console.log('KSign')"><span class="app-initial init-k">K</span>KSign</div>
-                <div onclick="console.log('Scarlet')"><span class="app-initial init-s">S</span>Scarlet</div>
-                <div onclick="console.log('Feather')"><span class="app-initial init-f">F</span>Feather</div>
-                <div onclick="console.log('GBox')"><span class="app-initial init-g">G</span>GBox</div>
+    <form onsubmit="event.preventDefault(); alert('تم بدء التوقيع');">
+        <div class="form-group">
+            <label>اختر التطبيق...</label>
+            <button type="button" class="select-btn" id="appSelectBtn" onclick="document.getElementById('appOverlay').style.display = 'flex'">اختر التطبيق...</button>
+        </div>
+
+        <div class="form-group">
+            <label>ملف P12</label>
+            <div class="file-upload" onclick="document.getElementById('p12Input').click()">
+                اضغط لاختيار الشهادة
+                <input type="file" id="p12Input" accept=".p12" required>
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>ملف P12</label>
-        <div class="file-upload" onclick="document.getElementById('p12-file').click()">
-            اضغط لاختيار الشهادة
-            <input type="file" id="p12-file" accept=".p12">
+        <div class="form-group">
+            <label>ملف Provision</label>
+            <div class="file-upload" onclick="document.getElementById('provisionInput').click()">
+                اضغط لاختيار التكون
+                <input type="file" id="provisionInput" accept=".mobileprovision" required>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>ملف Provision</label>
-        <div class="file-upload" onclick="document.getElementById('provision-file').click()">
-            اضغط لاختيار التكوين
-            <input type="file" id="provision-file" accept=".mobileprovision">
+        <div class="form-group">
+            <label>كلمة المرور للشهادة</label>
+            <input type="password" placeholder="أدخل كلمة المرور" required>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>كلمة المرور للشهادة</label>
-        <input type="password" class="input-field" placeholder="أدخل كلمة المرور">
-    </div>
-
-    <button class="submit-btn">بدء التوقيع</button>
+        <button type="submit">بدء التوقيع</button>
+    </form>
 
     <a href="https://t.me/PUBG_RIM" target="_blank" class="telegram-link">انضم إلى قناتنا على تيليجرام</a>
 </div>
+
+<div class="options-overlay" id="appOverlay" onclick="if(event.target === this) this.style.display = 'none'">
+    <div class="options-content">
+        <div class="option-item" onclick="selectApp('ESign')"><span class="icon icon-e">E</span> ESign</div>
+        <div class="option-item" onclick="selectApp('KSign')"><span class="icon icon-k">K</span> KSign</div>
+        <div class="option-item" onclick="selectApp('Scarlet')"><span class="icon icon-s">S</span> Scarlet</div>
+        <div class="option-item" onclick="selectApp('Feather')"><span class="icon icon-f">F</span> Feather</div>
+        <div class="option-item" onclick="selectApp('GBox')"><span class="icon icon-g">G</span> GBox</div>
+    </div>
+</div>
+
+<script>
+    function selectApp(appName) {
+        document.getElementById('appSelectBtn').innerText = appName;
+        document.getElementById('appOverlay').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
