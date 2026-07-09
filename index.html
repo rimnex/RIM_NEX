@@ -1,222 +1,363 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIM_NEX Signer</title>
+    <title>RIM_NEX - Premium Cloud Signer</title>
     <style>
+        /* إعدادات الخطوط والخلفية */
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        
         body {
-            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            background-color: #050505; /* أسود عميق */
+            background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 100%);
+            font-family: 'Tajawal', sans-serif;
             color: #ffffff;
-            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
         }
+
+        /* الحاوية الرئيسية (الإطار الزجاجي/الأسود) */
         .container {
-            background-color: #0d0d0d;
-            width: 100%;
+            background: #111111;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 90%;
             max-width: 400px;
-            border-radius: 12px;
-            padding: 25px;
-            box-sizing: border-box;
-            border: 2px solid #d4af37;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-        }
-        h2 {
-            text-align: center;
-            color: #d4af37;
-            margin: 10px 0 5px 0;
-        }
-        h3 {
-            text-align: center;
-            font-size: 14px;
-            color: #cccccc;
-            margin-bottom: 25px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-        .select-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #d4af37;
-            background-color: #1a1a1a;
-            color: #d4af37;
-            text-align: right;
-            cursor: pointer;
-            box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             position: relative;
         }
-        .select-btn::after {
-            content: '▼';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: #d4af37;
+
+        /* الترويسة والعنوان الذهبي اللامع */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
         }
-        .options-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 900;
+            /* تدرج ذهبي لامع */
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
         }
-        .options-content {
-            background-color: #1a1a1a;
-            width: 90%;
-            max-width: 350px;
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* تنسيق الحقول والمجموعات */
+        .form-group {
+            margin-bottom: 20px;
+            background: #1a1a1a;
             border-radius: 12px;
             padding: 15px;
-            box-sizing: border-box;
-            border: 1px solid #d4af37;
-        }
-        .option-item {
-            padding: 15px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
-            cursor: pointer;
-            color: #ffffff;
+            border: 1px solid #2a2a2a;
         }
-        .option-item:last-child {
-            border-bottom: none;
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 700;
         }
-        .option-item:hover {
-            background-color: #333;
-            color: #d4af37;
-        }
-        .icon {
+
+        /* زر التبديل (الشهادة المجانية) */
+        .switch {
+            position: relative;
             display: inline-block;
-            width: 30px;
-            height: 30px;
-            border-radius: 6px;
-            margin-left: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: #ffffff;
+            width: 40px;
+            height: 20px;
         }
-        .file-upload {
-            width: 100%;
-            padding: 15px;
-            border-radius: 6px;
-            border: 2px dashed #d4af37;
-            background-color: #1a1a1a;
-            color: #d4af37;
-            text-align: center;
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
-            box-sizing: border-box;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #333;
+            transition: .4s;
+            border-radius: 20px;
         }
-        .file-upload:hover {
-            background-color: #262626;
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
         }
-        .file-upload input {
+
+        input:checked + .slider {
+            /* لون ذهبي عند التفعيل */
+            background: linear-gradient(to right, #bf953f, #aa771c);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* القوائم المنسدلة ومدخلات النصوص */
+        select, input[type="password"] {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+        }
+        
+        select option {
+            background: #111;
+            color: #fff;
+        }
+
+        /* إخفاء زر رفع الملفات الافتراضي وتخصيصه */
+        input[type="file"] {
             display: none;
         }
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #d4af37;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            box-sizing: border-box;
-            text-align: right;
-            font-size: 16px;
-        }
-        button[type="submit"] {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            background: linear-gradient(90deg, #b8860b, #ffd700);
-            color: #000000;
-            font-weight: bold;
+        .file-upload-label {
             cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-icon {
+            font-size: 18px;
+            color: #bf953f;
+        }
+
+        /* الزر الذهبي اللامع (بدء التوقيع) */
+        .sign-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+            /* تدرج ذهبي لامع */
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            transition: transform 0.2s, opacity 0.2s;
+            margin-top: 10px;
+        }
+
+        .sign-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* شريط المعالجة */
+        .progress-container {
+            display: none;
             margin-top: 20px;
+            text-align: center;
+        }
+        
+        .progress-container p {
+            font-size: 14px;
+            color: #bf953f;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #bf953f, #fcf6ba);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        /* النافذة المنبثقة (Modal) للتثبيت */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .modal-content p {
+            margin-bottom: 25px;
             font-size: 16px;
         }
-        button[type="submit"]:hover {
-            opacity: 0.9;
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #333;
+            padding-top: 15px;
         }
-        .telegram-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #d4af37;
-            text-decoration: none;
-            font-size: 14px;
+
+        .modal-buttons button {
+            background: transparent;
+            border: none;
+            color: #007aff; /* لون أزرار iOS */
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
         }
+        .modal-buttons button.cancel {
+            color: #ff3b30;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>RIM_NEX</h2>
-    <h3>CLOUD SIGNER</h3>
-
-    <form onsubmit="event.preventDefault(); alert('تم بدء التوقيع');">
-        <div class="form-group">
-            <label>اختر التطبيق</label>
-            <button type="button" class="select-btn" id="appSelectBtn" onclick="document.getElementById('appOverlay').style.display = 'flex'">اختر التطبيق...</button>
+    <div class="container">
+        <div class="header">
+            <h1>RIM_NEX</h1>
+            <p>PREMIUM CLOUD SIGNER</p>
         </div>
 
         <div class="form-group">
-            <label>ملف P12</label>
-            <div class="file-upload" onclick="document.getElementById('p12Input').click()">
-                اضغط لاختيار الشهادة
-                <input type="file" id="p12Input" accept=".p12" required>
+            <label>الشهادة المجانية $</label>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <select id="app-select">
+                <option value="feather">Feather</option>
+                <option value="esign">ESign</option>
+                <option value="scarlet">Scarlet</option>
+                <option value="gbox">GBox</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="file-upload-label" for="p12-file">
+                <span>ملف P12 <br><small style="color: #777; font-weight: 400;">اضغط لاختيار الشهادة</small></span>
+                <span class="file-icon">⇧</span>
+            </label>
+            <input type="file" id="p12-file" accept=".p12">
+        </div>
+
+        <div class="form-group">
+            <label class="file-upload-label" for="prov-file">
+                <span>ملف Provision <br><small style="color: #777; font-weight: 400;">اضغط لاختيار التكوين</small></span>
+                <span class="file-icon">📄</span>
+            </label>
+            <input type="file" id="prov-file" accept=".mobileprovision">
+        </div>
+
+        <div class="form-group">
+            <input type="password" placeholder="كلمة المرور">
+        </div>
+
+        <button class="sign-btn" id="start-sign-btn">بدء التوقيع</button>
+
+        <div class="progress-container" id="progress-container">
+            <p>جاري المعالجة...</p>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill"></div>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label>ملف Provision</label>
-            <div class="file-upload" onclick="document.getElementById('provisionInput').click()">
-                اضغط لاختيار التكوين
-                <input type="file" id="provisionInput" accept=".mobileprovision" required>
+    <div class="modal" id="install-modal">
+        <div class="modal-content">
+            <p>فتح هذه الصفحة في "iTunes"؟</p>
+            <div class="modal-buttons">
+                <button class="cancel" onclick="closeModal()">إلغاء</button>
+                <button onclick="openiTunes()">فتح</button>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label>كلمة المرور للشهادة</label>
-            <input type="password" placeholder="أدخل كلمة المرور" required>
-        </div>
+    <script>
+        const signBtn = document.getElementById('start-sign-btn');
+        const progressContainer = document.getElementById('progress-container');
+        const progressFill = document.getElementById('progress-fill');
+        const installModal = document.getElementById('install-modal');
 
-        <button type="submit">بدء التوقيع</button>
-    </form>
+        // محاكاة عملية التوقيع عند الضغط على الزر
+        signBtn.addEventListener('click', function() {
+            // إخفاء الزر وإظهار شريط التحميل
+            signBtn.style.display = 'none';
+            progressContainer.style.display = 'block';
+            
+            let width = 0;
+            // تسريع شريط التحميل لمحاكاة الفيديو
+            const interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // عند اكتمال التحميل، أظهر النافذة المنبثقة
+                    setTimeout(() => {
+                        installModal.style.display = 'flex';
+                    }, 500);
+                } else {
+                    width += 2; // سرعة التقدم
+                    progressFill.style.width = width + '%';
+                }
+            }, 50);
+        });
 
-    <a href="https://t.me/PUBG_RIM" target="_blank" class="telegram-link">انضم إلى قناتنا على تيليجرام</a>
-</div>
+        // وظيفة إغلاق النافذة
+        function closeModal() {
+            installModal.style.display = 'none';
+            // إعادة ضبط الواجهة
+            progressContainer.style.display = 'none';
+            progressFill.style.width = '0%';
+            signBtn.style.display = 'block';
+        }
 
-<div class="options-overlay" id="appOverlay" onclick="if(event.target === this) this.style.display = 'none'">
-    <div class="options-content">
-        <div class="option-item" onclick="selectApp('ESign', '#ff9900')"><span class="icon" style="background-color: #ff9900;">E</span> ESign</div>
-        <div class="option-item" onclick="selectApp('KSign', '#3366cc')"><span class="icon" style="background-color: #3366cc;">K</span> KSign</div>
-        <div class="option-item" onclick="selectApp('Scarlet', '#cc0000')"><span class="icon" style="background-color: #cc0000;">S</span> Scarlet</div>
-        <div class="option-item" onclick="store) {
-        document.getElementById('appSelectBtn').innerText = appName;
-        document.getElementById('appOverlay').style.display = 'none';
-    }
-</script>
-
+        // وظيفة فتح في آيتونز (محاكاة)
+        function openiTunes() {
+            alert('تم طلب التثبيت. في البيئة الحقيقية سيوجهك هذا إلى رابط itms-services://');
+            closeModal();
+        }
+    </script>
 </body>
 </html>
