@@ -1,451 +1,222 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IPA BLACK - Signer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIM_NEX Signer</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
         body {
-            background-color: #0a0a0c;
+            background-color: #1a1a1a;
             color: #ffffff;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            margin: 0;
             padding: 20px;
+            box-sizing: border-box;
         }
-
-        .signer-card {
-            background-color: #121212;
+        .container {
+            background-color: #0d0d0d;
             width: 100%;
             max-width: 400px;
-            border-radius: 20px;
-            padding: 30px 20px;
-            border: 1px solid #2a2a2a;
-            position: relative;
+            border-radius: 12px;
+            padding: 25px;
+            box-sizing: border-box;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
         }
-
-        .header {
+        h2 {
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
             color: #d4af37;
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            font-family: serif;
+            margin: 10px 0 5px 0;
         }
-
-        .header p {
-            color: #888;
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* Toggle Switch */
-        .toggle-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #1a1a1a;
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #222;
-        }
-
-        .toggle-container span {
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .toggle-container span::before {
-            content: '$';
-            color: #d4af37;
-            font-weight: bold;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 46px;
-            height: 24px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #333;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: #777;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #333;
-            border: 1px solid #d4af37;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(-22px);
-            background-color: #d4af37;
-        }
-
-        /* Input Groups */
-        .input-group {
-            background-color: #1a1a1a;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .input-group:hover {
-            border-color: #333;
-        }
-
-        .input-texts {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-title {
-            font-size: 15px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .input-subtitle {
-            font-size: 11px;
-            color: #777;
-            margin-top: 3px;
-        }
-
-        .input-icon {
-            color: #d4af37;
-            font-size: 20px;
-        }
-
-        .file-input-hidden {
-            display: none;
-        }
-
-        /* Password Input */
-        .password-input {
-            width: 100%;
-            background-color: #1a1a1a;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 15px 20px;
-            color: #fff;
-            font-size: 15px;
-            margin-bottom: 25px;
+        h3 {
             text-align: center;
-            outline: none;
-        }
-
-        .password-input:focus {
-            border-color: #d4af37;
-        }
-
-        /* Submit Button */
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: none;
-            background: #d4af37;
-            color: #000;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .submit-btn:disabled {
-            background: #555;
-            color: #888;
-            cursor: not-allowed;
-        }
-
-        /* Progress Bar (Hidden initially) */
-        .progress-container {
-            display: none;
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .progress-text {
-            color: #d4af37;
             font-size: 14px;
-            margin-bottom: 10px;
-            font-weight: bold;
+            color: #cccccc;
+            margin-bottom: 25px;
         }
-
-        .progress-bar-bg {
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .select-btn {
             width: 100%;
-            height: 6px;
-            background-color: #222;
-            border-radius: 3px;
-            overflow: hidden;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+            background-color: #1a1a1a;
+            color: #d4af37;
+            text-align: right;
+            cursor: pointer;
+            box-sizing: border-box;
             position: relative;
         }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background-color: #d4af37;
-            border-radius: 3px;
-            transition: width 0.3s linear;
+        .select-btn::after {
+            content: '▼';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: #d4af37;
         }
-
-        /* App Selection Modal */
-        .modal-overlay {
+        .options-overlay {
             display: none;
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        .modal-content {
-            background-color: #1a1a1a;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 400px;
-            border-radius: 20px 20px 0 0;
-            padding: 20px;
-            animation: slideUp 0.3s ease-out;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
+        .options-content {
+            background-color: #1a1a1a;
+            width: 90%;
+            max-width: 350px;
+            border-radius: 12px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid #d4af37;
         }
-
-        .app-option {
+        .option-item {
+            padding: 15px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 15px;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #333;
             cursor: pointer;
+            color: #ffffff;
         }
-        
-        .app-option:last-child {
+        .option-item:last-child {
             border-bottom: none;
         }
-
-        .app-name {
-            font-size: 16px;
-            color: #fff;
+        .option-item:hover {
+            background-color: #333;
+            color: #d4af37;
         }
-
-        .app-icon-mini {
-            width: 24px;
-            height: 24px;
-            background-color: #d4af37;
-            border-radius: 5px;
+        .icon {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            margin-left: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #000;
             font-weight: bold;
-            font-size: 12px;
+            color: #ffffff;
         }
-
+        .file-upload {
+            width: 100%;
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px dashed #d4af37;
+            background-color: #1a1a1a;
+            color: #d4af37;
+            text-align: center;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .file-upload:hover {
+            background-color: #262626;
+        }
+        .file-upload input {
+            display: none;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            box-sizing: border-box;
+            text-align: right;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #b8860b, #ffd700);
+            color: #000000;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            opacity: 0.9;
+        }
+        .telegram-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="signer-card">
-        <div class="header">
-            <h1>IPA BLACK</h1>
-            <p>PREMIUM CLOUD SIGNER</p>
+<div class="container">
+    <h2>RIM_NEX</h2>
+    <h3>CLOUD SIGNER</h3>
+
+    <form onsubmit="event.preventDefault(); alert('تم بدء التوقيع');">
+        <div class="form-group">
+            <label>اختر التطبيق</label>
+            <button type="button" class="select-btn" id="appSelectBtn" onclick="document.getElementById('appOverlay').style.display = 'flex'">اختر التطبيق...</button>
         </div>
 
-        <div class="toggle-container">
-            <span>الشهادة المجانية</span>
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="input-group" id="app-selector-btn" style="justify-content: center; gap: 10px;">
-            <span class="input-title" id="selected-app-name">ESign</span>
-            <div class="app-icon-mini" id="selected-app-icon" style="background-color:#ff9900;">E</div>
-        </div>
-
-        <div class="input-group" onclick="document.getElementById('p12-file').click()">
-            <div class="input-texts">
-                <span class="input-title">ملف P12</span>
-                <span class="input-subtitle" id="p12-name">اضغط لاختيار الشهادة</span>
-            </div>
-            <span class="input-icon">↑</span>
-            <input type="file" id="p12-file" class="file-input-hidden" accept=".p12" onchange="updateFileName(this, 'p12-name')">
-        </div>
-
-        <div class="input-group" onclick="document.getElementById('prov-file').click()">
-            <div class="input-texts">
-                <span class="input-title">ملف Provision</span>
-                <span class="input-subtitle" id="prov-name">اضغط لاختيار التكوين</span>
-            </div>
-            <span class="input-icon">📄</span>
-            <input type="file" id="prov-file" class="file-input-hidden" accept=".mobileprovision" onchange="updateFileName(this, 'prov-name')">
-        </div>
-
-        <input type="password" class="password-input" placeholder="كلمة المرور">
-
-        <button class="submit-btn" id="sign-btn" onclick="startSigning()">بدء التوقيع</button>
-
-        <div class="progress-container" id="progress-area">
-            <div class="progress-text" id="progress-text">جاري المعالجة...</div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progress-fill"></div>
+        <div class="form-group">
+            <label>ملف P12</label>
+            <div class="file-upload" onclick="document.getElementById('p12Input').click()">
+                اضغط لاختيار الشهادة
+                <input type="file" id="p12Input" accept=".p12" required>
             </div>
         </div>
-    </div>
 
-    <div class="modal-overlay" id="apps-modal" onclick="closeModal(event)">
-        <div class="modal-content">
-            <div class="app-option" onclick="selectApp('ESign', 'E', '#ff9900')">
-                <span class="app-name">ESign</span>
-                <div class="app-icon-mini" style="background-color:#ff9900;">E</div>
-            </div>
-            <div class="app-option" onclick="selectApp('KSign', 'K', '#3366cc')">
-                <span class="app-name">KSign</span>
-                <div class="app-icon-mini" style="background-color:#3366cc;">K</div>
-            </div>
-            <div class="app-option" onclick="selectApp('Scarlet', 'S', '#cc0000')">
-                <span class="app-name">Scarlet</span>
-                <div class="app-icon-mini" style="background-color:#cc0000;">S</div>
-            </div>
-            <div class="app-option" onclick="selectApp('GBox', 'G', '#6600cc')">
-                <span class="app-name">GBox</span>
-                <div class="app-icon-mini" style="background-color:#6600cc;">G</div>
-            </div>
-            <div class="app-option" onclick="selectApp('Feather', 'F', '#009933')">
-                <span class="app-name">Feather</span>
-                <div class="app-icon-mini" style="background-color:#009933;">F</div>
+        <div class="form-group">
+            <label>ملف Provision</label>
+            <div class="file-upload" onclick="document.getElementById('provisionInput').click()">
+                اضغط لاختيار التكوين
+                <input type="file" id="provisionInput" accept=".mobileprovision" required>
             </div>
         </div>
-    </div>
 
-    <script>
-        // Modal Logic
-        const modal = document.getElementById('apps-modal');
-        const appSelectorBtn = document.getElementById('app-selector-btn');
-        const selectedAppName = document.getElementById('selected-app-name');
-        const selectedAppIcon = document.getElementById('selected-app-icon');
+        <div class="form-group">
+            <label>كلمة المرور للشهادة</label>
+            <input type="password" placeholder="أدخل كلمة المرور" required>
+        </div>
 
-        appSelectorBtn.onclick = function() {
-            modal.style.display = 'flex';
-        }
+        <button type="submit">بدء التوقيع</button>
+    </form>
 
-        function closeModal(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
+    <a href="https://t.me/PUBG_RIM" target="_blank" class="telegram-link">انضم إلى قناتنا على تيليجرام</a>
+</div>
 
-        function selectApp(name, letter, color) {
-            selectedAppName.innerText = name;
-            selectedAppIcon.innerText = letter;
-            selectedAppIcon.style.backgroundColor = color;
-            modal.style.display = 'none';
-        }
+<div class="options-overlay" id="appOverlay" onclick="if(event.target === this) this.style.display = 'none'">
+    <div class="options-content">
+        <div class="option-item" onclick="selectApp('ESign', '#ff9900')"><span class="icon" style="background-color: #ff9900;">E</span> ESign</div>
+        <div class="option-item" onclick="selectApp('KSign', '#3366cc')"><span class="icon" style="background-color: #3366cc;">K</span> KSign</div>
+        <div class="option-item" onclick="selectApp('Scarlet', '#cc0000')"><span class="icon" style="background-color: #cc0000;">S</span> Scarlet</div>
+        <div class="option-item" onclick="store) {
+        document.getElementById('appSelectBtn').innerText = appName;
+        document.getElementById('appOverlay').style.display = 'none';
+    }
+</script>
 
-        // File Selection Logic
-        function updateFileName(inputElement, textElementId) {
-            const textElement = document.getElementById(textElementId);
-            if (inputElement.files.length > 0) {
-                textElement.innerText = inputElement.files[0].name;
-                textElement.style.color = "#d4af37"; // Change color when selected like in video
-            }
-        }
-
-        // Fake Signing Process Animation
-        function startSigning() {
-            const btn = document.getElementById('sign-btn');
-            const progressArea = document.getElementById('progress-area');
-            const progressText = document.getElementById('progress-text');
-            const progressFill = document.getElementById('progress-fill');
-
-            // Hide button, show progress
-            btn.style.display = 'none';
-            progressArea.style.display = 'block';
-
-            // Reset progress
-            progressFill.style.width = '0%';
-            progressText.innerText = 'جاري المعالجة...';
-
-            let width = 0;
-            const interval = setInterval(() => {
-                width += 2; // Speed of progress
-                progressFill.style.width = width + '%';
-
-                if (width === 40) {
-                    progressText.innerText = 'يتم التوقيع الان...';
-                }
-
-                if (width >= 100) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        // Simulate the iTunes popup
-                        if(confirm("فتح هذه الصفحة في \"iTunes\"؟")) {
-                            alert("تم التوقيع بنجاح! جاري التثبيت...");
-                            // Reset for next use
-                            btn.style.display = 'block';
-                            progressArea.style.display = 'none';
-                        } else {
-                            btn.style.display = 'block';
-                            progressArea.style.display = 'none';
-                        }
-                    }, 500);
-                }
-            }, 50); // Updates every 50ms
-        }
-    </script>
 </body>
 </html>
