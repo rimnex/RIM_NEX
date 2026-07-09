@@ -89,11 +89,11 @@
 
         /* تنسيق صورة الأيقونة الحقيقية */
         .app-logo {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             border-radius: 6px;
             object-fit: cover;
-            background-color: #333;
+            background-color: #2a2a2a; /* لون خلفية في حال تأخر تحميل الصورة */
         }
 
         .select-items {
@@ -229,18 +229,18 @@
             <div class="custom-select" style="padding: 15px;">
                 <div class="select-selected">
                     <div class="app-icon-text">
-                        <img src="https://via.placeholder.com/50/333333/ffffff?text=+" class="app-logo" alt="اختر">
+                        <img src="default.png" class="app-logo" alt="اختر" onerror="this.style.display='none'">
                         <span id="selected-app-text">اختر التطبيق...</span>
                     </div>
                     <span>▼</span>
                 </div>
                 
                 <div class="select-items select-hide">
-                    <div><img src="https://via.placeholder.com/50/1a1a1a/d4af37?text=E" class="app-logo" alt="ESign"> ESign</div>
-                    <div><img src="https://via.placeholder.com/50/1a1a1a/d4af37?text=K" class="app-logo" alt="KSign"> KSign</div>
-                    <div><img src="https://via.placeholder.com/50/1a1a1a/d4af37?text=S" class="app-logo" alt="Scarlet"> Scarlet</div>
-                    <div><img src="https://via.placeholder.com/50/1a1a1a/d4af37?text=F" class="app-logo" alt="Feather"> Feather</div>
-                    <div><img src="https://via.placeholder.com/50/1a1a1a/d4af37?text=G" class="app-logo" alt="GBox"> GBox</div>
+                    <div><img src="esign.png" class="app-logo" alt="ESign" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'28\' height=\'28\'><rect width=\'28\' height=\'28\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' fill=\'%23fff\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>E</text></svg>'"> ESign</div>
+                    <div><img src="ksign.png" class="app-logo" alt="KSign" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'28\' height=\'28\'><rect width=\'28\' height=\'28\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' fill=\'%23fff\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>K</text></svg>'"> KSign</div>
+                    <div><img src="scarlet.png" class="app-logo" alt="Scarlet" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'28\' height=\'28\'><rect width=\'28\' height=\'28\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' fill=\'%23fff\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>S</text></svg>'"> Scarlet</div>
+                    <div><img src="feather.png" class="app-logo" alt="Feather" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'28\' height=\'28\'><rect width=\'28\' height=\'28\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' fill=\'%23fff\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>F</text></svg>'"> Feather</div>
+                    <div><img src="gbox.png" class="app-logo" alt="GBox" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'28\' height=\'28\'><rect width=\'28\' height=\'28\' fill=\'%23333\'/><text x=\'50%\' y=\'50%\' fill=\'%23fff\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-family=\'sans-serif\' font-size=\'14\'>G</text></svg>'"> GBox</div>
                 </div>
             </div>
         </div>
@@ -293,7 +293,14 @@
 
         options.forEach(option => {
             option.addEventListener("click", function() {
-                selectSelected.querySelector('.app-icon-text').innerHTML = this.innerHTML;
+                // استنساخ محتوى الخيار المختار ليظهر في الأعلى
+                const content = this.innerHTML;
+                selectSelected.querySelector('.app-icon-text').innerHTML = content;
+                
+                // التأكد من إظهار الصورة إذا كانت مخفية (في حال عدم وجود صورة افتراضية)
+                const img = selectSelected.querySelector('img');
+                if(img) img.style.display = 'block';
+
                 selectItems.classList.add("select-hide");
             });
         });
