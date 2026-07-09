@@ -1,44 +1,13 @@
-const signBtn = document.getElementById('start-sign-btn');
-const p12Input = document.getElementById('p12-file');
-const provInput = document.getElementById('prov-file');
-const passwordInput = document.querySelector('input[type="password"]');
+<div class="app-item">
+    <div class="app-info">
+        <span class="app-name">eSign</span>
+    </div>
+    <a href="رابط_التحميل" class="install-btn">تثبيت</a>
+</div>
 
-signBtn.addEventListener('click', async function() {
-    // 1. التحقق من وجود الملفات
-    if (!p12Input.files[0] || !provInput.files[0]) {
-        alert("يرجى اختيار ملفات الشهادة (P12 و Provision)");
-        return;
-    }
-
-    // 2. تجهيز البيانات للإرسال
-    let formData = new FormData();
-    formData.append("p12", p12Input.files[0]);
-    formData.append("provision", provInput.files[0]);
-    formData.append("password", passwordInput.value);
-    formData.append("app", document.getElementById('app-select').value);
-
-    // 3. عرض شريط التحميل
-    signBtn.style.display = 'none';
-    document.getElementById('progress-container').style.display = 'block';
-
-    // 4. إرسال البيانات للسيرفر (غير المسار /sign إلى مسار السيرفر الخاص بك)
-    try {
-        let response = await fetch('/api/sign', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.ok) {
-            let result = await response.json();
-            // إظهار نافذة التحميل عند النجاح
-            document.getElementById('install-modal').style.display = 'flex';
-        } else {
-            alert("حدث خطأ أثناء الاتصال بالسيرفر");
-            signBtn.style.display = 'block';
-        }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("فشل في إرسال الملفات");
-        signBtn.style.display = 'block';
-    }
-});
+<div class="app-item">
+    <div class="app-info">
+        <span class="app-name">K-SIGN</span>
+    </div>
+    <a href="رابط_التحميل" class="install-btn">تثبيت</a>
+</div>
