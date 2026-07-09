@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIM_NEX Signer</title>
     <style>
-        /* الإعدادات الأساسية */
         body {
             background-color: #0a0a0a;
             color: #ffffff;
@@ -30,7 +29,6 @@
             box-sizing: border-box;
         }
 
-        /* العناوين */
         .title {
             text-align: center;
             color: #d4af37;
@@ -48,7 +46,6 @@
             letter-spacing: 1px;
         }
 
-        /* الحقول */
         .form-group {
             background-color: #1a1a1a;
             border: 1px solid #333;
@@ -66,13 +63,12 @@
             border-color: #d4af37;
         }
 
-        /* تصميم القائمة المنسدلة */
         .custom-select {
             width: 100%;
             cursor: pointer;
             user-select: none;
         }
-        
+
         .select-selected {
             display: flex;
             justify-content: space-between;
@@ -87,7 +83,6 @@
             gap: 10px;
         }
 
-        /* تنسيق الأيقونة المدمجة */
         .app-logo {
             width: 30px;
             height: 30px;
@@ -135,13 +130,13 @@
             color: #d4af37;
         }
 
-        /* حقول رفع الملفات */
         .file-upload {
             flex-direction: column;
             align-items: flex-start;
             cursor: pointer;
             position: relative;
         }
+
         .file-upload input[type="file"] {
             position: absolute;
             width: 100%;
@@ -151,23 +146,25 @@
             opacity: 0;
             cursor: pointer;
         }
+
         .file-info {
             display: flex;
             justify-content: space-between;
             width: 100%;
             align-items: center;
         }
+
         .file-title {
             font-weight: bold;
             font-size: 14px;
         }
+
         .file-desc {
             color: #666;
             font-size: 11px;
             margin-top: 5px;
         }
 
-        /* حقل كلمة المرور */
         input[type="password"] {
             background-color: transparent;
             border: none;
@@ -178,7 +175,6 @@
             text-align: center;
         }
 
-        /* الأزرار */
         .submit-btn {
             background: linear-gradient(90deg, #b8860b, #ffd700, #b8860b);
             color: #000;
@@ -192,6 +188,7 @@
             margin-top: 10px;
             transition: opacity 0.3s;
         }
+
         .submit-btn:hover {
             opacity: 0.9;
         }
@@ -222,7 +219,6 @@
 <body>
 
     <div class="signer-container">
-        
         <div class="title">RIM_NEX</div>
         <div class="subtitle">CLOUD SIGNER</div>
 
@@ -237,32 +233,30 @@
                 </div>
                 
                 <div class="select-items select-hide">
-                    
                     <div>
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%231c1c1e'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>E</text></svg>" class="app-logo" alt="ESign"> 
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230A84FF'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>E</text></svg>" class="app-logo" alt="ESign"> 
                         ESign
                     </div>
 
                     <div>
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230b192c'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>K</text></svg>" class="app-logo" alt="KSign"> 
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230056B3'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>K</text></svg>" class="app-logo" alt="KSign"> 
                         KSign
                     </div>
 
                     <div>
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23ff2a2a'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>S</text></svg>" class="app-logo" alt="Scarlet"> 
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23FF3B30'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>S</text></svg>" class="app-logo" alt="Scarlet"> 
                         Scarlet
                     </div>
 
                     <div>
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%235e5ce6'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>F</text></svg>" class="app-logo" alt="Feather"> 
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%235856D6'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>F</text></svg>" class="app-logo" alt="Feather"> 
                         Feather
                     </div>
 
                     <div>
-                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%2328cd41'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>G</text></svg>" class="app-logo" alt="GBox"> 
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%2334C759'/><text x='50' y='70' font-family='sans-serif' font-size='55' font-weight='bold' fill='%23ffffff' text-anchor='middle'>G</text></svg>" class="app-logo" alt="GBox"> 
                         GBox
                     </div>
-
                 </div>
             </div>
         </div>
@@ -299,7 +293,6 @@
             <span>انضم إلى قناتنا على تيليجرام</span>
             <span>✈️</span>
         </a>
-
     </div>
 
     <script>
@@ -315,7 +308,6 @@
 
         options.forEach(option => {
             option.addEventListener("click", function() {
-                // استنساخ محتوى الخيار المختار ليظهر في الأعلى
                 const content = this.innerHTML;
                 selectSelected.querySelector('.app-icon-text').innerHTML = content;
                 selectItems.classList.add("select-hide");
