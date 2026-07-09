@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Cloud Signer</title>
+    <title>RIM_NEX Signer</title>
     <style>
         /* الإعدادات الأساسية والخلفية الداكنة */
         body {
@@ -28,11 +28,11 @@
             border: 1px solid #2a2a2a;
         }
 
-        /* العناوين باللون الذهبي */
+        /* العناوين باللون الذهبي - تم تغيير الاسم إلى RIM_NEX */
         .title {
             text-align: center;
-            color: #d4af37; /* لون ذهبي */
-            font-size: 24px;
+            color: #d4af37;
+            font-size: 28px;
             font-weight: bold;
             margin-bottom: 5px;
             letter-spacing: 2px;
@@ -46,7 +46,7 @@
             letter-spacing: 1px;
         }
 
-        /* تنسيق الحقول */
+        /* تنسيق الحقول العامة */
         .form-group {
             background-color: #1a1a1a;
             border: 1px solid #333;
@@ -57,61 +57,71 @@
             align-items: center;
             justify-content: space-between;
             transition: border-color 0.3s;
+            position: relative; /* مهم للقائمة المنسدلة */
         }
 
         .form-group:hover {
             border-color: #d4af37;
         }
 
-        /* زر التبديل للشهادة المجانية */
-        .toggle-label {
-            color: #d4af37;
-            font-weight: bold;
-            font-size: 14px;
+        /* --- تصميم القائمة المنسدلة المخصصة مع الأيقونات --- */
+        .custom-select {
+            width: 100%;
+            cursor: pointer;
+            user-select: none;
         }
         
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-        }
-        .switch input { display: none; }
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #333;
-            border-radius: 20px;
-            transition: .4s;
-        }
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px; width: 16px;
-            left: 2px; bottom: 2px;
-            background-color: #888;
-            border-radius: 50%;
-            transition: .4s;
-        }
-        input:checked + .slider { background-color: #d4af37; }
-        input:checked + .slider:before {
-            transform: translateX(20px);
-            background-color: #fff;
+        .select-selected {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            font-size: 15px;
         }
 
-        /* القائمة المنسدلة للتطبيقات */
-        select {
-            background-color: transparent;
-            color: #fff;
-            border: none;
-            width: 100%;
-            font-size: 15px;
-            outline: none;
-            cursor: pointer;
-            appearance: none;
+        .select-selected .app-icon-text {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        select option { background-color: #1a1a1a; }
+
+        .select-items {
+            position: absolute;
+            background-color: #1a1a1a;
+            top: 105%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            border: 1px solid #333;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+        }
+
+        .select-hide {
+            display: none;
+        }
+
+        .select-items div {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #222;
+            transition: background-color 0.2s;
+        }
+
+        .select-items div:last-child {
+            border-bottom: none;
+        }
+
+        .select-items div:hover {
+            background-color: #333;
+            color: #d4af37;
+        }
 
         /* حقول رفع الملفات */
         .file-upload {
@@ -176,24 +186,26 @@
 <body>
 
     <div class="signer-container">
-        <div class="title">IPA BLACK</div>
-        <div class="subtitle">PREMIUM CLOUD SIGNER</div>
+        <div class="title">RIM_NEX</div>
+        <div class="subtitle">CLOUD SIGNER</div>
 
-        <div class="form-group">
-            <span class="toggle-label">$ الشهادة المجانية</span>
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="form-group">
-            <select>
-                <option value="esign">ESign</option>
-                <option value="scarlet">Scarlet</option>
-                <option value="feather">Feather</option>
-                <option value="gbox">GBox</option>
-            </select>
+        <div class="form-group" style="padding: 0;">
+            <div class="custom-select" style="padding: 15px;">
+                <div class="select-selected">
+                    <div class="app-icon-text">
+                        <span>📱</span> 
+                        <span id="selected-app-text">اختر التطبيق...</span>
+                    </div>
+                    <span>▼</span>
+                </div>
+                
+                <div class="select-items select-hide">
+                    <div><span>✍️</span> ESign</div>
+                    <div><span>🔴</span> Scarlet</div>
+                    <div><span>🪶</span> Feather</div>
+                    <div><span>📦</span> GBox</div>
+                </div>
+            </div>
         </div>
 
         <div class="form-group file-upload">
@@ -219,11 +231,40 @@
         </div>
 
         <div class="form-group">
-            <input type="password" placeholder="كلمة المرور">
+            <input type="password" placeholder="كلمة المرور للشهادة">
         </div>
 
         <button class="submit-btn">بدء التوقيع</button>
     </div>
 
+    <script>
+        const customSelect = document.querySelector(".custom-select");
+        const selectSelected = document.querySelector(".select-selected");
+        const selectItems = document.querySelector(".select-items");
+        const options = document.querySelectorAll(".select-items div");
+        const selectedAppText = document.getElementById("selected-app-text");
+
+        // فتح وإغلاق القائمة عند الضغط
+        selectSelected.addEventListener("click", function(e) {
+            e.stopPropagation();
+            selectItems.classList.toggle("select-hide");
+        });
+
+        // عند اختيار تطبيق من القائمة
+        options.forEach(option => {
+            option.addEventListener("click", function() {
+                // نقل الأيقونة والنص إلى الصندوق الرئيسي
+                selectSelected.querySelector('.app-icon-text').innerHTML = this.innerHTML;
+                selectItems.classList.add("select-hide");
+            });
+        });
+
+        // إغلاق القائمة عند الضغط في أي مكان آخر في الصفحة
+        document.addEventListener("click", function(e) {
+            if (!customSelect.contains(e.target)) {
+                selectItems.classList.add("select-hide");
+            }
+        });
+    </script>
 </body>
 </html>
