@@ -1,55 +1,144 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>متجر RIM_NEX</title>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- <style>
- body {
- background-color: #000000;
- background-image: radial-gradient(circle at center, #111111 0%, #000000 100%);
- color: #ffffff;
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- margin: 0;
- padding: 0;
- text-align: center;
- }
- .gold-text {
- background: linear-gradient(45deg, #FFD700, #DAA520, #FFD700);
- -webkit-background-clip: text;
- -webkit-text-fill-color: transparent;
- font-weight: bold;
- }
- .container {
- padding: 20px;
- }
- .app-list {
- list-style: none;
- padding: 0;
- max-width: 400px;
- margin: 0 auto;
- }
- .app-item {
- background-color: rgba(255, 255, 255, 0.05);
- border: 1px solid rgba(255, 215, 0, 0.2);
- border-radius: 10px;
- margin-bottom: 15px;
- padding: 15px;
- display: flex;
- align-items: center;
- justify-content: space-between;
- transition: all 0.3s ease;
- }
- .app-item:hover {
- background-color: rgba(255, 255, 255, 0.1);
- border-color: #FFD700;
- }
- .app-name {
- font-size: 18px;
- font-weight: bold;
- display: flex;
- align-items: center;
- }
- .app-name 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجري الخاص</title>
+    <style>
+        /* الإعدادات الأساسية للخطوط والألوان */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
 
+        /* تصميم ترويسة الموقع */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .header p {
+            color: #8e8e93;
+            font-size: 15px;
+            margin-top: 5px;
+        }
+
+        /* تصميم حاوية التطبيقات */
+        .app-list {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* تصميم كرت التطبيق الواحد */
+        .app-card {
+            background-color: #1c1c1e;
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* معلومات التطبيق (الرمز والاسم) */
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* أيقونة التطبيق */
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #3a3a3c;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .app-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 17px;
+        }
+        .app-details p {
+            margin: 0;
+            font-size: 13px;
+            color: #8e8e93;
+        }
+
+        /* زر التحميل */
+        .install-btn {
+            background-color: #007aff;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .install-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>متجري الخاص</h1>
+        <p>التطبيقات الأساسية فقط، بدون إعلانات مزعجة.</p>
+    </div>
+
+    <div class="app-list">
+        
+        <!-- التطبيق الأول -->
+        <div class="app-card">
+            <div class="app-info">
+                <div class="app-icon">🎬</div>
+                <div class="app-details">
+                    <h3>Cinemana</h3>
+                    <p>لمشاهدة الأفلام والمسلسلات</p>
+                </div>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+
+        <!-- التطبيق الثاني -->
+        <div class="app-card">
+            <div class="app-info">
+                <div class="app-icon">✍️</div>
+                <div class="app-details">
+                    <h3>ESign</h3>
+                    <p>لتوقيع وتثبيت التطبيقات</p>
+                </div>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+
+        <!-- التطبيق الثالث -->
+        <div class="app-card">
+            <div class="app-info">
+                <div class="app-icon">🔑</div>
+                <div class="app-details">
+                    <h3>KSign</h3>
+                    <p>أداة التوقيع البديلة</p>
+                </div>
+            </div>
+            <a href="#" class="install-btn">تثبيت</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
