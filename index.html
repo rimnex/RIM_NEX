@@ -2,94 +2,55 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIM_NEX | iOS Signing Manager</title>
 <style>
 :root{
- --bg:#000; --card:#141414; --border:rgba(255,255,255,.08);
- --gold:#D4AF37; --success:#34c759;
- --gold-gradient:linear-gradient(135deg,#8a6a1f,#D4AF37,#FFD700,#b8860b);
- --text:#f2f2f2; --text-dim:#8f8f8f;
- --radius-lg:20px; --radius-md:14px;
+ --bg:#0a0a0a; --card:#111; --border:rgba(255,255,255,.06);
+ --gold:#FFD700; --gold-dark:#D4AF37;
+ --gold-gradient:linear-gradient(135deg,#FFD700 0%,#FFA500 50%,#D4AF37 100%);
+ --text:#fff; --text-dim:#aaa; --success:#00ff88;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif}
 body{
- min-height:100vh; background: radial-gradient(circle at 50% -10%, rgba(212,175,55,.14), transparent 55%), var(--bg);
- color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
- display:flex; justify-content:center; padding:40px 16px 120px;
+ min-height:100vh; 
+ background: radial-gradient(ellipse at top, rgba(255,215,0,.15) 0%, transparent 50%), #000;
+ color:var(--text); 
+ padding:40px 16px 60px;
 }
-.wrap{width:100%;max-width:430px;display:flex;flex-direction:column;align-items:center;}
-.header{text-align:center;margin-bottom:26px}
-.logo{font-size:32px;font-weight:900;background:var(--gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.subtitle{ margin-top:6px;font-size:12px;letter-spacing:2.5px;color:var(--text-dim);font-weight:700; }
+.wrap{width:100%;max-width:400px;margin:0 auto;}
 
-.card{ width:100%; background:#141414; border:1px solid var(--border); border-radius:var(--radius-lg); margin-bottom:14px; }
+.header{text-align:center;margin-bottom:30px}
+.logo{font-size:36px;font-weight:900;background:var(--gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:2px}
+.subtitle{ margin-top:8px;font-size:11px;letter-spacing:3px;color:var(--text-dim);font-weight:600; }
 
-/* APPS LIST */
-.apps-title{font-size:13px;font-weight:700;color:var(--text-dim);margin:20px 0 10px;text-align:right;padding-right:4px;}
+.section-title{text-align:center;font-size:15px;color:var(--text-dim);margin-bottom:16px;font-weight:600}
+
+/* APP CARDS WITH GLOW */
 .app-card{
-  background:#141414;border:1px solid var(--border);border-radius:16px;
-  padding:14px;display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:10px;cursor:pointer;transition:.2s;text-decoration:none;color:var(--text)
+  background:rgba(17,17,17,.8);border:1px solid var(--border);border-radius:20px;
+  padding:16px;display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;cursor:pointer;transition:.3s;text-decoration:none;color:var(--text);
+  box-shadow:0 0 20px rgba(255,215,0,.1)
 }
-.app-card:hover{background:#1a1a1a;transform:translateY(-2px)}
-.app-info{display:flex;align-items:center;gap:12px;text-align:right}
-.app-icon{width:48px;height:48px;border-radius:14px;background:var(--gold-gradient);display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:20px;box-shadow:0 4px 12px rgba(212,175,55,.3)}
-.app-name{font-size:15px;font-weight:700}
-.app-status{font-size:11px;color:var(--success)}
-.app-action{font-size:22px;color:var(--gold)}
-
-/* upload */
-.upload-card{ border:2px dashed var(--gold); background:rgba(212,175,55,.03); cursor:pointer; transition:.25s; text-align:center }
-.upload-card:hover{background:rgba(212,175,55,.07)}
-.upload-card.has-file{border-style:solid;border-color:var(--success);background:rgba(52,199,89,.05);}
-.upload-inner{padding:24px 16px;}
-.upload-card.emoji{font-size:28px;display:block;margin-bottom:8px;}
-.upload-card.main-text{font-size:15px;font-weight:700;}
-.upload-card.sub-text{font-size:12.5px;color:var(--text-dim);margin-top:4px;}
-.upload-card.file-info{ margin-top:8px;font-size:12px;color:var(--success);display:none; align-items:center;justify-content:center;gap:6px;word-break:break-all;font-weight:600; }
-.upload-card.has-file.file-info{display:flex;}
-.upload-card.has-file.main-text,.upload-card.has-file.sub-text{display:none;}
-.upload-card input[type=file]{position:absolute;width:1px;height:1px;opacity:0;}
-
-/* password */
-.password-card{padding:6px;}
-.field{ position:relative;display:flex;align-items:center; }
-.field-icon{ width:40px;height:40px;display:flex;align-items:center;justify-content:center; font-size:18px; }
-.field input{ flex:1;background:transparent;border:none;outline:none; color:var(--text);font-size:14.5px;padding:12px 4px;text-align:right; }
-.field input::placeholder{color:var(--text-dim);}
-.eye-toggle{ width:40px;height:40px;display:flex;align-items:center;justify-content:center; background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-dim); }
-
-/* button */
-.btn-primary{ width:100%;padding:18px;border:none; border-radius:var(--radius-md);background:var(--gold-gradient); color:#1a1200;font-size:16px;font-weight:900;cursor:pointer; display:flex;align-items:center;justify-content:center;gap:9px; transition:.2s; box-shadow:0 10px 28px -8px rgba(212,175,55,.55); }
-.btn-primary:active{transform:scale(.97);}
-
-/* BOTTOM BAR */
-.bottom-bar{
-  position:fixed;bottom:15px;left:50%;transform:translateX(-50%);
-  width:calc(100% - 30px);max-width:430px;height:58px;
-  background:var(--gold-gradient);border-radius:20px;
-  display:flex;align-items:center;justify-content:space-between;padding:0 10px;
-  box-shadow:0 8px 30px rgba(212,175,55,.4);z-index:100
+.app-card:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(255,215,0,.25);border-color:var(--gold)}
+.app-info{display:flex;align-items:center;gap:14px}
+.app-icon{
+  width:56px;height:56px;border-radius:16px;
+  background:var(--gold-gradient);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:#000;font-size:24px;
+  box-shadow:0 0 20px rgba(255,215,0,.5)
 }
-.bottom-btn{
-  width:42px;height:42px;border-radius:14px;background:rgba(0,0,0,.15);
-  display:flex;align-items:center;justify-content:center;font-size:18px;color:#000;cursor:pointer;border:none;text-decoration:none
-}
-.url-center{
-  flex:1;margin:0 8px;background:rgba(0,0,0,.15);border-radius:14px;
-  padding:10px;text-align:center;color:#000;font-weight:700;font-size:12px;
-  display:flex;align-items:center;justify-content:center;gap:6px
-}
+.app-text .name{font-size:18px;font-weight:800}
+.app-text .status{font-size:12px;color:var(--success);margin-top:3px}
+.app-arrow{font-size:20px;color:var(--gold)}
 
-.toast-container{ position:fixed;top:18px;left:50%;transform:translateX(-50%); width:calc(100% - 32px);max-width:390px;z-index:999; }
-.toast{ display:flex;align-items:center;gap:10px;padding:13px 16px; border-radius:var(--radius-md);background:#161616;border:1px solid var(--border); font-size:13px;font-weight:600;margin-bottom:8px; }
-.toast.success{border-color:rgba(52,199,89,.35);color:var(--success);}
-.toast.error{border-color:rgba(255,91,91,.35);color:#ff5b5b;}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#111;border:1px solid var(--gold);padding:12px 20px;border-radius:12px;display:none;z-index:999}
 </style>
 </head>
 <body>
-<div class="toast-container" id="toastContainer"></div>
+<div class="toast" id="toast"></div>
 
 <div class="wrap">
   <header class="header">
@@ -97,145 +58,70 @@ body{
     <div class="subtitle">IOS SIGNING MANAGER</div>
   </header>
 
-  <!-- قسم التطبيقات مع روابط التثبيت المباشر -->
-  <div class="apps-title">التطبيقات الجاهزة للتثبيت</div>
+  <div class="section-title">التطبيقات الجاهزة للتثبيت</div>
 
   <a class="app-card" href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/esign.plist">
-    <div class="app-action">➤</div>
     <div class="app-info">
-      <div>
-        <div class="app-name">ESign</div>
-        <div class="app-status">جاهز للتثبيت</div>
-      </div>
       <div class="app-icon">E</div>
+      <div class="app-text">
+        <div class="name">ESign</div>
+        <div class="status">جاهز للتثبيت</div>
+      </div>
     </div>
+    <div class="app-arrow">➤</div>
   </a>
 
   <a class="app-card" href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/ksign.plist">
-    <div class="app-action">➤</div>
     <div class="app-info">
-      <div>
-        <div class="app-name">KSign</div>
-        <div class="app-status">جاهز للتثبيت</div>
-      </div>
       <div class="app-icon">K</div>
+      <div class="app-text">
+        <div class="name">KSign</div>
+        <div class="status">جاهز للتثبيت</div>
+      </div>
     </div>
+    <div class="app-arrow">➤</div>
   </a>
 
   <a class="app-card" href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/scarlet.plist">
-    <div class="app-action">➤</div>
     <div class="app-info">
-      <div>
-        <div class="app-name">Scarlet</div>
-        <div class="app-status">جاهز للتثبيت</div>
-      </div>
       <div class="app-icon">S</div>
+      <div class="app-text">
+        <div class="name">Scarlet</div>
+        <div class="status">جاهز للتثبيت</div>
+      </div>
     </div>
+    <div class="app-arrow">➤</div>
   </a>
 
   <a class="app-card" href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/gbox.plist">
-    <div class="app-action">➤</div>
     <div class="app-info">
-      <div>
-        <div class="app-name">GBox</div>
-        <div class="app-status">جاهز للتثبيت</div>
-      </div>
       <div class="app-icon">G</div>
+      <div class="app-text">
+        <div class="name">GBox</div>
+        <div class="status">جاهز للتثبيت</div>
+      </div>
     </div>
+    <div class="app-arrow">➤</div>
   </a>
 
   <a class="app-card" href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/feather.plist">
-    <div class="app-action">➤</div>
     <div class="app-info">
-      <div>
-        <div class="app-name">Feather</div>
-        <div class="app-status">جاهز للتثبيت</div>
-      </div>
       <div class="app-icon">F</div>
+      <div class="app-text">
+        <div class="name">Feather</div>
+        <div class="status">جاهز للتثبيت</div>
+      </div>
     </div>
+    <div class="app-arrow">➤</div>
   </a>
 
-  <!-- باقي الكود -->
-  <div class="card upload-card" id="p12Area">
-    <input type="file" id="p12Input" accept=".p12,.pfx">
-    <div class="upload-inner">
-      <span class="emoji">📄</span>
-      <div class="main-text">شهادة P12</div>
-      <div class="sub-text">اسحب الملف هنا</div>
-      <div class="file-info">✓ <span id="p12Name"></span></div>
-    </div>
-  </div>
-
-  <div class="card upload-card" id="profileArea">
-    <input type="file" id="profileInput" accept=".mobileprovision">
-    <div class="upload-inner">
-      <span class="emoji">📁</span>
-      <div class="main-text">Provisioning Profile</div>
-      <div class="sub-text">اسحب الملف هنا</div>
-      <div class="file-info">✓ <span id="profileName"></span></div>
-    </div>
-  </div>
-
-  <div class="card password-card">
-    <div class="field">
-      <div class="field-icon">🔒</div>
-      <input type="password" id="passwordInput" placeholder="كلمة مرور الشهادة">
-      <button type="button" class="eye-toggle" id="togglePw">👁️</button>
-    </div>
-  </div>
-
-  <button class="btn-primary" id="actionBtn">
-    <span>رفع الشهادة</span>
-    <span>➤</span>
-  </button>
-</div>
-
-<!-- الشريط السفلي -->
-<div class="bottom-bar">
-  <button class="bottom-btn" onclick="copyURL()">📋</button>
-  <a href="https://t.me/PUBG_NEX1" target="_blank" class="bottom-btn">✈️</a>
-  <div class="url-center" onclick="copyURL()">
-    <span>🔄</span>
-    <span>rim-nex.vercel.app</span>
-  </div>
-  <button class="bottom-btn">➤</button>
 </div>
 
 <script>
-let files = {p12:null, prov:null};
-
-function setupUpload(area, input, nameEl, key){
-  area.onclick = ()=>input.click();
-  input.onchange = ()=>{
-    if(input.files[0]){
-      files[key] = input.files[0];
-      nameEl.textContent = input.files[0].name;
-      area.classList.add('has-file');
-    }
-  }
-}
-setupUpload(p12Area, p12Input, p12Name, 'p12');
-setupUpload(profileArea, profileInput, profileName, 'prov');
-
-togglePw.onclick = ()=>{
-  passwordInput.type = passwordInput.type === 'password'? 'text' : 'password';
-}
-
-function showToast(msg, type){
-  let t = document.createElement('div');
-  t.className = 'toast ' + type;
-  t.innerHTML = `<span>${type==='success'?'✅':'⚠️'}</span><span>${msg}</span>`;
-  toastContainer.appendChild(t);
-  setTimeout(()=>t.remove(), 3000);
-}
-
-actionBtn.onclick = ()=>{
-  showToast('ميزة التوقيع تحتاج سيرفر', 'error');
-}
-
-function copyURL(){
-  navigator.clipboard.writeText('https://rim-nex.vercel.app');
-  showToast('تم نسخ الرابط', 'success');
+function showToast(msg){
+  let t=document.getElementById('toast');
+  t.textContent=msg;t.style.display='block';
+  setTimeout(()=>t.style.display='none',2500)
 }
 </script>
 </body>
