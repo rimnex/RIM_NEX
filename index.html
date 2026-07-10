@@ -2,34 +2,58 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>RIM_NEX - IOS SIGNING MANAGER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RIM_NEX</title>
 <style>
-:root{
-  --bg:#0a0a0a;
-  --border:rgba(212,175,55,0.25);
-  --gold:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);
-  --gold-solid:#d4af37;
-  --text:#fff;
-  --muted:#999;
+body{background:#0a0a0a;color:#fff;font-family:-apple-system;margin:0;padding:20px;text-align:center}
+h1{background:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:36px}
+.card{background:#111;border:1px solid rgba(212,175,55,0.3);border-radius:20px;padding:16px;margin:16px 0}
+.btn{width:100%;padding:18px;border:none;border-radius:16px;background:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);color:#000;font-weight:900;font-size:17px}
+</style>
+</head>
+<body>
+<h1>RIM_NEX</h1>
+<p>IOS SIGNING MANAGER</p>
+
+<div class="card">
+  <b>شهادة التوقيع الخاصة بي</b>
+  <input type="checkbox" checked>
+</div>
+
+<div class="card" id="selectBox">
+  <span id="selectedName">KSign</span> ▼
+</div>
+
+<div class="card" id="p12Card">
+  <b>شهادة P12</b><br>
+  <small>اسحب الملف هنا</small>
+  <div id="p12Name"></div>
+  <input type="file" id="p12" hidden>
+</div>
+
+<div class="card" id="provCard">
+  <b>Provisioning Profile</b><br>
+  <small>اسحب الملف هنا</small>
+  <div id="provName"></div>
+  <input type="file" id="prov" hidden>
+</div>
+
+<div class="card">
+  <input type="password" id="password" placeholder="Password" style="background:transparent;border:none;color:#fff;width:80%">
+  <span id="togglePass">👁️</span>
+</div>
+
+<button class="btn" id="signBtn">بدء التوقيع والتثبيت</button>
+
+<script>
+document.getElementById('p12Card').onclick = () => document.getElementById('p12').click();
+document.getElementById('provCard').onclick = () => document.getElementById('prov').click();
+document.getElementById('p12').onchange = e => {if(e.target.files[0]) document.getElementById('p12Name').textContent = e.target.files[0].name + ' ✓'}
+document.getElementById('prov').onchange = e => {if(e.target.files[0]) document.getElementById('provName').textContent = e.target.files[0].name + ' ✓'}
+document.getElementById('togglePass').onclick = () => {
+  const pass = document.getElementById('password');
+  pass.type = pass.type === 'password'? 'text' : 'password';
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
-body{background:radial-gradient(ellipse at top,rgba(212,175,55,0.15) 0%,transparent 60%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
-.container{max-width:430px;margin:0 auto}
-
-.header{text-align:center;padding:20px 0 40px}
-.header svg{width:40px;height:40px;margin-bottom:10px}
-.header h1{font-size:38px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
-.header p{color:var(--muted);font-size:12px;letter-spacing:3px;margin-top:8px}
-
-.card{background:rgba(17,17,17,0.9);border:1px solid var(--border);border-radius:20px;padding:16px;margin-bottom:16px}
-.card.dashed{border:1.5px dashed var(--border)}
-.card.dashed.filled{border:1.5px solid var(--gold-solid);background:rgba(212,175,55,0.05)}
-
-.toggle{display:flex;justify-content:space-between;align-items:center}
-.toggle-text{text-align:right}
-.toggle-text .title{font-size:15px;font-weight:700;margin-bottom:4px}
-.toggle-text .sub{font-size:11px;color:var(--muted)}
-.switch{position:relative;width:56px;height:34px}
-.switch input{display:none}
-.slider{position:absolute;inset:0;background:#1a1a1a;border-radius:34px;cursor:pointer;transition:.3s;border:1px solid var(--border)}
+</script>
+</body>
+</html>
