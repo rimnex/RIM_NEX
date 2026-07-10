@@ -5,61 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIM_NEX</title>
 <style>
-:root{--bg:#0a0a0a;--border:rgba(212,175,55,0.35);--gold:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);--text:#fff;--muted:#888;}
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display"}
-body{background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.2) 0%,transparent 70%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
+:root{
+  --bg:#000;
+  --border:rgba(212,175,55,0.5);
+  --gold:linear-gradient(135deg,#d4af37 0%,#f7d774 50%,#d4af37 100%);
+  --text:#fff;
+  --muted:#666;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont}
+body{background:radial-gradient(ellipse at 50% -20%,rgba(212,175,55,0.3) 0%,transparent 60%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
 .container{max-width:430px;margin:0 auto}
 
-.header{text-align:center;padding:25px 0 35px}
-.header-title{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
-.shield{width:36px;height:36px}
+.header{text-align:center;padding:40px 0 45px}
+.header-title{display:flex;align-items:center;justify-content:center;gap:10px}
+.header h1{font-size:40px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.shield{width:34px;height:34px}
 .shield path{fill:url(#goldGrad)}
-.header h1{font-size:36px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
-.header p{color:var(--muted);font-size:11px;letter-spacing:4px}
+.header p{color:var(--muted);font-size:10px;letter-spacing:5px;margin-top:10px;text-transform:uppercase}
 
-.card{background:rgba(17,17,17,0.95);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:14px}
-.card.dashed{border:1.5px dashed rgba(212,175,55,0.4)}
+.card{background:transparent;border:1.5px solid var(--border);border-radius:20px;padding:20px;margin-bottom:18px}
+.card.dashed{border:1.5px dashed var(--border)}
 
-.toggle{display:flex;justify-content:space-between;align-items:center}
+.toggle{display:flex;justify-content:space-between;align-items:center;flex-direction:row-reverse}
 .toggle-text{text-align:right}
-.toggle-text b{font-size:15px}
-.toggle-text small{font-size:11px;color:var(--muted)}
-.switch{position:relative;width:54px;height:32px}
+.toggle-text b{font-size:16px;font-weight:700}
+.toggle-text small{font-size:12px;color:var(--muted);display:block;margin-top:5px}
+.switch{position:relative;width:58px;height:36px;flex-shrink:0}
 .switch input{display:none}
-.slider{position:absolute;inset:0;background:#2a2a2a;border-radius:32px;cursor:pointer;transition:.3s}
-.slider:before{content:"";position:absolute;width:26px;height:26px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
+.slider{position:absolute;inset:0;background:#1a1a1a;border-radius:36px;cursor:pointer;transition:.3s;border:1px solid var(--border)}
+.slider:before{content:"";position:absolute;width:30px;height:30px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
 input:checked +.slider{background:var(--gold)}
 input:checked +.slider:before{transform:translateX(22px)}
 
-.select-box{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.select-left{display:flex;align-items:center;gap:12px}
-.app-icon{width:42px;height:42px;border-radius:14px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:18px}
-
-.dropdown{display:none;background:#0a0a0a;border:1px solid var(--border);border-radius:14px;margin-top:10px;padding:6px}
+.select-box{display:flex;justify-content:space-between;align-items:center;cursor:pointer;flex-direction:row-reverse}
+.select-left{display:flex;align-items:center;gap:15px}
+.app-icon{width:46px;height:46px;border-radius:15px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:22px}
+.arrow{font-size:16px;color:#fff}
+.dropdown{display:none;background:#000;border:1.5px solid var(--border);border-radius:16px;margin-top:12px;padding:8px}
 .dropdown.show{display:block}
-.dropdown-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;cursor:pointer}
-.dropdown-item:hover{background:#1a1a1a}
+.dropdown-item{display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;cursor:pointer}
+.dropdown-item:hover{background:#111}
 
 .upload{text-align:center}
-.upload b{font-size:15px}
-.upload small{font-size:12px;color:var(--muted)}
-.file-name{font-size:13px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-top:6px}
-
-.input-wrap{display:flex;align-items:center;justify-content:space-between}
-.input-pass{background:transparent;border:none;outline:none;color:var(--muted);width:90%;text-align:right;font-size:15px}
-.eye{font-size:20px;cursor:pointer}
-
-.btn{width:100%;padding:18px;border:none;border-radius:16px;background:var(--gold);color:#000;font-weight:900;font-size:17px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.upload b{font-size:17px;font-weight:700}
+.upload small{font-size:13px;color:var(--muted);margin-top:8px;display:block}
+.file-name{font-size:14px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-top:10px}
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute">
+<svg width="0" height="0">
   <defs>
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8f6b1f"/>
-      <stop offset="50%" stop-color="#d4af37"/>
-      <stop offset="100%" stop-color="#f7d774"/>
+      <stop offset="0%" stop-color="#d4af37"/>
+      <stop offset="50%" stop-color="#f7d774"/>
+      <stop offset="100%" stop-color="#d4af37"/>
     </linearGradient>
   </defs>
 </svg>
@@ -67,51 +67,33 @@ input:checked +.slider:before{transform:translateX(22px)}
 <div class="container">
   <div class="header">
     <div class="header-title">
+      <h1>RIM_NEX</h1>
       <svg class="shield" viewBox="0 0 24 24">
         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
       </svg>
-      <h1>RIM_NEX</h1>
     </div>
     <p>IOS SIGNING MANAGER</p>
   </div>
 
   <div class="card toggle">
-    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+    <div class="switch">
+      <input type="checkbox" id="toggleCert" checked>
+      <span class="slider"></span>
+    </div>
     <div class="toggle-text">
-      <b>شهادة التوقيع الخاصة بي</b><br>
+      <b>شهادة التوقيع الخاصة بي</b>
       <small>استخدم شهادة Apple Developer</small>
     </div>
   </div>
 
   <div class="card" style="position:relative">
     <div class="select-box" id="selectBox">
-      <div>▼</div>
+      <div class="arrow">▼</div>
       <div class="select-left">
-        <span id="selectedName">ESign</span>
         <div class="app-icon" id="selectedIcon">E</div>
+        <span id="selectedName">ESign</span>
       </div>
     </div>
     <div class="dropdown" id="dropdown">
       <div class="dropdown-item" data-name="ESign" data-icon="E" data-plist="ESign.plist"><div class="app-icon">E</div><span>ESign</span></div>
-      <div class="dropdown-item" data-name="KSign" data-icon="K" data-plist="KSign.plist"><div class="app-icon">K</div><span>KSign</span></div>
-      <div class="dropdown-item" data-name="Scarlet" data-icon="S" data-plist="Scarlet.plist"><div class="app-icon">S</div><span>Scarlet</span></div>
-      <div class="dropdown-item" data-name="GBox" data-icon="G" data-plist="GBox.plist"><div class="app-icon">G</div><span>GBox</span></div>
-      <div class="dropdown-item" data-name="Feather" data-icon="F" data-plist="Feather. plist"><div class="app-icon">F</div><span>Feather</span></div>
-    </div>
-  </div>
-
-  <div class="card dashed upload" id="p12Card">
-    <b>شهادة P12</b><br>
-    <small>اسحب الملف هنا</small>
-    <div class="file-name" id="p12Name"></div>
-    <input type="file" id="p12" hidden>
-  </div>
-
-  <div class="card dashed upload" id="provCard">
-    <b>Provisioning Profile</b><br>
-    <small>اسحب الملف هنا</small>
-    <div class="file-name" id="provName"></div>
-    <input type="file" id="prov" hidden>
-  </div>
-
-  
+      <div class="dropdown-item" data-name="KSign" data-icon
