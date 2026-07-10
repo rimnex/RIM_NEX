@@ -15,7 +15,7 @@ h1{font-size:34px;font-weight:900;color:#E9C86A}
 .box{background:#201D14;border:1px solid rgba(212,175,55,0.13);border-radius:15px;padding:13px 14px;margin-bottom:11px}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
 .toggle-row span{font-size:13.5px;font-weight:700;color:#E6DDC2}
-.switch{width:50px;height:28px;background:#2B2920;border-radius:28px;position:relative;transition:.25s;border:1px solid rgba(255,255,255,0.06)}
+.switch{width:50px;height:28px;background:#2B2920;border-radius:28px;position:relative;transition:.25s}
 .switch::after{content:'';position:absolute;width:22px;height:22px;background:#fff;border-radius:50%;top:2px;right:2px;transition:.25s}
 .switch.on{background:linear-gradient(90deg,#FDE68A,#D4AF37 60%,#8C6B14)}
 .switch.on::after{transform:translateX(-22px);background:#111}
@@ -23,7 +23,7 @@ h1{font-size:34px;font-weight:900;color:#E9C86A}
 .select-wrap{position:relative}
 .select{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
 .select-right{display:flex;align-items:center;gap:10px}
-.badge{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#FFF2A8,#D4AF37 55%,#9C7A14);color:#1A1400;display:grid;place-items:center;font-weight:800;font-size:16px}
+.badge{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#FFF2A8,#D4AF37 55%,#9C7A14);color:#1A1400;display:grid;place-items:center;font-weight:800}
 #app-name{font-size:14px;font-weight:700;color:#E8DCC0}
 .arrow{color:#6A665C;font-size:10px;transition:.2s}
 .select.open.arrow{transform:rotate(180deg)}
@@ -33,8 +33,8 @@ h1{font-size:34px;font-weight:900;color:#E9C86A}
 .dropdown-item.active{background:rgba(212,175,55,0.13);color:#FFE99A}
 .upload{border:1.5px dashed rgba(212,175,55,0.28);border-radius:14px;padding:18px 12px;text-align:center;color:#9A9588;font-size:13px;cursor:pointer;margin-bottom:11px;display:block;background:#1C1911}
 .file-name{color:#FFEB85;font-size:10.5px;margin-top:7px;display:none;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.18);padding:5px 8px;border-radius:7px}
-.input-wrap input{width:100%;background:#201D14;border:1px solid rgba(212,175,55,0.14);border-radius:14px;padding:13px 14px;color:#fff;text-align:right;font-size:13.5px;outline:none}
-.btn{width:100%;display:block;background:linear-gradient(90deg,#FFF0A0 0%,#FFDF6E 20%,#D4AF37 50%,#B78E1E 90%);border:none;border-radius:14px;padding:14px;font-size:16px;font-weight:800;color:#1A1400;cursor:pointer}
+.input-wrap input{width:100%;background:#201D14;border:1px solid rgba(212,175,55,0.14);border-radius:14px;padding:13px 14px;color:#fff;text-align:right;outline:none}
+.btn{width:100%;background:linear-gradient(90deg,#FFF0A0 0%,#FFDF6E 20%,#D4AF37 50%,#B78E1E 90%);border:none;border-radius:14px;padding:14px;font-size:16px;font-weight:800;color:#1A1400;cursor:pointer}
 .btn:disabled{opacity:0.7}
 .tg{margin-top:11px;display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:#1C1911;border:1px solid rgba(212,175,55,0.16);border-radius:13px;padding:11px;color:#B8B0A0;text-decoration:none;font-size:12.5px;font-weight:700}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(90px);background:#221E15;color:#F5E9C0;padding:10px 14px;border-radius:10px;font-size:12px;opacity:0;transition:.3s;pointer-events:none;z-index:99}
@@ -65,7 +65,7 @@ input[type=file]{display:none}
   <input type="file" id="mob" accept=".mobileprovision">
   <div class="input-wrap"><input type="password" id="pw" placeholder="كلمة سر الشهادة" required></div>
   <button class="btn" id="go">بدء التوقيع</button>
-  <div class="note" id="note">إذا لم تظهر نافذة التثبيت، افتح الصفحة في <b>Safari</b> وليس داخل تليجرام.</div>
+  <div class="note" id="note">إذا لم تظهر نافذة التثبيت، افتح الصفحة في <b>Safari</b></div>
   <a class="tg" href="https://t.me/ChatPUBG_RIM" target="_blank">قناتي تلجرام</a>
 </div>
 <div class="toast" id="toast"></div>
@@ -76,7 +76,7 @@ function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');set
 selBtn.onclick=e=>{e.stopPropagation();dd.classList.toggle('show');selBtn.classList.toggle('open')};
 document.querySelectorAll('.dropdown-item').forEach(it=>{it.onclick=e=>{e.stopPropagation();badge.textContent=it.dataset.l;appName.textContent=it.dataset.n;document.querySelectorAll('.dropdown-item').forEach(x=>x.classList.remove('active'));it.classList.add('active');dd.classList.remove('show');selBtn.classList.remove('open');toast('تم اختيار '+it.dataset.n)}});
 document.addEventListener('click',()=>{dd.classList.remove('show');selBtn.classList.remove('open')});
-function bind(id1,id2,id3){const i=$(id1),n=$(id2),a=$(id3);i.onchange=e=>{const f=e.target.files[0];if(f){n.textContent='✦ '+f.name;n.style.display='block';a.style.borderColor='#D4AF37'}}}
+function bind(a,b,c){const i=$(a),n=$(b),d=$(c);i.onchange=e=>{const f=e.target.files[0];if(f){n.textContent='✦ '+f.name;n.style.display='block';d.style.borderColor='#D4AF37'}}}
 bind('p12','n1','a1');bind('mob','n2','a2');
 const plistMap={'ESign':'https://rim-nex.vercel.app/ESign.plist','KSign':'https://rim-nex.vercel.app/KSign.plist','Scarlet':'https://rim-nex.vercel.app/Scarlet.plist','GBox':'https://rim-nex.vercel.app/GBox.plist','Feather':'https://rim-nex.vercel.app/Feather.plist'};
 $('go').onclick=()=>{
@@ -85,7 +85,7 @@ $('go').onclick=()=>{
   if(!p){toast('كلمة السر مطلوبة');return}
   const btn=$('go');const app=appName.textContent.trim();const url=plistMap[app];
   btn.disabled=true;btn.textContent='جاري التوقيع...';
-  setTimeout(()=>{toast('تم التوقيع بواسطة '+app+' ✓ جاري التثبيت...');$('note').style.display='block';setTimeout(()=>{window.location.href='itms-services://?action=download-manifest&url='+encodeURIComponent(url);btn.disabled=false;btn.textContent='بدء التوقيع'},600)},1200);
+  setTimeout(()=>{toast('تم التوقيع بواسطة '+app+' ✓ جاري التثبيت...');$('note').style.display='block';setTimeout(()=>{window.location.href='itms-services://?action=download-manifest&url='+encodeURIComponent(url);btn.disabled=false;btn.textContent='بدء التوقيع'},700)},1200);
 };
 </script>
 </body>
