@@ -2,178 +2,467 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIM_NEX - IPA Signing Center</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RIM_NEX | iOS Signing Manager</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root{
   --bg:#0d0d0d;
   --card:#141414;
   --border:rgba(255,255,255,.08);
-  --gold:linear-gradient(135deg,#8f6b1f,#d4af37,#f7d774,#b8860b);
-  --gold-solid:#d4af37;
-  --text:#f5f5f5;
-  --muted:#999;
+  --gold:#d4af37;
+  --gold-gradient:linear-gradient(135deg,#8f6b1f,#d4af37,#f7d774,#b8860b);
+  --text:#f2f2f2;
+  --text-dim:#8f8f8f;
+  --text-faint:#5c5c5c;
+  --success:#34c759;
+  --error:#ff5b5b;
+  --radius-lg:20px;
+  --radius-md:14px;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-body{background:var(--bg);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:16px;color:var(--text)}
-.container{width:100%;max-width:430px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:32px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-.header{text-align:center;margin-bottom:24px}
-.header h1{font-size:28px;font-weight:800;background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
-.header p{color:var(--muted);font-size:13px;margin-top:4px}
 
-.toggle{display:flex;justify-content:space-between;align-items:center;background:#0f0f0f;border:1px solid var(--border);padding:14px 16px;border-radius:20px;margin-bottom:14px}
-.switch{position:relative;width:50px;height:28px}
-.switch input{display:none}
-.slider{position:absolute;inset:0;background:#2a2a2a;border-radius:28px;cursor:pointer;transition:.3s}
-.slider:before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
-input:checked +.slider{background:var(--gold-solid)}
-input:checked +.slider:before{transform:translateX(22px)}
+,::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-.field{margin-bottom:14px;position:relative}
-.field-label{font-size:13px;color:var(--muted);margin-bottom:8px}
-.select-box{background:#0f0f0f;border:1px solid var(--border);border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.select-left{display:flex;align-items:center;gap:10px}
-.app-icon{width:32px;height:32px;border-radius:10px;background:var(--gold-solid);display:flex;align-items:center;justify-content:center;color:#000;font-weight:800;font-size:12px}
-#chevron{transition:transform.3s}
+body{ 
+min-height:100vh; 
+background: 
+radial-gradient(circle at 50% -10%, rgba(212,175,55,.10), transparent 55%), 
+var(--bg); 
+color:var(--text); 
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif; 
+display:flex; 
+justify-content:center; 
+align-items:flex-start; 
+padding:40px 16px 60px; 
+line-height:1.5; 
+-webkit-font-smoothing:antialiased; 
+}
 
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#111;border:1px solid var(--border);border-radius:18px;padding:8px;z-index:10;display:none}
-.dropdown.show{display:block}
-.dropdown-item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;cursor:pointer}
-.dropdown-item:hover{background:#1a1a1a}
+::-webkit-scrollbar{width:8px;} 
+::-webkit-scrollbar-track{background:#0d0d0d;} 
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8f6b1f,#d4af37);border-radius:10px;} 
+::-webkit-scrollbar-thumb:hover{background:#f7d774;} 
+*{scrollbar-width:thin;scrollbar-color:#d4af37 #0d0d0d;}
 
-.upload-box{background:#0f0f0f;border:2px dashed var(--border);border-radius:20px;padding:18px;text-align:center;cursor:pointer}
-.upload-box:hover{border-color:var(--gold-solid)}
-.upload-box span{font-size:13px;color:var(--muted);display:block}
-.file-name{font-size:12px;color:var(--text);margin-top:6px;word-break:break-all}
+a:focus-visible, button:focus-visible, .upload-area:focus-visible, input:focus-visible{ 
+outline:2px solid var(--gold); 
+outline-offset:3px; 
+border-radius:8px; 
+}
 
-.input-wrap{position:relative}
-.input-pass{width:100%;background:#0f0f0f;border:1px solid var(--border);border-radius:20px;padding:14px 16px;color:var(--text);font-size:15px;outline:none}
-.input-pass:focus{border-color:var(--gold-solid)}
+.wrap{width:100%;max-width:430px;display:flex;flex-direction:column;align-items:center;}
 
-.btn{width:100%;padding:16px;border:none;border-radius:22px;background:var(--gold);color:#000;font-weight:800;font-size:16px;cursor:pointer;margin-top:8px}
+.header{text-align:center;margin-bottom:28px;opacity:0;animation:fadeInUp .6s ease forwards;} 
+.header .logo{ 
+display:inline-flex;align-items:center;gap:8px; 
+font-size:28px;font-weight:800;letter-spacing:.5px; 
+} 
+.header .logo i{color:var(--gold);font-size:22px;} 
+.header .logo span{ 
+background:var(--gold-gradient); 
+-webkit-background-clip:text;background-clip:text;color:transparent; 
+} 
+.header .subtitle{ 
+margin-top:6px;font-size:12.5px;letter-spacing:2px;text-transform:uppercase; 
+color:var(--text-dim);font-weight:600; 
+}
 
-.progress{height:6px;background:#1f1f1f;border-radius:10px;overflow:hidden;margin-top:12px;display:none}
-.progress-bar{height:100%;width:0;background:var(--gold-solid);transition:width.3s}
+.card{ 
+width:100%; 
+background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 30%), var(--card); 
+border:1px solid var(--border); 
+border-radius:var(--radius-lg); 
+padding:24px; 
+backdrop-filter:blur(20px); 
+-webkit-backdrop-filter:blur(20px); 
+box-shadow:0 20px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.02) inset; 
+opacity:0;animation:fadeInUp .6s ease forwards;animation-delay:.1s; 
+display:flex;flex-direction:column;gap:18px; 
+}
 
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--card);border:1px solid var(--border);padding:12px 20px;border-radius:14px;opacity:0;transition:.4s;z-index:99}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toggle-row{ 
+display:flex;align-items:center;justify-content:space-between;gap:12px; 
+padding:14px 16px; 
+background:rgba(255,255,255,.02); 
+border:1px solid var(--border); 
+border-radius:var(--radius-md); 
+transition:border-color .25s ease; 
+} 
+.toggle-row:hover{border-color:rgba(212,175,55,.3);} 
+.toggle-info{display:flex;flex-direction:column;gap:3px;} 
+.toggle-info .title{font-size:14.5px;font-weight:600;color:var(--text);} 
+.toggle-info .desc{font-size:11.5px;color:var(--text-faint);}
+
+.switch{position:relative;width:48px;height:28px;flex-shrink:0;} 
+.switch input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;z-index:2;} 
+.switch .track{ 
+position:absolute;inset:0;background:#2a2a2a;border:1px solid var(--border); 
+border-radius:999px;transition:background .3s ease, box-shadow .3s ease; 
+} 
+.switch .thumb{ 
+position:absolute;top:3px;right:3px;width:22px;height:22px;background:#e8e8e8; 
+border-radius:50%;transition:transform .3s cubic-bezier(.34,1.56,.64,1), background .3s ease; 
+box-shadow:0 2px 6px rgba(0,0,0,.4); 
+} 
+.switch input:checked ~ .track{background:var(--gold-gradient);box-shadow:0 0 16px rgba(212,175,55,.5);} 
+.switch input:checked ~ .thumb{transform:translateX(-20px);background:#fff;}
+
+.cert-section{transition:opacity .3s ease, filter .3s ease;} 
+.cert-section.disabled{opacity:.4;filter:grayscale(.5);pointer-events:none;} 
+.cert-stack{display:flex;flex-direction:column;gap:14px;}
+
+.upload-area{ 
+position:relative;border:1.5px dashed rgba(212,175,55,.35);border-radius:var(--radius-md); 
+padding:22px 16px;text-align:center;cursor:pointer;transition:all .25s ease; 
+background:rgba(212,175,55,.02);display:block; 
+} 
+.upload-area:hover{border-color:var(--gold);background:rgba(212,175,55,.05);transform:translateY(-2px);} 
+.upload-area.drag-over{border-color:var(--gold);background:rgba(212,175,55,.09);box-shadow:0 0 0 4px rgba(212,175,55,.1);} 
+.upload-area.has-file{border-style:solid;border-color:rgba(52,199,89,.4);background:rgba(52,199,89,.04);} 
+.upload-area input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;} 
+.upload-area .icon{ 
+width:46px;height:46px;margin:0 auto 10px;border-radius:14px; 
+display:flex;align-items:center;justify-content:center; 
+background:var(--gold-gradient);font-size:18px;color:#1a1200; 
+box-shadow:0 6px 16px -4px rgba(212,175,55,.5); 
+} 
+.upload-area.has-file .icon{background:linear-gradient(135deg,#1f8a3d,#34c759);color:#06170a;} 
+.upload-area .main-text{font-size:14.5px;font-weight:600;color:var(--text);} 
+.upload-area .sub-text{font-size:12px;color:var(--text-faint);margin-top:3px;} 
+.upload-area .file-info{ 
+margin-top:10px;font-size:12px;color:var(--success);display:none; 
+align-items:center;justify-content:center;gap:6px;word-break:break-all;padding:0 6px; 
+} 
+.upload-area.has-file .file-info{display:flex;} 
+.upload-area.has-file .main-text,.upload-area.has-file .sub-text{display:none;}
+
+.field{ 
+position:relative;display:flex;align-items:center; 
+background:rgba(255,255,255,.02);border:1px solid var(--border); 
+border-radius:999px;padding:4px;transition:box-shadow .25s ease, border-color .25s ease; 
+} 
+.field:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.15);} 
+.field .field-icon{ 
+width:38px;height:38px;display:flex;align-items:center;justify-content:center; 
+color:var(--gold);font-size:15px;flex-shrink:0; 
+} 
+.field input{ 
+flex:1;min-width:0;background:transparent;border:none;outline:none; 
+color:var(--text);font-size:14.5px;padding:10px 4px;font-family:inherit; 
+} 
+.field input::placeholder{color:var(--text-faint);} 
+.field .toggle-visibility{ 
+width:38px;height:38px;display:flex;align-items:center;justify-content:center; 
+background:none;border:none;color:var(--text-faint);cursor:pointer;flex-shrink:0; 
+transition:color .2s ease; 
+} 
+.field .toggle-visibility:hover{color:var(--gold);}
+
+.hint{font-size:12px;color:var(--text-faint);text-align:center;padding:2px 6px 0;display:none;} 
+.hint.show{display:block;}
+
+.btn-sign{ 
+position:relative;overflow:hidden;width:100%;padding:17px;border:none; 
+border-radius:var(--radius-md);background:var(--gold-gradient);background-size:200% 200%; 
+color:#1a1200;font-size:15.5px;font-weight:800;letter-spacing:.3px;cursor:pointer; 
+display:flex;align-items:center;justify-content:center;gap:10px; 
+transition:transform .2s ease, box-shadow .3s ease, background-position .4s ease; 
+box-shadow:0 10px 30px -8px rgba(212,175,55,.55); 
+} 
+.btn-sign:hover{transform:translateY(-3px);background-position:100% 50%;box-shadow:0 16px 36px -8px rgba(212,175,55,.7);} 
+.btn-sign:active{transform:translateY(-1px) scale(.98);} 
+.btn-sign:disabled{cursor:not-allowed;opacity:.75;transform:none;} 
+.btn-sign .ripple{ 
+position:absolute;border-radius:50%;background:rgba(255,255,255,.5); 
+transform:scale(0);animation:ripple .6s ease-out;pointer-events:none; 
+} 
+.btn-sign .spinner{ 
+width:17px;height:17px;border:2.5px solid rgba(26,18,0,.25);border-top-color:#1a1200; 
+border-radius:50%;animation:spin .7s linear infinite;display:none; 
+} 
+.btn-sign.loading .spinner{display:inline-block;} 
+.btn-sign.loading .btn-icon{display:none;}
+
+.progress-wrap{height:5px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden;display:none;margin-top:12px;} 
+.progress-wrap.active{display:block;} 
+.progress-bar{height:100%;width:0%;border-radius:99px;background:var(--gold-gradient);transition:width .18s ease;box-shadow:0 0 10px rgba(212,175,55,.6);}
+
+.toast-container{ 
+position:fixed;top:20px;left:50%;transform:translateX(-50%); 
+width:calc(100% - 32px);max-width:400px;display:flex;flex-direction:column;gap:10px; 
+z-index:999;pointer-events:none; 
+} 
+.toast{ 
+pointer-events:auto;display:flex;align-items:center;gap:10px;padding:14px 16px; 
+border-radius:var(--radius-md);background:#161616;border:1px solid var(--border); 
+box-shadow:0 12px 30px -8px rgba(0,0,0,.6);font-size:13.5px;font-weight:600; 
+animation:toastIn .35s cubic-bezier(.34,1.56,.64,1) forwards; 
+} 
+.toast.hide{animation:toastOut .3s ease forwards;} 
+.toast.success{border-color:rgba(52,199,89,.35);} 
+.toast.success i{color:var(--success);} 
+.toast.error{border-color:rgba(255,91,91,.35);} 
+.toast.error i{color:var(--error);} 
+.toast i{font-size:16px;flex-shrink:0;}
+
+.footnote{ 
+margin-top:18px;font-size:11px;color:var(--text-faint);text-align:center; 
+opacity:0;animation:fadeInUp .6s ease forwards;animation-delay:.2s; 
+}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}} 
+@keyframes spin{to{transform:rotate(360deg);}} 
+@keyframes ripple{to{transform:scale(3);opacity:0;}} 
+@keyframes toastIn{from{opacity:0;transform:translateY(-16px) scale(.95);}to{opacity:1;transform:translateY(0) scale(1);}} 
+@keyframes toastOut{to{opacity:0;transform:translateY(-10px) scale(.95);}}
+
+@media (max-width:360px){ 
+.card{padding:18px;gap:14px;} 
+.header .logo{font-size:24px;} 
+} 
+@media (prefers-reduced-motion:reduce){ 
+*{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;} 
+} 
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="card">
-    <div class="header">
-      <h1>RIM_NEX</h1>
-      <p>IPA Signing Center</p>
+
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<div class="wrap">
+  <header class="header">
+    <div class="logo"><i class="fa-solid fa-shield-halved"></i><span>RIM_NEX</span></div>
+    <div class="subtitle">iOS Signing Manager</div>
+  </header>
+
+  <main class="card">
+
+<div class="toggle-row">
+  <div class="toggle-info">
+    <span class="title">شهادة التوقيع الخاصة بي</span>
+    <span class="desc">استخدم شهادة Apple Developer الخاصة بك</span>
+  </div>
+  <label class="switch">
+    <input type="checkbox" id="certToggle" checked aria-label="تفعيل استخدام شهادتي الخاصة">
+    <span class="track"></span>
+    <span class="thumb"></span>
+  </label>
+</div>
+
+<div class="cert-section" id="certSection">
+  <div class="cert-stack">
+
+    <div class="upload-area" id="p12Area" tabindex="0" role="button" aria-label="رفع شهادة P12">
+      <input type="file" id="p12Input" accept=".p12">
+      <div class="icon"><i class="fa-solid fa-certificate"></i></div>
+      <div class="main-text">شهادة P12</div>
+      <div class="sub-text">اسحب الملف هنا أو اضغط للتصفح</div>
+      <div class="file-info"><i class="fa-solid fa-circle-check"></i><span id="p12Name"></span></div>
     </div>
 
-    <div class="toggle">
-      <span>الشهادة المجانية</span>
-      <label class="switch">
-        <input type="checkbox" id="freeCert">
-        <span class="slider"></span>
-      </label>
-    </div>
-
-    <div class="field">
-      <div class="field-label">اختر تطبيق التوقيع</div>
-      <div class="select-box" id="selectBox">
-        <div class="select-left">
-          <div class="app-icon" id="selectedIcon">E</div>
-          <span id="selectedName">ESign</span>
-        </div>
-        <span id="chevron">▼</span>
-      </div>
-      <div class="dropdown" id="dropdown">
-        <div class="dropdown-item" data-name="ESign" data-icon="E"><div class="app-icon">E</div><span>ESign</span></div>
-        <div class="dropdown-item" data-name="KSign" data-icon="K"><div class="app-icon">K</div><span>KSign</span></div>
-        <div class="dropdown-item" data-name="Scarlet" data-icon="S"><div class="app-icon">S</div><span>Scarlet</span></div>
-        <div class="dropdown-item" data-name="GBox" data-icon="G"><div class="app-icon">G</div><span>GBox</span></div>
-        <div class="dropdown-item" data-name="Feather" data-icon="F"><div class="app-icon">F</div><span>Feather</span></div>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="upload-box" id="p12Box">
-        <span>📄 اضغط لرفع P12 Certificate</span>
-        <div class="file-name" id="p12Name"></div>
-      </div>
-      <input type="file" id="p12File" accept=".p12,.cer" hidden>
-    </div>
-
-    <div class="field">
-      <div class="upload-box" id="provBox">
-        <span>📁 اضغط لرفع Provision Profile</span>
-        <div class="file-name" id="provName"></div>
-      </div>
-      <input type="file" id="provFile" accept=".mobileprovision" hidden>
+    <div class="upload-area" id="profileArea" tabindex="0" role="button" aria-label="رفع Provisioning Profile">
+      <input type="file" id="profileInput" accept=".mobileprovision">
+      <div class="icon"><i class="fa-solid fa-folder-open"></i></div>
+      <div class="main-text">Provisioning Profile</div>
+      <div class="sub-text">اسحب الملف هنا أو اضغط للتصفح</div>
+      <div class="file-info"><i class="fa-solid fa-circle-check"></i><span id="profileName"></span></div>
     </div>
 
     <div class="field">
-      <input type="password" class="input-pass" id="password" placeholder="Password">
+      <div class="field-icon"><i class="fa-solid fa-lock"></i></div>
+      <input type="password" id="passwordInput" placeholder="كلمة مرور الشهادة" autocomplete="off">
+      <button type="button" class="toggle-visibility" id="togglePw" aria-label="إظهار كلمة المرور">
+        <i class="fa-solid fa-eye"></i>
+      </button>
     </div>
 
-    <div class="progress" id="progress"><div class="progress-bar" id="bar"></div></div>
-    <button class="btn" id="signBtn">بدء التوقيع</button>
   </div>
 </div>
-<div class="toast" id="toast"></div>
+
+<div class="hint" id="disabledHint">فعّل الخيار أعلاه لاستخدام شهادتك الخاصة والمتابعة</div>
+
+<div>
+  <button class="btn-sign" id="signBtn">
+    <div class="spinner"></div>
+    <i class="fa-solid fa-pen-nib btn-icon"></i>
+    <span class="btn-label">بدء التوقيع</span>
+  </button>
+  <div class="progress-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
+</div>
+  </main>
+
+  <div class="footnote">جميع الملفات تُعالج داخل هذه الواجهة فقط</div>
+</div>
 
 <script>
-// Dropdown
-const selectBox = document.getElementById('selectBox');
-const dropdown = document.getElementById('dropdown');
-let isOpen = false;
-selectBox.onclick = (e) => {
-  e.stopPropagation();
-  isOpen =!isOpen;
-  dropdown.classList.toggle('show', isOpen);
-  document.getElementById('chevron').style.transform = isOpen? 'rotate(180deg)' : 'rotate(0deg)';
-};
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.onclick = (e) => {
-    e.stopPropagation();
-    document.getElementById('selectedName').textContent = item.dataset.name;
-    document.getElementById('selectedIcon').textContent = item.dataset.icon;
-    isOpen = false; dropdown.classList.remove('show');
-  }
-});
-document.onclick = () => {isOpen = false; dropdown.classList.remove('show');}
+(function(){
+  'use strict';
 
-// Upload
-function bindUpload(box, input, nameEl){
-  box.onclick = () => input.click();
-  input.onchange = () => { if(input.files[0]) nameEl.textContent = input.files[0].name; }
-}
-bindUpload(document.getElementById('p12Box'), document.getElementById('p12File'), document.getElementById('p12Name'));
-bindUpload(document.getElementById('provBox'), document.getElementById('provFile'), document.getElementById('provName'));
+  var certToggle = document.getElementById('certToggle');
+  var certSection = document.getElementById('certSection');
+  var disabledHint = document.getElementById('disabledHint');
 
-// Sign Button
-document.getElementById('signBtn').onclick = () => {
-  if(!document.getElementById('p12File').files[0] ||!document.getElementById('provFile').files[0] ||!document.getElementById('password').value){
-    showToast('الرجاء اكمال جميع الحقول','error'); return;
+  var p12Area = document.getElementById('p12Area');
+  var p12Input = document.getElementById('p12Input');
+  var p12Name = document.getElementById('p12Name');
+
+  var profileArea = document.getElementById('profileArea');
+  var profileInput = document.getElementById('profileInput');
+  var profileName = document.getElementById('profileName');
+
+  var passwordInput = document.getElementById('passwordInput');
+  var togglePw = document.getElementById('togglePw');
+
+  var signBtn = document.getElementById('signBtn');
+  var progressWrap = document.getElementById('progressWrap');
+  var progressBar = document.getElementById('progressBar');
+  var toastContainer = document.getElementById('toastContainer');
+
+  function formatSize(bytes){
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
   }
-  document.getElementById('progress').style.display = 'block';
-  let w = 0;
-  let int = setInterval(()=>{
-    w += 10;
-    document.getElementById('bar').style.width = w + '%';
-    if(w >= 100){
-      clearInterval(int);
-      showToast('تم التوقيع بنجاح','success');
-      setTimeout(()=>{document.getElementById('progress').style.display='none';document.getElementById('bar').style.width='0'},1000);
+
+  function setupUpload(area, input, nameEl){
+    area.addEventListener('click', function(){ input.click(); });
+    area.addEventListener('keydown', function(e){
+      if(e.key = 'Enter' || e.key = ' '){
+        e.preventDefault();
+        input.click();
+      }
+    });
+    input.addEventListener('click', function(e){ e.stopPropagation(); });
+    input.addEventListener('change', function(){
+      if(input.files && input.files[0]){
+        var f = input.files[0];
+        nameEl.textContent = f.name + ' • ' + formatSize(f.size);
+        area.classList.add('has-file');
+      } else {
+        area.classList.remove('has-file');
+      }
+    });
+    ['dragenter','dragover'].forEach(function(evt){
+      area.addEventListener(evt, function(e){
+        e.preventDefault(); e.stopPropagation();
+        area.classList.add('drag-over');
+      });
+    });
+    ['dragleave','drop'].forEach(function(evt){
+      area.addEventListener(evt, function(e){
+        e.preventDefault(); e.stopPropagation();
+        area.classList.remove('drag-over');
+      });
+    });
+    area.addEventListener('drop', function(e){
+      var dt = e.dataTransfer;
+      if(dt && dt.files && dt.files.length){
+        input.files = dt.files;
+        input.dispatchEvent(new Event('change'));
+      }
+    });
+  }
+
+  setupUpload(p12Area, p12Input, p12Name);
+  setupUpload(profileArea, profileInput, profileName);
+
+  function updateToggleState(){
+    var on = certToggle.checked;
+    certSection.classList.toggle('disabled', !on);
+    disabledHint.classList.toggle('show', !on);
+  }
+  certToggle.addEventListener('change', updateToggleState);
+  updateToggleState();
+
+  togglePw.addEventListener('click', function(){
+    var isPw = passwordInput.type = 'password';
+    passwordInput.type = isPw ? 'text' : 'password';
+    togglePw.innerHTML = isPw
+      ? '<i class="fa-solid fa-eye-slash"></i>'
+      : '<i class="fa-solid fa-eye"></i>';
+    togglePw.setAttribute('aria-label', isPw ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+  });
+
+  function showToast(message, type){
+    var toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+    var icon = type = 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+    toast.innerHTML = '<i class="fa-solid ' + icon + '"></i><span>' + message + '</span>';
+    toastContainer.appendChild(toast);
+    setTimeout(function(){
+      toast.classList.add('hide');
+      setTimeout(function(){ toast.remove(); }, 300);
+    }, 3200);
+  }
+
+  function spawnRipple(e, btn){
+    var rect = btn.getBoundingClientRect();
+    var size = Math.max(rect.width, rect.height);
+    var span = document.createElement('span');
+    span.className = 'ripple';
+    span.style.width = span.style.height = size + 'px';
+    span.style.left = (e.clientX - rect.left - size/2) + 'px';
+    span.style.top = (e.clientY - rect.top - size/2) + 'px';
+    btn.appendChild(span);
+    setTimeout(function(){ span.remove(); }, 650);
+  }
+
+  signBtn.addEventListener('click', function(e){
+    spawnRipple(e, signBtn);
+    if(signBtn.classList.contains('loading')) return;
+
+    if(!certToggle.checked){
+      showToast('فعّل خيار الشهادة الخاصة أولًا', 'error');
+      return;
     }
-  },200);
-};
+    if(!p12Input.files.length){
+      showToast('الرجاء اختيار شهادة P12', 'error');
+      return;
+    }
+    if(!profileInput.files.length){
+      showToast('الرجاء اختيار ملف Provisioning Profile', 'error');
+      return;
+    }
+    if(!passwordInput.value.trim()){
+      showToast('الرجاء إدخال كلمة المرور', 'error');
+      return;
+    }
 
-function showToast(msg,type){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast ${type} show`;
-  t.style.borderColor = type=='success'?'#2ecc71':'#e74c3c';
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
+    startSigning();
+  });
+
+  function startSigning(){
+    signBtn.classList.add('loading');
+    signBtn.disabled = true;
+    signBtn.querySelector('.btn-label').textContent = 'جاري التوقيع...';
+    progressWrap.classList.add('active');
+    progressBar.style.width = '0%';
+
+    var pct = 0;
+    var timer = setInterval(function(){
+      pct += Math.random()*18 + 6;
+      if(pct >= 100){
+        pct = 100;
+        clearInterval(timer);
+        progressBar.style.width = '100%';
+        setTimeout(finishSigning, 300);
+      } else {
+        progressBar.style.width = pct + '%';
+      }
+    }, 260);
+  }
+
+  function finishSigning(){
+    signBtn.classList.remove('loading');
+    signBtn.disabled = false;
+    signBtn.querySelector('.btn-label').textContent = 'بدء التوقيع';
+    progressWrap.classList.remove('active');
+    progressBar.style.width = '0%';
+    showToast('تم التوقيع بنجاح', 'success');
+  }
+
+})();
 </script>
+
 </body>
 </html>
