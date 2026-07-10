@@ -13,17 +13,15 @@ body{background:radial-gradient(ellipse at 50% -20%,rgba(212,175,55,0.3) 0%,#000
 .card{background:rgba(8,8,8,0.9);border:2px solid #d4af37;border-radius:22px;padding:20px;margin-bottom:18px}
 .dashed{border:2px dashed #d4af37}
 .toggle{display:flex;justify-content:space-between;align-items:center}
-.toggle b{font-size:17px;font-weight:700}
-.toggle small{font-size:12px;color:#999;display:block;margin-top:5px}
+.toggle b{font-size:17px}.toggle small{font-size:12px;color:#999;display:block;margin-top:5px}
 .switch{width:58px;height:36px;background:linear-gradient(180deg,#FFD700,#D4AF37);border-radius:36px;position:relative}
 .switch::after{content:"";width:30px;height:30px;background:#fff;border-radius:50%;position:absolute;right:3px;top:3px}
 .select{display:flex;justify-content:space-between;align-items:center}
 .left{display:flex;align-items:center;gap:15px}
 .icon{width:50px;height:50px;border-radius:18px;background:linear-gradient(180deg,#FFD700,#D4AF37);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:24px}
 .upload{text-align:center;cursor:pointer}
-.upload b{font-size:17px;font-weight:700}
-.upload small{font-size:13px;color:#999;margin-top:6px;display:block}
-.file{color:#FFD700;font-size:14px;margin-top:8px;font-weight:600}
+.upload b{font-size:17px}.upload small{font-size:13px;color:#999;margin-top:6px;display:block}
+.file{color:#FFD700;font-size:14px;margin-top:8px}
 .input{display:flex;justify-content:space-between;align-items:center}
 .input input{background:transparent;border:none;color:#fff;width:85%;text-align:right;font-size:16px;outline:none}
 .btn{width:100%;padding:21px;border:none;border-radius:18px;background:linear-gradient(180deg,#FFD700,#D4AF37);color:#000;font-weight:900;font-size:18px;margin-top:12px}
@@ -37,7 +35,7 @@ body{background:radial-gradient(ellipse at 50% -20%,rgba(212,175,55,0.3) 0%,#000
   <div class="card dashed upload" onclick="pick('p12')"><b>شهادة P12</b><small>اضغط لاختيار الملف</small><div class="file" id="p12"></div></div>
   <div class="card dashed upload" onclick="pick('prov')"><b>Provisioning Profile</b><small>اضغط لاختيار الملف</small><div class="file" id="prov"></div></div>
   <div class="card input"><input type="password" id="pass" placeholder="Password"><span onclick="pass.type=pass.type=='password'?'text':'password'">👁️</span></div>
-  <button class="btn" onclick="if(!f.p12||!f.prov||!pass.value){alert('كمل البيانات')}else{window.location.href='itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/rimnex/RIM_NEX/main/ESign.plist'}">بدء التوقيع والتثبيت</button>
+  <button class="btn">بدء التوقيع والتثبيت</button>
 </div>
 <script>let f={};function pick(t){let i=document.createElement('input');i.type='file';i.accept=t=='p12'?'.p12,.pfx':'.mobileprovision';i.onchange=e=>{if(e.target.files[0]){f[t]=e.target.files[0];document.getElementById(t).innerText=e.target.files[0].name+' ✓'}};i.click()}</script>
 </body>
