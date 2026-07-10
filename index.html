@@ -2,67 +2,34 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIM_NEX</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>RIM_NEX - IOS SIGNING MANAGER</title>
 <style>
-:root{--bg:#0a0a0a;--card:#111;--border:rgba(212,175,55,0.3);--gold:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);--gold-solid:#d4af37;--text:#fff;--muted:#999;}
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
-body{background:radial-gradient(ellipse at top,rgba(212,175,55,0.12) 0%,transparent 60%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
-.container{max-width:430px;margin:0 auto}
-.header{text-align:center;padding:15px 0 35px}
-.header h1{font-size:36px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.card{background:rgba(17,17,17,0.9);border:1px solid var(--border);border-radius:24px;padding:18px;margin-bottom:16px}
-.select-box{background:#0a0a0a;border:1px solid var(--border);border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.dropdown{position:absolute;background:#0a0a0a;border:1px solid var(--border);border-radius:16px;padding:6px;display:none;width:100%}
-.dropdown.show{display:block}
-.dropdown-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;cursor:pointer}
-.dropdown-item:hover{background:#1a1a1a}
-.app-icon{width:38px;height:38px;border-radius:12px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900}
-.btn{width:100%;padding:17px;border:none;border-radius:18px;background:var(--gold);color:#000;font-weight:900;font-size:17px;cursor:pointer}
-</style>
-</head>
-<body>
-<div class="container">
-  <div class="header"><h1>RIM_NEX</h1></div>
-
-  <div class="card" style="position:relative">
-    <div class="select-box" id="selectBox">
-      <span id="selectedName">ESign</span>
-      <div class="app-icon" id="selectedIcon">E</div>
-    </div>
-    <div class="dropdown" id="dropdown">
-      <div class="dropdown-item" data-name="ESign" data-icon="E" data-plist="ESign.plist" data-ipa="esign_5.0.2_unsigned.i..."><div class="app-icon">E</div><span>ESign</span></div>
-      <div class="dropdown-item" data-name="KSign" data-icon="K" data-plist="KSign.plist" data-ipa="Ksign.ipa"><div class="app-icon">K</div><span>KSign</span></div>
-      <div class="dropdown-item" data-name="Scarlet" data-icon="S" data-plist="Scarlet.plist" data-ipa="Scarlet_scarletiosdown..."><div class="app-icon">S</div><span>Scarlet</span></div>
-      <div class="dropdown-item" data-name="GBox" data-icon="G" data-plist="GBox.plist" data-ipa="GBox_v5.7.6.ipa"><div class="app-icon">G</div><span>GBox</span></div>
-      <div class="dropdown-item" data-name="Feather" data-icon="F" data-plist="Feather. plist" data-ipa="feather_v1.4.0 2.ipa"><div class="app-icon">F</div><span>Feather</span></div>
-    </div>
-  </div>
-
-  <button class="btn" id="signBtn">بدء التوقيع والتثبيت</button>
-</div>
-
-<script>
-const baseUrl = "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/";
-let selectedPlist = "ESign.plist";
-let selectedIpa = "esign_5.0.2_unsigned.i...";
-
-document.getElementById('selectBox').onclick = (e) => {e.stopPropagation(); document.getElementById('dropdown').classList.toggle('show');}
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.onclick = (e) => {
-    e.stopPropagation();
-    document.getElementById('selectedName').textContent = item.dataset.name;
-    document.getElementById('selectedIcon').textContent = item.dataset.icon;
-    selectedPlist = item.dataset.plist;
-    selectedIpa = item.dataset.ipa;
-    document.getElementById('dropdown').classList.remove('show');
-  }
-});
-
-document.getElementById('signBtn').onclick = () => {
-  // يحمل ال plist الاول عشان يظهر "تثبيت"
-  window.location.href = "itms-services://?action=download-manifest&url=" + baseUrl + selectedPlist;
+:root{
+  --bg:#0a0a0a;
+  --border:rgba(212,175,55,0.25);
+  --gold:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);
+  --gold-solid:#d4af37;
+  --text:#fff;
+  --muted:#999;
 }
-</script>
-</body>
-</html>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
+body{background:radial-gradient(ellipse at top,rgba(212,175,55,0.15) 0%,transparent 60%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
+.container{max-width:430px;margin:0 auto}
+
+.header{text-align:center;padding:20px 0 40px}
+.header svg{width:40px;height:40px;margin-bottom:10px}
+.header h1{font-size:38px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.header p{color:var(--muted);font-size:12px;letter-spacing:3px;margin-top:8px}
+
+.card{background:rgba(17,17,17,0.9);border:1px solid var(--border);border-radius:20px;padding:16px;margin-bottom:16px}
+.card.dashed{border:1.5px dashed var(--border)}
+.card.dashed.filled{border:1.5px solid var(--gold-solid);background:rgba(212,175,55,0.05)}
+
+.toggle{display:flex;justify-content:space-between;align-items:center}
+.toggle-text{text-align:right}
+.toggle-text .title{font-size:15px;font-weight:700;margin-bottom:4px}
+.toggle-text .sub{font-size:11px;color:var(--muted)}
+.switch{position:relative;width:56px;height:34px}
+.switch input{display:none}
+.slider{position:absolute;inset:0;background:#1a1a1a;border-radius:34px;cursor:pointer;transition:.3s;border:1px solid var(--border)}
