@@ -36,10 +36,9 @@ h1{font-size:34px;font-weight:900;color:#E9C86A;letter-spacing:.5px;line-height:
 .upload:hover{border-color:#D4AF37;background:rgba(212,175,55,0.06)}
 .file-name{color:#FFEB85;font-size:10.5px;margin-top:7px;display:none;word-break:break-all;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.18);padding:5px 8px;border-radius:7px}
 .input-wrap{position:relative;margin-bottom:12px}
-.input-wrap input{width:100%;background:#201D14;border:1px solid rgba(212,175,55,0.14);border-radius:14px;padding:13px 12px 13px 38px;color:#fff;text-align:right;font-size:13.5px;outline:none;font-family:inherit}
+.input-wrap input{width:100%;background:#201D14;border:1px solid rgba(212,175,55,0.14);border-radius:14px;padding:13px 14px;color:#fff;text-align:right;font-size:13.5px;outline:none;font-family:inherit}
 .input-wrap input::placeholder{color:#7A756C}
 .input-wrap input:focus{border-color:rgba(212,175,55,0.42)}
-.eye{position:absolute;left:11px;top:50%;transform:translateY(-50%);cursor:pointer;opacity:.65;font-size:16px;user-select:none}
 .btn{width:100%;display:block;background:linear-gradient(90deg,#FFF0A0 0%,#FFDF6E 20%,#D4AF37 50%,#B78E1E 90%);border:none;border-radius:14px;padding:14px;font-size:16px;font-weight:800;color:#1A1400;cursor:pointer;box-shadow:0 6px 18px rgba(180,135,40,0.32);transition:.18s}
 .btn:active{transform:scale(0.98)}
 .tg{margin-top:11px;display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:#1C1911;border:1px solid rgba(212,175,55,0.16);border-radius:13px;padding:11px;color:#B8B0A0;text-decoration:none;font-size:12.5px;font-weight:700;transition:.2s}
@@ -77,7 +76,7 @@ input[type=file]{display:none}
   <label class="upload" id="a2" for="mob">📄 اضغط لرفع Provision Profile<div class="file-name" id="n2"></div></label>
   <input type="file" id="mob" accept=".mobileprovision">
 
-  <div class="input-wrap"><input type="password" id="pw" placeholder="كلمة سر الشهادة" required><span class="eye" id="eye">👁️</span></div>
+  <div class="input-wrap"><input type="password" id="pw" placeholder="كلمة سر الشهادة" required></div>
 
   <button class="btn" id="go">بدء التوقيع</button>
 
@@ -98,7 +97,6 @@ document.addEventListener('click',()=>{dd.classList.remove('show');selBtn.classL
 let free=true;tog.onclick=()=>{free=!free;sw.classList.toggle('on',free);toast(free?'الشهادة المجانية مفعلة':'الشهادة المدفوعة مفعلة')};
 function bind(inpId,nameId,areaId){const inp=$(inpId),nm=$(nameId),ar=$(areaId);inp.onchange=e=>{const f=e.target.files[0];if(f){nm.textContent='✦ '+f.name;nm.style.display='block';ar.style.borderColor='#D4AF37'}};['dragenter','dragover'].forEach(ev=>ar.addEventListener(ev,e=>{e.preventDefault();ar.style.borderColor='#D4AF37'}));['dragleave','drop'].forEach(ev=>ar.addEventListener(ev,e=>{e.preventDefault()}));ar.addEventListener('drop',e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(f){inp.files=e.dataTransfer.files;nm.textContent='✦ '+f.name;nm.style.display='block'}})}
 bind('p12','n1','a1');bind('mob','n2','a2');
-$('eye').onclick=()=>{const p=$('pw');p.type=p.type==='password'?'text':'password'};
 $('go').onclick=()=>{const a=$('p12').files[0],b=$('mob').files[0],p=$('pw').value.trim();if(!a||!b){toast('يرجى رفع الملفين');return}if(!p){toast('كلمة السر مطلوبة');$('pw').focus();return}const btn=$('go');btn.disabled=true;btn.textContent='جاري التوقيع...';setTimeout(()=>{btn.disabled=false;btn.textContent='بدء التوقيع';toast('تم التوقيع بواسطة '+appName.textContent+' ✓')},1400)};
 </script>
 </body>
