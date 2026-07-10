@@ -1,1 +1,25 @@
-https://cdn.fbsbx.com/v/t65.102178-21/738953751_1010226404972387_3073458190007096240_n.jpg/Scarlet.plist?_nc_ht=cdn.fbsbx.com&_nc_ohc=WcVd0erRokQQ7kNvwHIS-KE&sdl=1&ccb=14-4&oh=00_AQDmd-RluxIPRUrZMqW9RgqUAT6PqNMnE_g-nXVFDk4z_w&oe=6A532098&_nc_sid=4ee932
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>items</key>
+  <array>
+    <dict>
+      <key>assets</key>
+      <array>
+        <dict>
+          <key>kind</key><string>software-package</string>
+          <key>url</key><string>https://rim-nex.vercel.app/Scarlet_scarletiosdownload.com.ipa</string>
+        </dict>
+      </array>
+      <key>metadata</key>
+      <dict>
+        <key>bundle-identifier</key><string>com.scarlet.app</string>
+        <key>bundle-version</key><string>1.0</string>
+        <key>kind</key><string>software</string>
+        <key>title</key><string>Scarlet</string>
+      </dict>
+    </dict>
+  </array>
+</dict>
+</plist>
