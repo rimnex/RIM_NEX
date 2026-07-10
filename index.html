@@ -5,124 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIM_NEX</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro",Arial,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Arial,sans-serif}
 body{background:#000;color:#fff;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}
 
 .card{
-  background:#0e0e0e;
-  border:1px solid #222;
+  background:#0a0a0a;
+  border:1px solid #1a1a1a;
   border-radius:24px;
   padding:24px;
   width:100%;
   max-width:380px;
 }
 
-/* الهيدر مع الدرع */
 .header{text-align:center;margin-bottom:25px}
 .logo{
   font-size:30px;font-weight:900;color:#D4AF37;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  letter-spacing:1px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
 }
-.logo svg{width:28px;height:28px;fill:#D4AF37}
-.sub{font-size:13px;color:#777;margin-top:6px}
+.logo svg{width:26px;height:26px;fill:#D4AF37}
+.sub{font-size:13px;color:#666;margin-top:6px}
 
-/* التون */
 .toggle{
   background:#111;border:1px solid #222;border-radius:16px;
   padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:15px
+  margin-bottom:20px
 }
-.toggle span{font-size:15px}
-.switch{position:relative;width:50px;height:30px}
+.switch{position:relative;width:52px;height:32px}
 .switch input{opacity:0}
 .slider{
-  position:absolute;top:0;left:0;right:0;bottom:0;background:#333;border-radius:30px;transition:.3s
+  position:absolute;top:0;left:0;right:0;bottom:0;background:#2a2a2a;border-radius:30px;transition:.3s
 }
 .slider:before{
-  content:"";position:absolute;height:24px;width:24px;left:3px;bottom:3px;
+  content:"";position:absolute;height:26px;width:26px;left:3px;bottom:3px;
   background:#fff;border-radius:50%;transition:.3s
 }
 input:checked + .slider{background:#D4AF37}
 input:checked + .slider:before{transform:translateX(20px)}
 
-/* قائمة الاختيار */
+.label{font-size:12px;color:#666;margin-bottom:8px;text-align:right}
+
+/* الدروب داون مطابق للصورة */
+.dropdown{position:relative;margin-bottom:15px}
 .select{
   background:#111;border:1px solid #222;border-radius:16px;
-  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:15px;cursor:pointer
+  padding:12px 16px;display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer
 }
-.select .right{display:flex;align-items:center;gap:8px}
+.select .left{display:flex;align-items:center;gap:10px}
 .badge{
-  background:#D4AF37;color:#000;font-weight:800;
-  width:32px;height:32px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center
+  background:#D4AF37;color:#000;font-weight:900;
+  width:34px;height:34px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:16px
 }
+.arrow{color:#fff;font-size:14px;transition:.3s}
+.arrow.up{transform:rotate(180deg)}
+
+.options{
+  background:#111;border:1px solid #222;border-radius:16px;
+  margin-top:8px;padding:8px;display:none;position:absolute;width:100%;z-index:10
+}
+.options.show{display:block}
+.option{
+  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;
+  border-radius:10px;cursor:pointer;margin-bottom:4px
+}
+.option:hover{background:#1a1a1a}
 
 /* رفع الملفات */
 .upload{
-  border:2px dashed #333;border-radius:16px;padding:16px;
+  border:2px dashed #2a2a2a;border-radius:16px;padding:18px;
   text-align:center;color:#777;font-size:14px;margin-bottom:12px
 }
 .upload.active{border-color:#D4AF37;border-style:dashed}
-
-.upload .file-name{color:#fff;margin-top:8px;font-size:12px}
-
-/* الباسورد */
-input[type="password"]{
-  width:100%;background:#111;border:1px solid #222;border-radius:16px;
-  padding:14px 16px;color:#fff;text-align:right;margin-bottom:15px;font-size:15px
-}
-
-/* زر التوقيع */
-.btn{
-  width:100%;background:linear-gradient(180deg,#D4AF37,#B8860B);
-  border:none;border-radius:16px;padding:16px;
-  font-size:17px;font-weight:800;color:#000;cursor:pointer
-}
-</style>
-</head>
-<body>
-
-<div class="card">
-  <div class="header">
-    <div class="logo">
-      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-      RIM_NEX
-    </div>
-    <div class="sub">IPA Signing Center</div>
-  </div>
-
-  <div class="toggle">
-    <span>الشهادة المجانية</span>
-    <label class="switch">
-      <input type="checkbox" checked>
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <div style="text-align:right;font-size:12px;color:#666;margin-bottom:8px">اختر تطبيق التوقيع</div>
-  <div class="select">
-    <div>▼</div>
-    <div class="right">
-      ESign
-      <div class="badge">E</div>
-    </div>
-  </div>
-
-  <div class="upload active">
-    اضغط لرفع P12 Certificate 📄
-    <div class="file-name">00008110-000249CA1107801E.p12</div>
-  </div>
-
-  <div class="upload">
-    اضغط لرفع Provision Profile 📁
-  </div>
-
-  <input type="password" placeholder="Password">
-
-  <button class="btn">بدء التوقيع</button>
-</div>
-
-</body>
-</html>
+.upload
