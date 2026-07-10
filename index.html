@@ -66,4 +66,133 @@ input:checked +.slider:before{transform:translateX(22px)}
 .pass-icons svg{width:20px;height:20px;fill:var(--muted);cursor:pointer}
 
 /* Button */
-.btn{width:
+.btn{width:100%;padding:16px;border:none;border-radius:18px;background:var(--gold);color:#000;font-weight:900;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(212,175,55,0.35)}
+.btn:active{transform:scale(.98)}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>
+      RIM_NEX
+      <svg width="30" height="30" viewBox="0 0 24 24">
+        <defs><linearGradient id="g"><stop stop-color="#8f6b1f"/><stop offset="1" stop-color="#f7d774"/></linearGradient></defs>
+        <path fill="url(#g)" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+      </svg>
+    </h1>
+    <p>IOS SIGNING MANAGER</p>
+  </div>
+
+  <div class="card toggle">
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider"></span>
+    </label>
+    <div class="toggle-text">
+      <div class="title">شهادة التوقيع الخاصة بي</div>
+      <div class="sub">استخدم شهادة Apple Developer</div>
+    </div>
+  </div>
+
+  <div class="card select-wrap">
+    <div class="select-box" id="selectBox">
+      <div class="arrow" id="arrow">▼</div>
+      <div class="select-left">
+        <span id="selectedName">KSign</span>
+        <div class="app-icon" id="selectedIcon">K</div>
+      </div>
+    </div>
+    <div class="dropdown" id="dropdown">
+      <div class="dropdown-item" data-name="ESign" data-icon="E" data-plist="esign.plist" data-ipa="ESign.ipa"><div class="app-icon">E</div><span>ESign</span></div>
+      <div class="dropdown-item" data-name="KSign" data-icon="K" data-plist="ksign.plist" data-ipa="KSign.ipa"><div class="app-icon">K</div><span>KSign</span></div>
+      <div class="dropdown-item" data-name="Scarlet" data-icon="S" data-plist="scarlet.plist" data-ipa="Scarlet.ipa"><div class="app-icon">S</div><span>Scarlet</span></div>
+      <div class="dropdown-item" data-name="GBox" data-icon="G" data-plist="gbox.plist" data-ipa="GBox.ipa"><div class="app-icon">G</div><span>GBox</span></div>
+      <div class="dropdown-item" data-name="Feather" data-icon="F" data-plist="feather.plist" data-ipa="Feather.ipa"><div class="app-icon">F</div><span>Feather</span></div>
+    </div>
+  </div>
+
+  <div class="card upload" id="p12Card" onclick="document.getElementById('p12').click()">
+    <div class="upload-box">
+      <div class="upload-title">شهادة P12</div>
+      <div class="upload-sub">اسحب الملف هنا</div>
+      <div class="file-name" id="p12Name"></div>
+    </div>
+    <input type="file" id="p12" accept=".p12,.cer,.pfx" hidden>
+  </div>
+
+  <div class="card upload" id="provCard" onclick="document.getElementById('prov').click()">
+    <div class="upload-box">
+      <div class="upload-title">Provisioning Profile</div>
+      <div class="upload-sub">اسحب الملف هنا</div>
+      <div class="file-name" id="provName"></div>
+    </div>
+    <input type="file" id="prov" accept=".mobileprovision" hidden>
+  </div>
+
+  <div class="card input-wrap">
+    <div class="pass-icons">
+      <svg id="togglePass" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5z"/></svg>
+    </div>
+    <input type="password" class="input-pass" id="password" placeholder="Password">
+  </div>
+
+  <button class="btn" id="signBtn">
+    بدء التوقيع والتثبيت
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>
+  </button>
+</div>
+
+<script>
+const baseUrl = "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/";
+let selectedPlist = "ksign.plist";
+let selectedIpa = "KSign.ipa";
+
+// Select
+document.getElementById('selectBox').onclick = (e) => {e.stopPropagation(); document.getElementById('dropdown').classList.toggle('show'); document.getElementById('arrow').classList.toggle('rotate');}
+document.querySelectorAll('.dropdown-item').forEach(item => {
+  item.onclick = (e) => {
+    e.stopPropagation();
+    document.getElementById('selectedName').textContent = item.dataset.name;
+    document.getElementById('selectedIcon').textContent = item.dataset.icon;
+    selectedPlist = item.dataset.plist;
+    selectedIpa = item.dataset.ipa;
+    document.getElementById('dropdown').classList.remove('show');
+    document.getElementById('arrow').classList.remove('rotate');
+  }
+});
+document.onclick = () => {document.getElementById('dropdown').classList.remove('show'); document.getElementById('arrow').classList.remove('rotate');}
+
+// Upload مع اللون الذهبي
+document.getElementById('p12').onchange = e => {
+  if(e.target.files[0]){
+    document.getElementById('p12Name').textContent = '✓ ' + e.target.files[0].name;
+    document.getElementById('p12Name').classList.add('show');
+    document.getElementById('p12Card').classList.add('filled'); // يقلب ذهبي
+  }
+}
+document.getElementById('prov').onchange = e => {
+  if(e.target.files[0]){
+    document.getElementById('provName').textContent = '✓ ' + e.target.files[0].name;
+    document.getElementById('provName').classList.add('show');
+    document.getElementById('provCard').classList.add('filled'); // يقلب ذهبي
+  }
+}
+
+// Password toggle
+document.getElementById('togglePass').onclick = () => {
+  const pass = document.getElementById('password');
+  pass.type = pass.type === 'password'? 'text' : 'password';
+}
+
+// Sign
+document.getElementById('signBtn').onclick = () => {
+  if(!document.getElementById('p12').files[0] ||!document.getElementById('prov').files[0] ||!document.getElementById('password').value){
+    alert('الرجاء اكمال جميع الحقول'); return;
+  }
+  window.location.href = baseUrl + selectedPlist;
+  setTimeout(()=>{ window.location.href = baseUrl + selectedIpa; }, 2000);
+  alert('جاري تحميل ملفات التثبيت');
+}
+</script>
+</body>
+</html>
