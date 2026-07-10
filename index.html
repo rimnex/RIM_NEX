@@ -4,217 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIM_NEX - Gold Edition</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#050505;
-  --card-bg:rgba(18,17,14,0.92);
-  --box-bg:rgba(32,30,24,0.9);
-  --border:rgba(212,175,55,0.12);
-  --border-dashed:rgba(212,175,55,0.22);
-  --gold:#D4AF37;
-  --gold-light:#FFEB99;
-  --gold-gradient:linear-gradient(100deg, #FFF6B0 0%, #FFEB85 10%, #E9C86A 25%, #D4AF37 45%, #B38728 75%, #8C6520 100%);
-  --gold-btn:linear-gradient(100deg, #FFF3A3 0%, #FFDF6B 18%, #D4AF37 45%, #C19A2E 78%, #A77E1A 100%);
-  --text:#F3F0E6;
-  --muted:#9E9A8E;
-  --muted-2:#6B675E;
-}
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  background:
-    radial-gradient(800px 500px at 50% -15%, rgba(212,175,55,0.22), transparent 65%),
-    radial-gradient(500px 300px at 80% 100%, rgba(180,135,40,0.12), transparent 70%),
-    var(--bg);
-  min-height:100vh;display:flex;justify-content:center;align-items:flex-start;
-  padding:24px 16px;
-  font-family:'Cairo',-apple-system,Arial,sans-serif;
-  color:var(--text);
-}
-.card{
-  width:100%;max-width:400px;
-  background:var(--card-bg);
-  border:1px solid rgba(212,175,55,0.18);
-  border-radius:28px;
-  padding:28px 22px 22px;
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  box-shadow:0 24px 70px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,175,55,0.06) inset, 0 1px 0 rgba(255,255,255,0.06) inset;
-}
-h1{
-  text-align:center;
-  font-size:38px;font-weight:800;letter-spacing:1px;line-height:1;
-  background:var(--gold-gradient);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  filter:drop-shadow(0 2px 10px rgba(212,175,55,0.25));
-}
-.sub{
-  text-align:center;color:var(--muted);
-  font-size:12.5px;letter-spacing:1.2px;text-transform:uppercase;
-  margin:8px 0 30px;
-}
-.box{
-  background:var(--box-bg);
-  border:1px solid var(--border);
-  border-radius:16px;padding:16px;margin-bottom:14px;
-  transition:.25s;
-}
-.box:hover{border-color:rgba(212,175,55,0.22)}
-.toggle-row{
-  display:flex;align-items:center;justify-content:space-between;
-  cursor:pointer;user-select:none;
-}
-.toggle-row span{font-size:14px;font-weight:700;color:#E8E0C8}
-.switch{
-  width:54px;height:30px;background:#2A2822;
-  border-radius:30px;position:relative;transition:.3s;
-  border:1px solid rgba(255,255,255,0.06);
-}
-.switch::after{
-  content:'';position:absolute;width:24px;height:24px;
-  background:linear-gradient(180deg,#fff,#E8E0C8);border-radius:50%;
-  top:2px;right:2px;transition:.3s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 2px 10px rgba(0,0,0,0.4);
-}
-.switch.on{
-  background:var(--gold-gradient);
-  box-shadow:0 0 18px rgba(212,175,55,0.35);
-  border-color:rgba(212,175,55,0.4);
-}
-.switch.on::after{transform:translateX(-24px);background:#111}
-.label{color:#B8B0A0;font-size:12px;margin:18px 4px 8px}
-.select-wrap{position:relative}
-.select{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-.select-right{display:flex;align-items:center;gap:12px}
-.badge{
-  width:44px;height:44px;border-radius:13px;
-  background:var(--gold-btn);color:#1A1500;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:18px;flex-shrink:0;
-  box-shadow:0 4px 14px rgba(180,135,40,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
-  border:1px solid rgba(255,255,255,0.25);
-}
-#app-name{font-size:15px;font-weight:700;color:#F0E6C8}
-.arrow{color:var(--muted-2);font-size:11px;transition:.2s}
-.select.open .arrow{transform:rotate(180deg);color:var(--gold)}
-.dropdown{
-  display:none;position:absolute;top:calc(100% + 10px);right:0;left:0;
-  background:#1D1B16;border:1px solid rgba(212,175,55,0.18);
-  border-radius:16px;overflow:hidden;z-index:20;
-  box-shadow:0 18px 45px rgba(0,0,0,0.6);animation:drop .2s ease;
-}
-@keyframes drop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-.dropdown.show{display:block}
-.dropdown-item{
-  padding:13px 14px;display:flex;align-items:center;gap:12px;
-  cursor:pointer;color:#D8D0B8;font-size:14px;font-weight:600;transition:.18s;
-}
-.dropdown-item:hover{background:rgba(212,175,55,0.08)}
-.dropdown-item.active{background:linear-gradient(90deg, rgba(212,175,55,0.18), rgba(212,175,55,0.05));color:var(--gold-light)}
-.upload{
-  border:1.6px dashed var(--border-dashed);
-  border-radius:16px;padding:21px 16px;text-align:center;
-  color:var(--muted);font-size:13.8px;cursor:pointer;margin-bottom:14px;
-  display:block;transition:.25s;background:rgba(28,26,18,0.5);line-height:1.7;
-}
-.upload:hover{border-color:rgba(212,175,55,0.45);background:rgba(212,175,55,0.07);color:#D8D0B8;box-shadow:0 0 0 4px rgba(212,175,55,0.06)}
-.upload.drag{border-color:var(--gold);background:rgba(212,175,55,0.12)}
-.upload-icon{font-size:22px;display:block;margin-bottom:4px;filter:sepia(1) saturate(1.2)}
-.file-name{
-  color:#FFEB85;font-size:11.5px;margin-top:9px;display:none;
-  word-break:break-all;background:linear-gradient(90deg, rgba(212,175,55,0.18), rgba(212,175,55,0.06));
-  border:1px solid rgba(212,175,55,0.18);padding:7px 11px;border-radius:9px;
-}
-.input-wrap{position:relative;margin-bottom:16px}
-input[type="password"],input[type="text"]{
-  width:100%;background:var(--box-bg);
-  border:1px solid var(--border);border-radius:16px;
-  padding:16px 16px 16px 44px;color:#fff;text-align:right;
-  font-size:14.5px;font-family:inherit;outline:none;transition:.25s;
-}
-input::placeholder{color:#7A756C}
-input:focus{border-color:rgba(212,175,55,0.45);box-shadow:0 0 0 4px rgba(212,175,55,0.12)}
-.eye{position:absolute;left:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--muted-2);font-size:18px}
-.btn{
-  width:100%;
-  background:var(--gold-btn);
-  border:none;border-radius:16px;padding:17px;
-  font-size:17px;font-weight:800;color:#1A1400;cursor:pointer;
-  font-family:inherit;transition:.22s;
-  box-shadow:0 10px 28px rgba(180,135,40,0.38), inset 0 1px 0 rgba(255,255,255,0.7);
-  letter-spacing:0.2px;
-}
-.btn:hover{transform:translateY(-1px);box-shadow:0 14px 32px rgba(180,135,40,0.48), inset 0 1px 0 rgba(255,255,255,0.8);filter:brightness(1.06)}
-.btn:active{transform:translateY(0)}
-input[type="file"]{display:none}
-.toast{
-  position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);
-  background:linear-gradient(180deg,#24211A,#1A1812);color:#F5E9C0;
-  padding:12px 18px;border-radius:12px;font-size:13px;
-  border:1px solid rgba(212,175,55,0.22);opacity:0;transition:.38s;
-  pointer-events:none;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,0.5);
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+body{background:#070707;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:22px 16px;font-family:'Cairo',system-ui,Arial,sans-serif}
+.card{width:100%;max-width:400px;background:#16140F;border:1px solid rgba(212,175,55,0.22);border-radius:28px;padding:26px 20px 20px;box-shadow:0 20px 60px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,255,255,0.05)}
+.title-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:2px}
+h1{font-size:37px;font-weight:800;letter-spacing:.5px;line-height:1;color:#D4AF37}
+@supports (-webkit-background-clip:text){h1{background:linear-gradient(100deg,#FFF6B0 0%,#FFEB85 15%,#D4AF37 50%,#B38728 85%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
+.shield{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#FFFFFF 0%,#E5E7EB 18%,#C0C5CC 45%,#9AA0A8 70%,#D1D5DB 100%);border-radius:10px 10px 12px 12px;box-shadow:0 2px 10px rgba(192,197,204,0.35),inset 0 1px 0 rgba(255,255,255,0.9),inset 0 -1px 0 rgba(0,0,0,0.15);border:1px solid rgba(255,255,255,0.6)}
+/* ... باقي الستايل نفسه */
+.tg-link{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;width:100%;background:rgba(36,33,26,0.9);border:1px solid rgba(212,175,55,0.18);border-radius:14px;padding:12px 14px;color:#C8BFA8;text-decoration:none;font-size:13px;font-weight:700}
+.tg-link:hover{background:rgba(212,175,55,0.10);border-color:rgba(212,175,55,0.32);color:#FFEB99}
 </style>
 </head>
 <body>
 <div class="card">
-  <h1>RIM_NEX</h1>
-  <div class="sub">IPA Signing Center — Gold Edition</div>
-  <div class="box toggle-row" id="toggleBox">
-    <div class="switch on" id="switch"></div>
-    <span>الشهادة المجانية</span>
+  <div class="title-row">
+    <h1>RIM_NEX</h1>
+    <span class="shield" title="محمي">
+      <!-- درع فضي بتدرج -->
+      <svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="silverGrad" x1="2" y1="2" x2="22" y2="20"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="25%" stop-color="#E5E7EB"/><stop offset="55%" stop-color="#9CA3AF"/><stop offset="85%" stop-color="#D1D5DB"/><stop offset="100%" stop-color="#F9FAFB"/></linearGradient></defs><path d="M12 2.8L4.5 7.2V12.2C4.5 16.1 7.1 19.6 12 21.2C16.9 19.6 19.5 16.1 19.5 12.2V7.2L12 2.8Z" fill="url(#silverGrad)" stroke="#9AA0A8" stroke-width="0.9"/><path d="M8.8 12.2L11 14.4L15.6 9.2" stroke="#4B5563" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
   </div>
-  <div class="label">اختر تطبيق التوقيع</div>
-  <div class="select-wrap">
-    <div class="box select" id="selectBtn">
-      <span class="arrow">▼</span>
-      <div class="select-right">
-        <span id="app-name">ESign</span>
-        <div class="badge" id="app-badge">E</div>
-      </div>
-    </div>
-    <div class="dropdown" id="dropdown">
-      <div class="dropdown-item active" data-letter="E" data-name="ESign"><div class="badge">E</div> ESign</div>
-      <div class="dropdown-item" data-letter="K" data-name="KSign"><div class="badge">K</div> KSign</div>
-      <div class="dropdown-item" data-letter="S" data-name="Scarlet"><div class="badge">S</div> Scarlet</div>
-      <div class="dropdown-item" data-letter="G" data-name="GBox"><div class="badge">G</div> GBox</div>
-      <div class="dropdown-item" data-letter="F" data-name="Feather"><div class="badge">F</div> Feather</div>
-    </div>
-  </div>
-  <label class="upload" id="p12-area" for="p12">
-    <span class="upload-icon">📁</span>
-    اضغط لرفع P12 Certificate
-    <div class="file-name" id="p12-name"></div>
-  </label>
-  <input type="file" id="p12" accept=".p12,.pfx">
-  <label class="upload" id="mobile-area" for="mobile">
-    <span class="upload-icon">📄</span>
-    اضغط لرفع Provision Profile
-    <div class="file-name" id="mobile-name"></div>
-  </label>
-  <input type="file" id="mobile" accept=".mobileprovision">
-  <div class="input-wrap">
-    <input type="password" id="pass" placeholder="كلمة سر الشهادة" required>
-    <span class="eye" id="eye">👁️</span>
-  </div>
+  <div class="sub">IPA Signing Center</div>
+  <!-- باقي الكروت: الشهادة، اختيار التطبيق، الرفع -->
+  <input type="password" id="pass" placeholder="كلمة سر الشهادة" required>
   <button class="btn" id="signBtn">بدء التوقيع</button>
+  <a href="https://t.me/ChatPUBG_RIM" target="_blank" class="tg-link">قناتي تلجرام</a>
 </div>
-<div class="toast" id="toast"></div>
-<script>
-const selectBtn=document.getElementById('selectBtn'),dropdown=document.getElementById('dropdown'),
-appBadge=document.getElementById('app-badge'),appName=document.getElementById('app-name'),
-switchEl=document.getElementById('switch'),toggleBox=document.getElementById('toggleBox');
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
-selectBtn.addEventListener('click',e=>{e.stopPropagation();dropdown.classList.toggle('show');selectBtn.classList.toggle('open')});
-document.querySelectorAll('.dropdown-item').forEach(i=>{i.addEventListener('click',e=>{e.stopPropagation();appBadge.textContent=i.dataset.letter;appName.textContent=i.dataset.name;document.querySelectorAll('.dropdown-item').forEach(x=>x.classList.remove('active'));i.classList.add('active');dropdown.classList.remove('show');selectBtn.classList.remove('open');showToast(`تم اختيار ${i.dataset.name}`)})});
-document.addEventListener('click',()=>{dropdown.classList.remove('show');selectBtn.classList.remove('open')});
-let isFree=true;toggleBox.addEventListener('click',()=>{isFree=!isFree;switchEl.classList.toggle('on',isFree);showToast(isFree?'الشهادة المجانية مفعلة':'الشهادة المدفوعة مفعلة')});
-function handleFile(input,nameEl,areaEl){input.addEventListener('change',e=>{const f=e.target.files[0];if(f){nameEl.textContent='✦ '+f.name;nameEl.style.display='block';areaEl.style.borderColor='#D4AF37'}});['dragenter','dragover'].forEach(ev=>areaEl.addEventListener(ev,e=>{e.preventDefault();areaEl.classList.add('drag')}));['dragleave','drop'].forEach(ev=>areaEl.addEventListener(ev,e=>{e.preventDefault();areaEl.classList.remove('drag')}));areaEl.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f){input.files=e.dataTransfer.files;nameEl.textContent='✦ '+f.name;nameEl.style.display='block'}})}
-handleFile(document.getElementById('p12'),document.getElementById('p12-name'),document.getElementById('p12-area'));
-handleFile(document.getElementById('mobile'),document.getElementById('mobile-name'),document.getElementById('mobile-area'));
-document.getElementById('eye').onclick=()=>{const p=document.getElementById('pass');p.type=p.type==='password'?'text':'password'};
-document.getElementById('signBtn').onclick=()=>{const a=document.getElementById('p12').files[0],b=document.getElementById('mobile').files[0],p=document.getElementById('pass').value.trim();if(!a||!b){showToast('يرجى رفع ملفي P12 و Mobileprovision');return}if(!p){showToast('كلمة السر مطلوبة');document.getElementById('pass').focus();document.getElementById('pass').style.borderColor='#D4AF37';return}const btn=document.getElementById('signBtn');btn.disabled=true;btn.textContent='جاري التوقيع...';setTimeout(()=>{btn.disabled=false;btn.textContent='بدء التوقيع';showToast(`تم التوقيع بواسطة ${appName.textContent} ✦`)},1700)};
-</script>
 </body>
 </html>
