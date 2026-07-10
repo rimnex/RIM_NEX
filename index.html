@@ -3,178 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIM_NEX - IPA Signing Center</title>
+<title>RIM_NEX</title>
 <style>
-:root{
-  --bg:#0d0d0d;
-  --card:#141414;
-  --border:rgba(255,255,255,.08);
-  --gold:linear-gradient(135deg,#8f6b1f,#d4af37,#f7d774,#b8860b);
-  --gold-solid:#d4af37;
-  --text:#f5f5f5;
-  --muted:#999;
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro",Arial,sans-serif}
+body{background:#000;color:#fff;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}
+
+.card{
+  background:#0e0e0e;
+  border:1px solid #222;
+  border-radius:24px;
+  padding:24px;
+  width:100%;
+  max-width:380px;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-body{background:var(--bg);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:16px;color:var(--text)}
-.container{width:100%;max-width:430px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:32px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-.header{text-align:center;margin-bottom:24px}
-.header h1{font-size:28px;font-weight:800;background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent}
-.header p{color:var(--muted);font-size:13px;margin-top:4px}
 
-.toggle{display:flex;justify-content:space-between;align-items:center;background:#0f0f0f;border:1px solid var(--border);padding:14px 16px;border-radius:20px;margin-bottom:14px} 
-.switch{position:relative;width:50px;height:28px} 
-.switch input{display:none} 
-.slider{position:absolute;inset:0;background:#2a2a2a;border-radius:28px;cursor:pointer;transition:.3s} 
-.slider:before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s} 
-input:checked +.slider{background:var(--gold-solid)} 
-input:checked +.slider:before{transform:translateX(22px)}
+/* الهيدر مع الدرع */
+.header{text-align:center;margin-bottom:25px}
+.logo{
+  font-size:30px;font-weight:900;color:#D4AF37;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  letter-spacing:1px;
+}
+.logo svg{width:28px;height:28px;fill:#D4AF37}
+.sub{font-size:13px;color:#777;margin-top:6px}
 
-.field{margin-bottom:14px;position:relative} 
-.field-label{font-size:13px;color:var(--muted);margin-bottom:8px} 
-.select-box{background:#0f0f0f;border:1px solid var(--border);border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer} 
-.select-left{display:flex;align-items:center;gap:10px} 
-.app-icon{width:32px;height:32px;border-radius:10px;background:var(--gold-solid);display:flex;align-items:center;justify-content:center;color:#000;font-weight:800;font-size:12px} 
-#chevron{transition:transform.3s}
+/* التون */
+.toggle{
+  background:#111;border:1px solid #222;border-radius:16px;
+  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:15px
+}
+.toggle span{font-size:15px}
+.switch{position:relative;width:50px;height:30px}
+.switch input{opacity:0}
+.slider{
+  position:absolute;top:0;left:0;right:0;bottom:0;background:#333;border-radius:30px;transition:.3s
+}
+.slider:before{
+  content:"";position:absolute;height:24px;width:24px;left:3px;bottom:3px;
+  background:#fff;border-radius:50%;transition:.3s
+}
+input:checked + .slider{background:#D4AF37}
+input:checked + .slider:before{transform:translateX(20px)}
 
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#111;border:1px solid var(--border);border-radius:18px;padding:8px;z-index:10;display:none} 
-.dropdown.show{display:block} 
-.dropdown-item{display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;cursor:pointer} 
-.dropdown-item:hover{background:#1a1a1a}
+/* قائمة الاختيار */
+.select{
+  background:#111;border:1px solid #222;border-radius:16px;
+  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:15px;cursor:pointer
+}
+.select .right{display:flex;align-items:center;gap:8px}
+.badge{
+  background:#D4AF37;color:#000;font-weight:800;
+  width:32px;height:32px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center
+}
 
-.upload-box{background:#0f0f0f;border:2px dashed var(--border);border-radius:20px;padding:18px;text-align:center;cursor:pointer} 
-.upload-box:hover{border-color:var(--gold-solid)} 
-.upload-box span{font-size:13px;color:var(--muted);display:block} 
-.file-name{font-size:12px;color:var(--text);margin-top:6px;word-break:break-all}
+/* رفع الملفات */
+.upload{
+  border:2px dashed #333;border-radius:16px;padding:16px;
+  text-align:center;color:#777;font-size:14px;margin-bottom:12px
+}
+.upload.active{border-color:#D4AF37;border-style:dashed}
 
-.input-wrap{position:relative} 
-.input-pass{width:100%;background:#0f0f0f;border:1px solid var(--border);border-radius:20px;padding:14px 16px;color:var(--text);font-size:15px;outline:none} 
-.input-pass:focus{border-color:var(--gold-solid)}
+.upload .file-name{color:#fff;margin-top:8px;font-size:12px}
 
-.btn{width:100%;padding:16px;border:none;border-radius:22px;background:var(--gold);color:#000;font-weight:800;font-size:16px;cursor:pointer;margin-top:8px}
+/* الباسورد */
+input[type="password"]{
+  width:100%;background:#111;border:1px solid #222;border-radius:16px;
+  padding:14px 16px;color:#fff;text-align:right;margin-bottom:15px;font-size:15px
+}
 
-.progress{height:6px;background:#1f1f1f;border-radius:10px;overflow:hidden;margin-top:12px;display:none} 
-.progress-bar{height:100%;width:0;background:var(--gold-solid);transition:width.3s}
-
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--card);border:1px solid var(--border);padding:12px 20px;border-radius:14px;opacity:0;transition:.4s;z-index:99} 
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1} 
+/* زر التوقيع */
+.btn{
+  width:100%;background:linear-gradient(180deg,#D4AF37,#B8860B);
+  border:none;border-radius:16px;padding:16px;
+  font-size:17px;font-weight:800;color:#000;cursor:pointer
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="card">
-    <div class="header">
-      <h1>RIM_NEX</h1>
-      <p>IPA Signing Center</p>
+
+<div class="card">
+  <div class="header">
+    <div class="logo">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      RIM_NEX
     </div>
+    <div class="sub">IPA Signing Center</div>
+  </div>
 
-<div class="toggle">
-  <span>الشهادة المجانية</span>
-  <label class="switch">
-    <input type="checkbox" id="freeCert">
-    <span class="slider"></span>
-  </label>
-</div>
+  <div class="toggle">
+    <span>الشهادة المجانية</span>
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
 
-<div class="field">
-  <div class="field-label">اختر تطبيق التوقيع</div>
-  <div class="select-box" id="selectBox">
-    <div class="select-left">
-      <div class="app-icon" id="selectedIcon">E</div>
-      <span id="selectedName">ESign</span>
+  <div style="text-align:right;font-size:12px;color:#666;margin-bottom:8px">اختر تطبيق التوقيع</div>
+  <div class="select">
+    <div>▼</div>
+    <div class="right">
+      ESign
+      <div class="badge">E</div>
     </div>
-    <span id="chevron">▼</span>
   </div>
-  <div class="dropdown" id="dropdown">
-    <div class="dropdown-item" data-name="ESign" data-icon="E"><div class="app-icon">E</div><span>ESign</span></div>
-    <div class="dropdown-item" data-name="KSign" data-icon="K"><div class="app-icon">K</div><span>KSign</span></div>
-    <div class="dropdown-item" data-name="Scarlet" data-icon="S"><div class="app-icon">S</div><span>Scarlet</span></div>
-    <div class="dropdown-item" data-name="GBox" data-icon="G"><div class="app-icon">G</div><span>GBox</span></div>
-    <div class="dropdown-item" data-name="Feather" data-icon="F"><div class="app-icon">F</div><span>Feather</span></div>
+
+  <div class="upload active">
+    اضغط لرفع P12 Certificate 📄
+    <div class="file-name">00008110-000249CA1107801E.p12</div>
   </div>
-</div>
 
-<div class="field">
-  <div class="upload-box" id="p12Box">
-    <span>📄 اضغط لرفع P12 Certificate</span>
-    <div class="file-name" id="p12Name"></div>
+  <div class="upload">
+    اضغط لرفع Provision Profile 📁
   </div>
-  <input type="file" id="p12File" accept=".p12,.cer" hidden>
+
+  <input type="password" placeholder="Password">
+
+  <button class="btn">بدء التوقيع</button>
 </div>
-
-<div class="field">
-  <div class="upload-box" id="provBox">
-    <span>📁 اضغط لرفع Provision Profile</span>
-    <div class="file-name" id="provName"></div>
-  </div>
-  <input type="file" id="provFile" accept=".mobileprovision" hidden>
-</div>
-
-<div class="field">
-  <input type="password" class="input-pass" id="password" placeholder="Password">
-</div>
-
-<div class="progress" id="progress"><div class="progress-bar" id="bar"></div></div>
-<button class="btn" id="signBtn">بدء التوقيع</button>
-  </div>
-</div>
-<div class="toast" id="toast"></div>
-
-<script>
-// Dropdown
-const selectBox = document.getElementById('selectBox');
-const dropdown = document.getElementById('dropdown');
-let isOpen = false;
-selectBox.onclick = (e) => {
-  e.stopPropagation();
-  isOpen =!isOpen;
-  dropdown.classList.toggle('show', isOpen);
-  document.getElementById('chevron').style.transform = isOpen? 'rotate(180deg)' : 'rotate(0deg)';
-};
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.onclick = (e) => {
-    e.stopPropagation();
-    document.getElementById('selectedName').textContent = item.dataset.name;
-    document.getElementById('selectedIcon').textContent = item.dataset.icon;
-    isOpen = false; dropdown.classList.remove('show');
-  }
-});
-document.onclick = () => {isOpen = false; dropdown.classList.remove('show');}
-
-// Upload
-function bindUpload(box, input, nameEl){
-  box.onclick = () => input.click();
-  input.onchange = () => { if(input.files[0]) nameEl.textContent = input.files[0].name; }
-}
-bindUpload(document.getElementById('p12Box'), document.getElementById('p12File'), document.getElementById('p12Name'));
-bindUpload(document.getElementById('provBox'), document.getElementById('provFile'), document.getElementById('provName'));
-
-// Sign Button
-document.getElementById('signBtn').onclick = () => {
-  if(!document.getElementById('p12File').files[0] ||!document.getElementById('provFile').files[0] ||!document.getElementById('password').value){
-    showToast('الرجاء اكمال جميع الحقول','error'); return;
-  }
-  document.getElementById('progress').style.display = 'block';
-  let w = 0;
-  let int = setInterval(()=>{
-    w += 10;
-    document.getElementById('bar').style.width = w + '%';
-    if(w >= 100){
-      clearInterval(int);
-      showToast('تم التوقيع بنجاح','success');
-      setTimeout(()=>{document.getElementById('progress').style.display='none';document.getElementById('bar').style.width='0'},1000);
-    }
-  },200);
-};
-
-function showToast(msg,type){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast ${type} show`;
-  t.style.borderColor = type=='success'?'#2ecc71':'#e74c3c';
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-</script>
 
 </body>
 </html>
