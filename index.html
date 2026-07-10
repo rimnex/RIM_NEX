@@ -13,9 +13,11 @@ h1{text-align:center;font-size:32px;background:linear-gradient(135deg,#d4af37,#f
 select{width:100%;background:#0f0f0f;border:1px solid rgba(212,175,55,0.3);color:#fff;padding:12px;border-radius:12px;font-size:15px}
 .upload{border:2px dashed rgba(212,175,55,0.3);border-radius:16px;padding:20px;text-align:center;cursor:pointer}
 .upload:hover{border-color:#d4af37}
+.upload-title{font-size:16px;font-weight:700;margin-bottom:5px}
+.upload-sub{font-size:12px;color:#888}
+.file-name{font-size:12px;color:#d4af37;margin-top:8px;word-break:break-all}
 input[type="password"]{width:100%;background:#0f0f0f;border:1px solid rgba(212,175,55,0.3);color:#fff;padding:14px;border-radius:12px}
 .btn{width:100%;padding:15px;background:linear-gradient(135deg,#d4af37,#f7d774);border:none;border-radius:16px;color:#000;font-weight:900;font-size:16px;margin-top:20px;cursor:pointer}
-.btn:active{transform:scale(0.98)}
 </style>
 </head>
 <body>
@@ -34,16 +36,19 @@ input[type="password"]{width:100%;background:#0f0f0f;border:1px solid rgba(212,1
     </select>
   </div>
 
+  <!-- الحل هنا: accept و webkitdirectory -->
   <div class="card upload" onclick="document.getElementById('p12').click()">
-    <div>📄 P12 شهادة</div>
-    <div id="p12Name" style="font-size:12px;color:#d4af37;margin-top:5px"></div>
-    <input type="file" id="p12" hidden>
+    <div class="upload-title">شهادة P12</div>
+    <div class="upload-sub">اضغط لاختيار ملف الشهادة</div>
+    <div class="file-name" id="p12Name"></div>
+    <input type="file" id="p12" accept=".p12,.cer,.pfx" hidden>
   </div>
 
   <div class="card upload" onclick="document.getElementById('prov').click()">
-    <div>📁 Provisioning Profile</div>
-    <div id="provName" style="font-size:12px;color:#d4af37;margin-top:5px"></div>
-    <input type="file" id="prov" hidden>
+    <div class="upload-title">Provisioning Profile</div>
+    <div class="upload-sub">اضغط لاختيار ملف البروفايل</div>
+    <div class="file-name" id="provName"></div>
+    <input type="file" id="prov" accept=".mobileprovision" hidden>
   </div>
 
   <div class="card">
@@ -70,14 +75,10 @@ function startSign(){
   }
 
   const [plist, ipa] = document.getElementById('appSelect').value.split('|');
-
-  // تحميل ملف الplist الاول
   window.location.href = baseUrl + plist;
-
-  // بعد ثانيتين يحمل الipa
-  setTimeout(()=>{
-    window.location.href = baseUrl + ipa;
-  }, 2000);
-
+  setTimeout(()=>{ window.location.href = baseUrl + ipa; }, 2000);
   alert('جاري تحميل ملفات التثبيت');
 }
+</script>
+</body>
+</html>
