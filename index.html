@@ -1,187 +1,32 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIM_NEX</title>
-<style>
-:root{
-  --bg:#000;
-  --border:#d4af37;
-  --gold:linear-gradient(135deg,#d4af37 0%,#ffd700 50%,#d4af37 100%);
-  --text:#fff;
-  --muted:#777;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont}
-body{background:radial-gradient(ellipse at 50% -20%,rgba(212,175,55,0.25) 0%,transparent 70%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
-.container{max-width:430px;margin:0 auto}
-
-.header{text-align:center;padding:50px 0 40px}
-.header-title{display:flex;align-items:center;justify-content:center;gap:14px}
-.header h1{font-size:40px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
-.shield{width:36px;height:36px;fill:url(#goldGrad)}
-.header p{color:var(--muted);font-size:10px;letter-spacing:6px;margin-top:10px}
-
-.card{background:rgba(10,10,10,0.7);border:1.5px solid var(--border);border-radius:22px;padding:20px;margin-bottom:18px}
-.card.dashed{border:1.5px dashed var(--border)}
-
-.toggle{display:flex;justify-content:space-between;align-items:center}
-.toggle-text{text-align:right}
-.toggle-text b{font-size:16px;font-weight:700}
-.toggle-text small{font-size:12px;color:var(--muted);display:block;margin-top:5px}
-.switch{position:relative;width:60px;height:36px}
-.switch input{display:none}
-.slider{position:absolute;inset:0;background:#1a1a1a;border-radius:36px;cursor:pointer;border:1.5px solid var(--border)}
-.slider:before{content:"";position:absolute;width:30px;height:30px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.3s}
-input:checked +.slider{background:var(--gold)}
-input:checked +.slider:before{transform:translateX(24px)}
-
-.select-wrapper{position:relative}
-.select-box{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.select-left{display:flex;align-items:center;gap:15px}
-.app-icon{width:48px;height:48px;border-radius:16px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:22px}
-.arrow{font-size:18px;transition:.3s}
-.arrow.rotate{transform:rotate(180deg)}
-.dropdown{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;background:#050505;border:1.5px solid var(--border);border-radius:20px;padding:10px;z-index:999}
-.dropdown.show{display:block}
-.dropdown-item{display:flex;align-items:center;gap:15px;padding:15px;border-radius:14px;cursor:pointer;justify-content:flex-end}
-.dropdown-item:hover{background:#111}
-
-.upload{text-align:center;cursor:pointer}
-.upload b{font-size:16px}
-.upload small{font-size:12px;color:var(--muted);margin-top:6px;display:block}
-.file-name{font-size:13px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-top:8px}
-
-.input-wrap{display:flex;align-items:center;justify-content:space-between}
-.input-pass{background:transparent;border:none;outline:none;color:var(--text);width:85%;text-align:right;font-size:15px}
-.eye{font-size:20px;cursor:pointer}
-
-.btn{width:100%;padding:20px;border:none;border-radius:18px;background:var(--gold);color:#000;font-weight:900;font-size:18px;margin-top:10px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تجربة سريعة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<svg width="0" height="0"><defs><linearGradient id="goldGrad"><stop offset="0%" stop-color="#d4af37"/><stop offset="50%" stop-color="#ffd700"/><stop offset="100%" stop-color="#d4af37"/></linearGradient></defs></svg>
-
-<div class="container">
-  <div class="header">
-    <div class="header-title">
-      <svg class="shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-      <h1>RIM_NEX</h1>
+    <div class="container">
+        <h1>نجح النشر!</h1>
+        <p>مرحباً بك في تجربتك الأولى على Vercel.</p>
     </div>
-    <p>IOS SIGNING MANAGER</p>
-  </div>
-
-  <div class="card toggle">
-    <div class="switch"><input type="checkbox" checked><span class="slider"></span></div>
-    <div class="toggle-text"><b>شهادة التوقيع الخاصة بي</b><small>استخدم شهادة Apple Developer</small></div>
-  </div>
-
-  <div class="card select-wrapper">
-    <div class="select-box" id="selectBox">
-      <div class="arrow" id="arrow">▼</div>
-      <div class="select-left">
-        <span id="selectedName">ESign</span>
-        <div class="app-icon" id="selectedIcon">E</div>
-      </div>
-    </div>
-    <div class="dropdown" id="dropdown">
-      <div class="dropdown-item" data-name="ESign" data-icon="E" data-plist="ESign.plist"><span>ESign</span><div class="app-icon">E</div></div>
-      <div class="dropdown-item" data-name="KSign" data-icon="K" data-plist="KSign.plist"><span>KSign</span><div class="app-icon">K</div></div>
-      <div class="dropdown-item" data-name="Scarlet" data-icon="S" data-plist="Scarlet.plist"><span>Scarlet</span><div class="app-icon">S</div></div>
-      <div class="dropdown-item" data-name="GBox" data-icon="G" data-plist="GBox.plist"><span>GBox</span><div class="app-icon">G</div></div>
-      <div class="dropdown-item" data-name="Feather" data-icon="F" data-plist="Feather.plist"><span>Feather</span><div class="app-icon">F</div></div>
-    </div>
-  </div>
-
-  <div class="card dashed upload" id="p12Card">
-    <b>شهادة P12</b>
-    <small>اضغط لاختيار الملف</small>
-    <div class="file-name" id="p12Name"></div>
-  </div>
-
-  <div class="card dashed upload" id="provCard">
-    <b>Provisioning Profile</b>
-    <small>اضغط لاختيار الملف</small>
-    <div class="file-name" id="provName"></div>
-  </div>
-
-  <div class="card input-wrap">
-    <input type="password" class="input-pass" id="password" placeholder="Password">
-    <span class="eye" id="togglePass">👁️</span>
-  </div>
-
-  <button class="btn" id="signBtn">بدء التوقيع والتثبيت</button>
-</div>
-
-<script>
-const baseUrl = "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/";
-let selectedPlist = "ESign.plist";
-let p12File = null;
-let provFile = null;
-
-// القائمة
-document.getElementById('selectBox').onclick = (e) => {
-  e.stopPropagation();
-  document.getElementById('dropdown').classList.toggle('show');
-  document.getElementById('arrow').classList.toggle('rotate');
-}
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.onclick = (e) => {
-    e.stopPropagation();
-    document.getElementById('selectedName').textContent = item.dataset.name;
-    document.getElementById('selectedIcon').textContent = item.dataset.icon;
-    selectedPlist = item.dataset.plist;
-    document.getElementById('dropdown').classList.remove('show');
-    document.getElementById('arrow').classList.remove('rotate');
-  }
-});
-document.addEventListener('click', () => {
-  document.getElementById('dropdown').classList.remove('show');
-  document.getElementById('arrow').classList.remove('rotate');
-});
-
-// الملفات
-document.getElementById('p12Card').onclick = () => {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.p12,.pfx';
-  input.onchange = e => {
-    if(e.target.files[0]){
-      p12File = e.target.files[0];
-      document.getElementById('p12Name').textContent = '✓ ' + p12File.name;
-    }
-  }
-  input.click();
-}
-
-document.getElementById('provCard').onclick = () => {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.mobileprovision';
-  input.onchange = e => {
-    if(e.target.files[0]){
-      provFile = e.target.files[0];
-      document.getElementById('provName').textContent = '✓ ' + provFile.name;
-    }
-  }
-  input.click();
-}
-
-// العين
-document.getElementById('togglePass').onclick = (e) => {
-  e.stopPropagation();
-  const pass = document.getElementById('password');
-  pass.type = pass.type === 'password'? 'text' : 'password';
-  document.getElementById('togglePass').textContent = pass.type === 'password'? '👁️' : '🙈';
-}
-
-// الزر
-document.getElementById('signBtn').onclick = () => {
-  if(!p12File ||!provFile ||!document.getElementById('password').value){
-    alert('الرجاء اكمال جميع الحقول'); return;
-  }
-  window.location.href = "itms-services://?action=download-manifest&url=" + baseUrl + selectedPlist;
-}
-</script>
 </body>
 </html>
