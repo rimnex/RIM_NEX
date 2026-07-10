@@ -2,136 +2,58 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>RIM_NEX | iOS Signing Manager</title>
 <style>
 :root{
- --bg:#050505; 
- --gold:#D4AF37; 
- --gold-gradient:linear-gradient(135deg,#FFD700,#D4AF37);
- --card:#0f0f0f; --border:rgba(212,175,55,.3);
- --text:#fff; --text-dim:#777; 
+ --bg:#000; 
+ --gold:#FFC107; 
+ --gold-dark:#FFA000;
+ --text:#fff; --text-dim:#888; 
+ --card-bg:#0A0A0A; --border:rgba(255,193,7,.25);
 }
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"SF Arabic","Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif}
 body{
  min-height:100vh; 
- background: radial-gradient(ellipse at 50% -20%, rgba(212,175,55,.18) 0%, #000 55%);
+ background: radial-gradient(ellipse at 50% -10%, rgba(255,193,7,.25) 0%, #000 50%);
  color:var(--text); 
- padding:40px 16px 100px;
+ padding:50px 16px 100px;
 }
-.wrap{width:100%;max-width:420px;margin:0 auto;}
 
-/* HEADER */
-.header{text-align:center;margin-bottom:25px}
-.logo{font-size:32px;font-weight:900;background:var(--gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-flex;align-items:center;gap:8px}
-.shield{font-size:26px}
-.subtitle{ margin-top:6px;font-size:11px;letter-spacing:2px;color:var(--text-dim);font-weight:600; }
+/* HEADER WITH GLOW */
+.header{text-align:center;margin-bottom:25px;position:relative}
+.header::before{
+  content:"";position:absolute;top:-40px;left:50%;transform:translateX(-50%);
+  width:300px;height:200px;background:radial-gradient(circle, rgba(255,193,7,.4) 0%, transparent 70%);
+  filter:blur(40px);z-index:-1;
+}
+.logo{font-size:34px;font-weight:900;color:var(--gold);display:inline-flex;align-items:center;gap:10px;letter-spacing:1px}
+.logo svg{width:28px;height:28px;fill:var(--gold);filter:drop-shadow(0 0 10px rgba(255,193,7,.6))}
+.subtitle{ margin-top:8px;font-size:11px;letter-spacing:2.5px;color:var(--text-dim);font-weight:500; }
 
-/* CARD */
-.main-card{background:#0a0a0a;border:1px solid rgba(212,175,55,.15);border-radius:24px;padding:18px}
+/* MAIN CARD */
+.main-card{
+  background:rgba(10,10,10,.85);border:1px solid rgba(255,193,7,.15);
+  border-radius:24px;padding:18px;backdrop-filter:blur(10px);
+}
 
 /* TOGGLE */
 .toggle-box{
-  background:#111;border:1px solid rgba(212,175,55,.1);border-radius:16px;
+  background:rgba(17,17,17,.6);border:1px solid rgba(255,193,7,.1);border-radius:16px;
   padding:16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px
 }
 .toggle-text{text-align:right}
 .toggle-text .t{font-size:15px;font-weight:700}
 .toggle-text .d{font-size:11px;color:var(--text-dim);margin-top:4px}
-.switch{position:relative;width:52px;height:30px;}
+.switch{position:relative;width:54px;height:32px;}
 .switch input{opacity:0;width:0;height:0;}
 .slider{
-  position:absolute;cursor:pointer;inset:0;background:#2a2a2a;border-radius:30px;transition:.3s;
-  box-shadow:inset 0 0 5px rgba(0,0,0,.5)
+  position:absolute;cursor:pointer;inset:0;background:#2a2a2a;border-radius:32px;transition:.3s;
 }
 .slider:before{
-  content:"";position:absolute;height:24px;width:24px;right:3px;bottom:3px;
+  content:"";position:absolute;height:26px;width:26px;left:3px;bottom:3px;
   background:#fff;border-radius:50%;transition:.3s;
+  box-shadow:0 2px 6px rgba(0,0,0,.3)
 }
-input:checked + .slider{background:var(--gold-gradient);box-shadow:0 0 15px rgba(212,175,55,.5);}
-input:checked + .slider:before{transform:translateX(-22px);}
-
-/* UPLOAD BOX */
-.upload-box{
-  border:2px dashed var(--border);border-radius:18px;padding:28px 16px;
-  text-align:center;margin-bottom:14px;background:rgba(212,175,55,.03);cursor:pointer;transition:.25s
-}
-.upload-box:hover{border-color:var(--gold);background:rgba(212,175,55,.06)}
-.upload-icon{
-  width:60px;height:60px;margin:0 auto 12px;border-radius:18px;
-  background:var(--gold-gradient);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 20px rgba(212,175,55,.5)
-}
-.upload-icon svg{width:28px;height:28px;fill:#000}
-.upload-title{font-size:16px;font-weight:800;margin-bottom:6px}
-.upload-desc{font-size:12px;color:var(--text-dim)}
-
-/* PASSWORD */
-.password-box{
-  background:#111;border:1px solid rgba(212,175,55,.1);border-radius:16px;
-  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px
-}
-.password-box input{
-  background:transparent;border:none;outline:none;color:var(--text);text-align:right;
-  font-size:14px;width:100%
-}
-.password-box input::placeholder{color:var(--text-dim)}
-.pass-icons{display:flex;gap:10px;align-items:center}
-.pass-icons svg{width:18px;height:18px;fill:var(--gold)}
-
-/* BUTTON */
-.btn-primary{
-  width:100%;padding:18px;border:none;border-radius:16px;
-  background:var(--gold-gradient);color:#1a1200;font-size:16px;font-weight:900;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
-  box-shadow:0 8px 25px rgba(212,175,55,.4);transition:.2s
-}
-.btn-primary:active{transform:scale(.97)}
-</style>
-</head>
-<body>
-
-<div class="wrap">
-  <header class="header">
-    <div class="logo">RIM_NEX <span class="shield">🛡️</span></div>
-    <div class="subtitle">IOS SIGNING MANAGER</div>
-  </header>
-
-  <div class="main-card">
-    
-    <!-- TOGGLE -->
-    <div class="toggle-box">
-      <label class="switch">
-        <input type="checkbox" checked>
-        <span class="slider"></span>
-      </label>
-      <div class="toggle-text">
-        <div class="t">شهادة التوقيع الخاصة بي</div>
-        <div class="d">استخدم شهادة Apple Developer الخاصة بك</div>
-      </div>
-    </div>
-
-    <!-- P12 UPLOAD -->
-    <div class="upload-box" onclick="document.getElementById('p12').click()">
-      <input type="file" id="p12" accept=".p12,.pfx" style="display:none">
-      <div class="upload-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-      </div>
-      <div class="upload-title">شهادة P12</div>
-      <div class="upload-desc">اسحب الملف هنا أو اضغط للتصفح</div>
-    </div>
-
-    <!-- PROVISIONING -->
-    <div class="upload-box" onclick="document.getElementById('prov').click()">
-      <input type="file" id="prov" accept=".mobileprovision" style="display:none">
-      <div class="upload-icon">
-        <svg viewBox="0 0 24 24"><path d="M10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12L10 4Z"/></svg>
-      </div>
-      <div class="upload-title">Provisioning Profile</div>
-      <div class="upload-desc">اسحب الملف هنا أو اضغط للتصفح</div>
-    </div>
-
-    <!-- PASSWORD -->
-    <div class="password-box">
-      <div class="pass-icons">
-        <svg viewBox="0 0 24 24"><path d="M18 8H17V6C17 3.24 14.76 1 12 1S7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9
+input:checked + .slider{background:var(--gold);box-shadow:0 0 15px rgba(255,193,7,.5);}
+input:checked + .slider:before{transform:translateX(22px
