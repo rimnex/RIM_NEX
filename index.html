@@ -2,77 +2,84 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIM_NEX</title>
 <style>
-:root{
-  --bg:#0a0a0a;
-  --card:#111;
-  --border:rgba(212,175,55,0.3);
-  --gold:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);
-  --text:#fff;
-  --muted:#999;
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
-body{background:radial-gradient(ellipse at top,rgba(212,175,55,0.15) 0%,transparent 60%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
+:root{--bg:#0a0a0a;--border:rgba(212,175,55,0.35);--gold:linear-gradient(135deg,#8f6b1f 0%,#d4af37 50%,#f7d774 100%);--text:#fff;--muted:#888;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display"}
+body{background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,0.2) 0%,transparent 70%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
 .container{max-width:430px;margin:0 auto}
 
 .header{text-align:center;padding:25px 0 35px}
-.header.shield{display:inline-block;width:36px;height:36px;background:var(--gold);border-radius:8px 8px 4px 4px;position:relative;margin-left:8px}
-.header.shield::before{content:'';position:absolute;bottom:-8px;left:0;right:0;height:8px;background:var(--gold);border-radius:0 0 12px 12px}
-.header h1{display:inline;font-size:34px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
-.header p{color:var(--muted);font-size:11px;letter-spacing:4px;margin-top:10px}
+.header-title{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.shield{width:36px;height:36px}
+.shield path{fill:url(#goldGrad)}
+.header h1{font-size:36px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
+.header p{color:var(--muted);font-size:11px;letter-spacing:4px}
 
-.card{background:rgba(17,17,17,0.95);border:1px solid var(--border);border-radius:20px;padding:18px;margin-bottom:16px}
-.card.dashed{border:1.5px dashed rgba(212,175,55,0.4);border-radius:16px}
+.card{background:rgba(17,17,17,0.95);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:14px}
+.card.dashed{border:1.5px dashed rgba(212,175,55,0.4)}
 
 .toggle{display:flex;justify-content:space-between;align-items:center}
 .toggle-text{text-align:right}
-.toggle-text.title{font-size:15px;font-weight:700;margin-bottom:4px}
-.toggle-text.sub{font-size:11px;color:var(--muted)}
-.switch{position:relative;width:56px;height:34px}
+.toggle-text b{font-size:15px}
+.toggle-text small{font-size:11px;color:var(--muted)}
+.switch{position:relative;width:54px;height:32px}
 .switch input{display:none}
-.slider{position:absolute;inset:0;background:#2a2a2a;border-radius:34px;cursor:pointer;transition:.3s}
-.slider:before{content:"";position:absolute;width:28px;height:28px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
+.slider{position:absolute;inset:0;background:#2a2a2a;border-radius:32px;cursor:pointer;transition:.3s}
+.slider:before{content:"";position:absolute;width:26px;height:26px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
 input:checked +.slider{background:var(--gold)}
 input:checked +.slider:before{transform:translateX(22px)}
 
-.select-box{background:#0a0a0a;border:1px solid var(--border);border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.select-box{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .select-left{display:flex;align-items:center;gap:12px}
-.app-icon{width:40px;height:40px;border-radius:12px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:18px}
-.dropdown{position:absolute;left:0;right:0;background:#0a0a0a;border:1px solid var(--border);border-radius:16px;padding:6px;z-index:10;display:none;margin-top:8px}
+.app-icon{width:42px;height:42px;border-radius:14px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:18px}
+
+.dropdown{display:none;background:#0a0a0a;border:1px solid var(--border);border-radius:14px;margin-top:10px;padding:6px}
 .dropdown.show{display:block}
-.dropdown-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;cursor:pointer}
+.dropdown-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;cursor:pointer}
 .dropdown-item:hover{background:#1a1a1a}
 
 .upload{text-align:center}
-.upload.title{font-size:16px;font-weight:700;margin-bottom:4px}
-.upload.sub{font-size:12px;color:var(--muted);margin-bottom:8px}
-.file-name{font-size:13px;color:var(--text);font-weight:500}
+.upload b{font-size:15px}
+.upload small{font-size:12px;color:var(--muted)}
+.file-name{font-size:13px;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;margin-top:6px}
 
-.input-wrap{background:#0a0a0a;border:1px solid var(--border);border-radius:16px;padding:15px 16px;display:flex;align-items:center;justify-content:space-between}
-.input-pass{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:15px;text-align:right}
-.eye{width:24px;height:24px;fill:var(--muted);cursor:pointer}
+.input-wrap{display:flex;align-items:center;justify-content:space-between}
+.input-pass{background:transparent;border:none;outline:none;color:var(--muted);width:90%;text-align:right;font-size:15px}
+.eye{font-size:20px;cursor:pointer}
 
-.btn{width:100%;padding:18px;border:none;border-radius:16px;background:var(--gold);color:#000;font-weight:900;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 25px rgba(212,175,55,0.4)}
+.btn{width:100%;padding:18px;border:none;border-radius:16px;background:var(--gold);color:#000;font-weight:900;font-size:17px;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8f6b1f"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#f7d774"/>
+    </linearGradient>
+  </defs>
+</svg>
+
 <div class="container">
   <div class="header">
-    <span class="shield"></span>
-    <h1>RIM_NEX</h1>
+    <div class="header-title">
+      <svg class="shield" viewBox="0 0 24 24">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+      </svg>
+      <h1>RIM_NEX</h1>
+    </div>
     <p>IOS SIGNING MANAGER</p>
   </div>
 
   <div class="card toggle">
-    <label class="switch">
-      <input type="checkbox" id="toggleCert" checked>
-      <span class="slider"></span>
-    </label>
+    <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
     <div class="toggle-text">
-      <div class="title">شهادة التوقيع الخاصة بي</div>
-      <div class="sub">استخدم شهادة Apple Developer</div>
+      <b>شهادة التوقيع الخاصة بي</b><br>
+      <small>استخدم شهادة Apple Developer</small>
     </div>
   </div>
 
@@ -80,8 +87,8 @@ input:checked +.slider:before{transform:translateX(22px)}
     <div class="select-box" id="selectBox">
       <div>▼</div>
       <div class="select-left">
-        <div class="app-icon" id="selectedIcon">K</div>
-        <span id="selectedName">KSign</span>
+        <span id="selectedName">ESign</span>
+        <div class="app-icon" id="selectedIcon">E</div>
       </div>
     </div>
     <div class="dropdown" id="dropdown">
@@ -94,74 +101,17 @@ input:checked +.slider:before{transform:translateX(22px)}
   </div>
 
   <div class="card dashed upload" id="p12Card">
-    <div class="title">شهادة P12</div>
-    <div class="sub">اسحب الملف هنا</div>
+    <b>شهادة P12</b><br>
+    <small>اسحب الملف هنا</small>
     <div class="file-name" id="p12Name"></div>
-    <input type="file" id="p12" accept=".p12,.cer,.pfx" hidden>
+    <input type="file" id="p12" hidden>
   </div>
 
   <div class="card dashed upload" id="provCard">
-    <div class="title">Provisioning Profile</div>
-    <div class="sub">اسحب الملف هنا</div>
+    <b>Provisioning Profile</b><br>
+    <small>اسحب الملف هنا</small>
     <div class="file-name" id="provName"></div>
-    <input type="file" id="prov" accept=".mobileprovision" hidden>
+    <input type="file" id="prov" hidden>
   </div>
 
-  <div class="card input-wrap">
-    <svg class="eye" id="togglePass" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-    <input type="password" class="input-pass" id="password" placeholder="Password">
-  </div>
-
-  <button class="btn" id="signBtn">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/></svg>
-    بدء التوقيع والتثبيت
-  </button>
-</div>
-
-<script>
-const baseUrl = "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/";
-let selectedPlist = "KSign.plist";
-
-// القائمة
-document.getElementById('selectBox').onclick = (e) => {e.stopPropagation(); document.getElementById('dropdown').classList.toggle('show');}
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.onclick = () => {
-    document.getElementById('selectedName').textContent = item.dataset.name;
-    document.getElementById('selectedIcon').textContent = item.dataset.icon;
-    selectedPlist = item.dataset.plist;
-    document.getElementById('dropdown').classList.remove('show');
-  }
-});
-document.onclick = () => document.getElementById('dropdown').classList.remove('show');
-
-// رفع الملفات
-document.getElementById('p12Card').onclick = () => document.getElementById('p12').click();
-document.getElementById('provCard').onclick = () => document.getElementById('prov').click();
-
-document.getElementById('p12').onchange = e => {
-  if(e.target.files[0]){
-    document.getElementById('p12Name').textContent = e.target.files[0].name + ' ✓';
-  }
-}
-document.getElementById('prov').onchange = e => {
-  if(e.target.files[0]){
-    document.getElementById('provName').textContent = e.target.files[0].name + ' ✓';
-  }
-}
-
-// العين
-document.getElementById('togglePass').onclick = () => {
-  const pass = document.getElementById('password');
-  pass.type = pass.type === 'password'? 'text' : 'password';
-}
-
-// التثبيت
-document.getElementById('signBtn').onclick = () => {
-  if(!document.getElementById('p12').files[0] ||!document.getElementById('prov').files[0] ||!document.getElementById('password').value){
-    alert('الرجاء اكمال جميع الحقول'); return;
-  }
-  window.location.href = "itms-services://?action=download-manifest&url=" + baseUrl + selectedPlist;
-}
-</script>
-</body>
-</html>
+  
