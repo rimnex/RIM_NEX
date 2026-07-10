@@ -1,1 +1,25 @@
-https://cdn.fbsbx.com/v/t65.102178-21/743424970_2193720498071036_5203760135661297552_n.jpg/ESign.plist?_nc_ht=cdn.fbsbx.com&_nc_ohc=5S0-crVreNYQ7kNvwGqCeV1&sdl=1&ccb=14-4&oh=00_AQAZSqZRw9ixaAzap27Sv4TyQUzf8FaaqNAosL-Nrp6uZQ&oe=6A53391F&_nc_sid=4ee932
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>items</key>
+  <array>
+    <dict>
+      <key>assets</key>
+      <array>
+        <dict>
+          <key>kind</key><string>software-package</string>
+          <key>url</key><string>https://rim-nex.vercel.app/esign_5.0.2_unsigned.ipa</string>
+        </dict>
+      </array>
+      <key>metadata</key>
+      <dict>
+        <key>bundle-identifier</key><string>com.esign.esign</string>
+        <key>bundle-version</key><string>5.0.2</string>
+        <key>kind</key><string>software</string>
+        <key>title</key><string>ESign</string>
+      </dict>
+    </dict>
+  </array>
+</dict>
+</plist>
