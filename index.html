@@ -2,26 +2,467 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>RIM_NEX</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RIM_NEX | iOS Signing Manager</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-body{background:#000;color:#fff;font-family:sans-serif;text-align:center;padding:50px}
-h1{color:#D4AF37;font-size:40px}
-.shield{fill:#D4AF37;width:40px}
-.card{background:#111;border:1px solid #D4AF37;border-radius:15px;padding:20px;margin:15px 0}
-.btn{background:#D4AF37;color:#000;padding:15px;border:none;border-radius:10px;font-weight:900;width:100%}
+:root{
+  --bg:#0d0d0d;
+  --card:#141414;
+  --border:rgba(255,255,255,.08);
+  --gold:#d4af37;
+  --gold-gradient:linear-gradient(135deg,#8f6b1f,#d4af37,#f7d774,#b8860b);
+  --text:#f2f2f2;
+  --text-dim:#8f8f8f;
+  --text-faint:#5c5c5c;
+  --success:#34c759;
+  --error:#ff5b5b;
+  --radius-lg:20px;
+  --radius-md:14px;
+}
+
+,::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+body{ 
+min-height:100vh; 
+background: 
+radial-gradient(circle at 50% -10%, rgba(212,175,55,.10), transparent 55%), 
+var(--bg); 
+color:var(--text); 
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif; 
+display:flex; 
+justify-content:center; 
+align-items:flex-start; 
+padding:40px 16px 60px; 
+line-height:1.5; 
+-webkit-font-smoothing:antialiased; 
+}
+
+::-webkit-scrollbar{width:8px;} 
+::-webkit-scrollbar-track{background:#0d0d0d;} 
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8f6b1f,#d4af37);border-radius:10px;} 
+::-webkit-scrollbar-thumb:hover{background:#f7d774;} 
+*{scrollbar-width:thin;scrollbar-color:#d4af37 #0d0d0d;}
+
+a:focus-visible, button:focus-visible, .upload-area:focus-visible, input:focus-visible{ 
+outline:2px solid var(--gold); 
+outline-offset:3px; 
+border-radius:8px; 
+}
+
+.wrap{width:100%;max-width:430px;display:flex;flex-direction:column;align-items:center;}
+
+.header{text-align:center;margin-bottom:28px;opacity:0;animation:fadeInUp .6s ease forwards;} 
+.header .logo{ 
+display:inline-flex;align-items:center;gap:8px; 
+font-size:28px;font-weight:800;letter-spacing:.5px; 
+} 
+.header .logo i{color:var(--gold);font-size:22px;} 
+.header .logo span{ 
+background:var(--gold-gradient); 
+-webkit-background-clip:text;background-clip:text;color:transparent; 
+} 
+.header .subtitle{ 
+margin-top:6px;font-size:12.5px;letter-spacing:2px;text-transform:uppercase; 
+color:var(--text-dim);font-weight:600; 
+}
+
+.card{ 
+width:100%; 
+background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 30%), var(--card); 
+border:1px solid var(--border); 
+border-radius:var(--radius-lg); 
+padding:24px; 
+backdrop-filter:blur(20px); 
+-webkit-backdrop-filter:blur(20px); 
+box-shadow:0 20px 60px -20px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.02) inset; 
+opacity:0;animation:fadeInUp .6s ease forwards;animation-delay:.1s; 
+display:flex;flex-direction:column;gap:18px; 
+}
+
+.toggle-row{ 
+display:flex;align-items:center;justify-content:space-between;gap:12px; 
+padding:14px 16px; 
+background:rgba(255,255,255,.02); 
+border:1px solid var(--border); 
+border-radius:var(--radius-md); 
+transition:border-color .25s ease; 
+} 
+.toggle-row:hover{border-color:rgba(212,175,55,.3);} 
+.toggle-info{display:flex;flex-direction:column;gap:3px;} 
+.toggle-info .title{font-size:14.5px;font-weight:600;color:var(--text);} 
+.toggle-info .desc{font-size:11.5px;color:var(--text-faint);}
+
+.switch{position:relative;width:48px;height:28px;flex-shrink:0;} 
+.switch input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;z-index:2;} 
+.switch .track{ 
+position:absolute;inset:0;background:#2a2a2a;border:1px solid var(--border); 
+border-radius:999px;transition:background .3s ease, box-shadow .3s ease; 
+} 
+.switch .thumb{ 
+position:absolute;top:3px;right:3px;width:22px;height:22px;background:#e8e8e8; 
+border-radius:50%;transition:transform .3s cubic-bezier(.34,1.56,.64,1), background .3s ease; 
+box-shadow:0 2px 6px rgba(0,0,0,.4); 
+} 
+.switch input:checked ~ .track{background:var(--gold-gradient);box-shadow:0 0 16px rgba(212,175,55,.5);} 
+.switch input:checked ~ .thumb{transform:translateX(-20px);background:#fff;}
+
+.cert-section{transition:opacity .3s ease, filter .3s ease;} 
+.cert-section.disabled{opacity:.4;filter:grayscale(.5);pointer-events:none;} 
+.cert-stack{display:flex;flex-direction:column;gap:14px;}
+
+.upload-area{ 
+position:relative;border:1.5px dashed rgba(212,175,55,.35);border-radius:var(--radius-md); 
+padding:22px 16px;text-align:center;cursor:pointer;transition:all .25s ease; 
+background:rgba(212,175,55,.02);display:block; 
+} 
+.upload-area:hover{border-color:var(--gold);background:rgba(212,175,55,.05);transform:translateY(-2px);} 
+.upload-area.drag-over{border-color:var(--gold);background:rgba(212,175,55,.09);box-shadow:0 0 0 4px rgba(212,175,55,.1);} 
+.upload-area.has-file{border-style:solid;border-color:rgba(52,199,89,.4);background:rgba(52,199,89,.04);} 
+.upload-area input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;} 
+.upload-area .icon{ 
+width:46px;height:46px;margin:0 auto 10px;border-radius:14px; 
+display:flex;align-items:center;justify-content:center; 
+background:var(--gold-gradient);font-size:18px;color:#1a1200; 
+box-shadow:0 6px 16px -4px rgba(212,175,55,.5); 
+} 
+.upload-area.has-file .icon{background:linear-gradient(135deg,#1f8a3d,#34c759);color:#06170a;} 
+.upload-area .main-text{font-size:14.5px;font-weight:600;color:var(--text);} 
+.upload-area .sub-text{font-size:12px;color:var(--text-faint);margin-top:3px;} 
+.upload-area .file-info{ 
+margin-top:10px;font-size:12px;color:var(--success);display:none; 
+align-items:center;justify-content:center;gap:6px;word-break:break-all;padding:0 6px; 
+} 
+.upload-area.has-file .file-info{display:flex;} 
+.upload-area.has-file .main-text,.upload-area.has-file .sub-text{display:none;}
+
+.field{ 
+position:relative;display:flex;align-items:center; 
+background:rgba(255,255,255,.02);border:1px solid var(--border); 
+border-radius:999px;padding:4px;transition:box-shadow .25s ease, border-color .25s ease; 
+} 
+.field:focus-within{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.15);} 
+.field .field-icon{ 
+width:38px;height:38px;display:flex;align-items:center;justify-content:center; 
+color:var(--gold);font-size:15px;flex-shrink:0; 
+} 
+.field input{ 
+flex:1;min-width:0;background:transparent;border:none;outline:none; 
+color:var(--text);font-size:14.5px;padding:10px 4px;font-family:inherit; 
+} 
+.field input::placeholder{color:var(--text-faint);} 
+.field .toggle-visibility{ 
+width:38px;height:38px;display:flex;align-items:center;justify-content:center; 
+background:none;border:none;color:var(--text-faint);cursor:pointer;flex-shrink:0; 
+transition:color .2s ease; 
+} 
+.field .toggle-visibility:hover{color:var(--gold);}
+
+.hint{font-size:12px;color:var(--text-faint);text-align:center;padding:2px 6px 0;display:none;} 
+.hint.show{display:block;}
+
+.btn-sign{ 
+position:relative;overflow:hidden;width:100%;padding:17px;border:none; 
+border-radius:var(--radius-md);background:var(--gold-gradient);background-size:200% 200%; 
+color:#1a1200;font-size:15.5px;font-weight:800;letter-spacing:.3px;cursor:pointer; 
+display:flex;align-items:center;justify-content:center;gap:10px; 
+transition:transform .2s ease, box-shadow .3s ease, background-position .4s ease; 
+box-shadow:0 10px 30px -8px rgba(212,175,55,.55); 
+} 
+.btn-sign:hover{transform:translateY(-3px);background-position:100% 50%;box-shadow:0 16px 36px -8px rgba(212,175,55,.7);} 
+.btn-sign:active{transform:translateY(-1px) scale(.98);} 
+.btn-sign:disabled{cursor:not-allowed;opacity:.75;transform:none;} 
+.btn-sign .ripple{ 
+position:absolute;border-radius:50%;background:rgba(255,255,255,.5); 
+transform:scale(0);animation:ripple .6s ease-out;pointer-events:none; 
+} 
+.btn-sign .spinner{ 
+width:17px;height:17px;border:2.5px solid rgba(26,18,0,.25);border-top-color:#1a1200; 
+border-radius:50%;animation:spin .7s linear infinite;display:none; 
+} 
+.btn-sign.loading .spinner{display:inline-block;} 
+.btn-sign.loading .btn-icon{display:none;}
+
+.progress-wrap{height:5px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden;display:none;margin-top:12px;} 
+.progress-wrap.active{display:block;} 
+.progress-bar{height:100%;width:0%;border-radius:99px;background:var(--gold-gradient);transition:width .18s ease;box-shadow:0 0 10px rgba(212,175,55,.6);}
+
+.toast-container{ 
+position:fixed;top:20px;left:50%;transform:translateX(-50%); 
+width:calc(100% - 32px);max-width:400px;display:flex;flex-direction:column;gap:10px; 
+z-index:999;pointer-events:none; 
+} 
+.toast{ 
+pointer-events:auto;display:flex;align-items:center;gap:10px;padding:14px 16px; 
+border-radius:var(--radius-md);background:#161616;border:1px solid var(--border); 
+box-shadow:0 12px 30px -8px rgba(0,0,0,.6);font-size:13.5px;font-weight:600; 
+animation:toastIn .35s cubic-bezier(.34,1.56,.64,1) forwards; 
+} 
+.toast.hide{animation:toastOut .3s ease forwards;} 
+.toast.success{border-color:rgba(52,199,89,.35);} 
+.toast.success i{color:var(--success);} 
+.toast.error{border-color:rgba(255,91,91,.35);} 
+.toast.error i{color:var(--error);} 
+.toast i{font-size:16px;flex-shrink:0;}
+
+.footnote{ 
+margin-top:18px;font-size:11px;color:var(--text-faint);text-align:center; 
+opacity:0;animation:fadeInUp .6s ease forwards;animation-delay:.2s; 
+}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}} 
+@keyframes spin{to{transform:rotate(360deg);}} 
+@keyframes ripple{to{transform:scale(3);opacity:0;}} 
+@keyframes toastIn{from{opacity:0;transform:translateY(-16px) scale(.95);}to{opacity:1;transform:translateY(0) scale(1);}} 
+@keyframes toastOut{to{opacity:0;transform:translateY(-10px) scale(.95);}}
+
+@media (max-width:360px){ 
+.card{padding:18px;gap:14px;} 
+.header .logo{font-size:24px;} 
+} 
+@media (prefers-reduced-motion:reduce){ 
+*{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;} 
+} 
 </style>
 </head>
 <body>
-<h1>
-<svg class="shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5l-9-4z"/></svg>
-RIM_NEX
-</h1>
-<p>IOS SIGNING MANAGER</p>
 
-<div class="card"><b>شهادة التوقيع الخاصة بي</b></div>
-<div class="card"><b>P12 شهادة</b></div>
-<div class="card"><b>Provisioning Profile</b></div>
-<button class="btn">بدء التوقيع</button>
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<div class="wrap">
+  <header class="header">
+    <div class="logo"><i class="fa-solid fa-shield-halved"></i><span>RIM_NEX</span></div>
+    <div class="subtitle">iOS Signing Manager</div>
+  </header>
+
+  <main class="card">
+
+<div class="toggle-row">
+  <div class="toggle-info">
+    <span class="title">شهادة التوقيع الخاصة بي</span>
+    <span class="desc">استخدم شهادة Apple Developer الخاصة بك</span>
+  </div>
+  <label class="switch">
+    <input type="checkbox" id="certToggle" checked aria-label="تفعيل استخدام شهادتي الخاصة">
+    <span class="track"></span>
+    <span class="thumb"></span>
+  </label>
+</div>
+
+<div class="cert-section" id="certSection">
+  <div class="cert-stack">
+
+    <div class="upload-area" id="p12Area" tabindex="0" role="button" aria-label="رفع شهادة P12">
+      <input type="file" id="p12Input" accept=".p12">
+      <div class="icon"><i class="fa-solid fa-certificate"></i></div>
+      <div class="main-text">شهادة P12</div>
+      <div class="sub-text">اسحب الملف هنا أو اضغط للتصفح</div>
+      <div class="file-info"><i class="fa-solid fa-circle-check"></i><span id="p12Name"></span></div>
+    </div>
+
+    <div class="upload-area" id="profileArea" tabindex="0" role="button" aria-label="رفع Provisioning Profile">
+      <input type="file" id="profileInput" accept=".mobileprovision">
+      <div class="icon"><i class="fa-solid fa-folder-open"></i></div>
+      <div class="main-text">Provisioning Profile</div>
+      <div class="sub-text">اسحب الملف هنا أو اضغط للتصفح</div>
+      <div class="file-info"><i class="fa-solid fa-circle-check"></i><span id="profileName"></span></div>
+    </div>
+
+    <div class="field">
+      <div class="field-icon"><i class="fa-solid fa-lock"></i></div>
+      <input type="password" id="passwordInput" placeholder="كلمة مرور الشهادة" autocomplete="off">
+      <button type="button" class="toggle-visibility" id="togglePw" aria-label="إظهار كلمة المرور">
+        <i class="fa-solid fa-eye"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div class="hint" id="disabledHint">فعّل الخيار أعلاه لاستخدام شهادتك الخاصة والمتابعة</div>
+
+<div>
+  <button class="btn-sign" id="signBtn">
+    <div class="spinner"></div>
+    <i class="fa-solid fa-pen-nib btn-icon"></i>
+    <span class="btn-label">بدء التوقيع</span>
+  </button>
+  <div class="progress-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
+</div>
+  </main>
+
+  <div class="footnote">جميع الملفات تُعالج داخل هذه الواجهة فقط</div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var certToggle = document.getElementById('certToggle');
+  var certSection = document.getElementById('certSection');
+  var disabledHint = document.getElementById('disabledHint');
+
+  var p12Area = document.getElementById('p12Area');
+  var p12Input = document.getElementById('p12Input');
+  var p12Name = document.getElementById('p12Name');
+
+  var profileArea = document.getElementById('profileArea');
+  var profileInput = document.getElementById('profileInput');
+  var profileName = document.getElementById('profileName');
+
+  var passwordInput = document.getElementById('passwordInput');
+  var togglePw = document.getElementById('togglePw');
+
+  var signBtn = document.getElementById('signBtn');
+  var progressWrap = document.getElementById('progressWrap');
+  var progressBar = document.getElementById('progressBar');
+  var toastContainer = document.getElementById('toastContainer');
+
+  function formatSize(bytes){
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  function setupUpload(area, input, nameEl){
+    area.addEventListener('click', function(){ input.click(); });
+    area.addEventListener('keydown', function(e){
+      if(e.key = 'Enter' || e.key = ' '){
+        e.preventDefault();
+        input.click();
+      }
+    });
+    input.addEventListener('click', function(e){ e.stopPropagation(); });
+    input.addEventListener('change', function(){
+      if(input.files && input.files[0]){
+        var f = input.files[0];
+        nameEl.textContent = f.name + ' • ' + formatSize(f.size);
+        area.classList.add('has-file');
+      } else {
+        area.classList.remove('has-file');
+      }
+    });
+    ['dragenter','dragover'].forEach(function(evt){
+      area.addEventListener(evt, function(e){
+        e.preventDefault(); e.stopPropagation();
+        area.classList.add('drag-over');
+      });
+    });
+    ['dragleave','drop'].forEach(function(evt){
+      area.addEventListener(evt, function(e){
+        e.preventDefault(); e.stopPropagation();
+        area.classList.remove('drag-over');
+      });
+    });
+    area.addEventListener('drop', function(e){
+      var dt = e.dataTransfer;
+      if(dt && dt.files && dt.files.length){
+        input.files = dt.files;
+        input.dispatchEvent(new Event('change'));
+      }
+    });
+  }
+
+  setupUpload(p12Area, p12Input, p12Name);
+  setupUpload(profileArea, profileInput, profileName);
+
+  function updateToggleState(){
+    var on = certToggle.checked;
+    certSection.classList.toggle('disabled', !on);
+    disabledHint.classList.toggle('show', !on);
+  }
+  certToggle.addEventListener('change', updateToggleState);
+  updateToggleState();
+
+  togglePw.addEventListener('click', function(){
+    var isPw = passwordInput.type = 'password';
+    passwordInput.type = isPw ? 'text' : 'password';
+    togglePw.innerHTML = isPw
+      ? '<i class="fa-solid fa-eye-slash"></i>'
+      : '<i class="fa-solid fa-eye"></i>';
+    togglePw.setAttribute('aria-label', isPw ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+  });
+
+  function showToast(message, type){
+    var toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+    var icon = type = 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+    toast.innerHTML = '<i class="fa-solid ' + icon + '"></i><span>' + message + '</span>';
+    toastContainer.appendChild(toast);
+    setTimeout(function(){
+      toast.classList.add('hide');
+      setTimeout(function(){ toast.remove(); }, 300);
+    }, 3200);
+  }
+
+  function spawnRipple(e, btn){
+    var rect = btn.getBoundingClientRect();
+    var size = Math.max(rect.width, rect.height);
+    var span = document.createElement('span');
+    span.className = 'ripple';
+    span.style.width = span.style.height = size + 'px';
+    span.style.left = (e.clientX - rect.left - size/2) + 'px';
+    span.style.top = (e.clientY - rect.top - size/2) + 'px';
+    btn.appendChild(span);
+    setTimeout(function(){ span.remove(); }, 650);
+  }
+
+  signBtn.addEventListener('click', function(e){
+    spawnRipple(e, signBtn);
+    if(signBtn.classList.contains('loading')) return;
+
+    if(!certToggle.checked){
+      showToast('فعّل خيار الشهادة الخاصة أولًا', 'error');
+      return;
+    }
+    if(!p12Input.files.length){
+      showToast('الرجاء اختيار شهادة P12', 'error');
+      return;
+    }
+    if(!profileInput.files.length){
+      showToast('الرجاء اختيار ملف Provisioning Profile', 'error');
+      return;
+    }
+    if(!passwordInput.value.trim()){
+      showToast('الرجاء إدخال كلمة المرور', 'error');
+      return;
+    }
+
+    startSigning();
+  });
+
+  function startSigning(){
+    signBtn.classList.add('loading');
+    signBtn.disabled = true;
+    signBtn.querySelector('.btn-label').textContent = 'جاري التوقيع...';
+    progressWrap.classList.add('active');
+    progressBar.style.width = '0%';
+
+    var pct = 0;
+    var timer = setInterval(function(){
+      pct += Math.random()*18 + 6;
+      if(pct >= 100){
+        pct = 100;
+        clearInterval(timer);
+        progressBar.style.width = '100%';
+        setTimeout(finishSigning, 300);
+      } else {
+        progressBar.style.width = pct + '%';
+      }
+    }, 260);
+  }
+
+  function finishSigning(){
+    signBtn.classList.remove('loading');
+    signBtn.disabled = false;
+    signBtn.querySelector('.btn-label').textContent = 'بدء التوقيع';
+    progressWrap.classList.remove('active');
+    progressBar.style.width = '0%';
+    showToast('تم التوقيع بنجاح', 'success');
+  }
+
+})();
+</script>
 
 </body>
 </html>
