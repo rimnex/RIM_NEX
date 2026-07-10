@@ -1,153 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>RIM_NEX | IPA Signing Center</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<title>RIM_NEX | iOS Signing Manager</title>
 <style>
-:root{--bg:#0d0d0d;--card:#141414;--border:rgba(255,255,255,.08);--gold:#d4af37;--gold-gradient:linear-gradient(135deg,#8f6b1f,#d4af37,#f7d774,#b8860b);--text:#f5f5f5;--text-dim:#a0a0a0;--radius:20px}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{min-height:100vh;background:radial-gradient(circle at 50% -20%,rgba(212,175,55,.08),transparent 60%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;display:flex;justify-content:center;align-items:flex-start;padding:24px 16px 80px;animation:fadeIn.6s ease}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:var(--gold-gradient);border-radius:10px}::-webkit-scrollbar-track{background:var(--bg)}
-.container{width:100%;max-width:430px;display:flex;flex-direction:column;gap:16px;animation:slideUp.7s ease}
-.header{text-align:center;margin-bottom:8px}
-.header h1{font-size:32px;font-weight:900;background:var(--gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.5px}
-.header p{font-size:13px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
-.card{background:rgba(20,20,20,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:0 8px 32px rgba(0,0,0,.4);transition:transform.3s ease,box-shadow.3s ease;animation:fadeIn.8s ease}
-.card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(212,175,55,.1)}
-.toggle{display:flex;align-items:center;justify-content:space-between}
-.toggle-label{font-size:15px;font-weight:600}
-.switch{position:relative;width:52px;height:30px}
-.switch input{opacity:0;width:0;height:0}
-.slider{position:absolute;cursor:pointer;inset:0;background:#2a2a2a;border-radius:30px;transition:.4s;border:1px solid var(--border)}
-.slider:before{position:absolute;content:"";height:24px;width:24px;left:3px;top:2px;background:#fff;border-radius:50%;transition:.4s}
-input:checked+.slider{background:var(--gold-gradient);box-shadow:0 0 15px rgba(212,175,55,.4)}
-input:checked+.slider:before{transform:translateX(22px)}
-.select-wrapper{position:relative}
-.select-label{font-size:13px;color:var(--text-dim);margin-bottom:10px;display:block;font-weight:600}
-.select-box{background:#1a1a1a;border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:.3s}
-.select-box:hover{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.1)}
-.selected-app{display:flex;align-items:center;gap:12px}
-.app-icon{width:36px;height:36px;border-radius:8px;background:var(--gold-gradient);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#000;box-shadow:0 4px 12px rgba(212,175,55,.3)}
-.app-name{font-size:15px;font-weight:600}
-.dropdown{position:absolute;top:110%;left:0;right:0;background:#1a1a1a;border:1px solid var(--border);border-radius:14px;z-index:10;max-height:0;overflow:hidden;opacity:0;transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.dropdown.active{max-height:300px;opacity:1;padding:8px}
-.dropdown-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;cursor:pointer;transition:.2s}
-.dropdown-item:hover{background:rgba(212,175,55,.1)}
-.upload-area{border:2px dashed var(--border);border-radius:var(--radius);padding:32px 20px;text-align:center;cursor:pointer;transition:.3s;background:rgba(212,175,55,.02)}
-.upload-area:hover{border-color:var(--gold);background:rgba(212,175,55,.05);transform:translateY(-2px)}
-.upload-area.has-file{border-style:solid;border-color:var(--gold);background:rgba(212,175,55,.08)}
-.upload-icon{font-size:32px;color:var(--gold);margin-bottom:10px}
-.upload-text{font-size:14px;font-weight:600;margin-bottom:4px}
-.upload-sub{font-size:12px;color:var(--text-dim)}
-.file-name{margin-top:10px;font-size:12px;color:var(--gold);font-weight:600}
-.input-field{position:relative}
-.input-field input{width:100%;background:#1a1a1a;border:1px solid var(--border);border-radius:30px;padding:14px 45px 14px 45px;color:var(--text);font-size:15px;outline:none;transition:.3s}
-.input-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.2)}
-.input-field i{position:absolute;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:16px}
-.input-field.icon-left{left:16px}
-.input-field.icon-right{right:16px;cursor:pointer}
-.btn{width:100%;padding:18px;border:none;border-radius:16px;background:var(--gold-gradient);background-size:200% 200%;color:#000;font-size:16px;font-weight:900;cursor:pointer;position:relative;overflow:hidden;transition:.4s;box-shadow:0 8px 24px rgba(212,175,55,.3)}
-.btn:hover{background-position:100% 50%;transform:translateY(-2px);box-shadow:0 12px 32px rgba(212,175,55,.4)}
-.btn:active{transform:scale(.97)}
-.btn.loading{pointer-events:none;opacity:.8}
-.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.4);transform:scale(0);animation:ripple.6s linear}
-.progress{height:4px;background:#2a2a2a;border-radius:10px;overflow:hidden;margin-top:12px;display:none}
-.progress-bar{height:100%;background:var(--gold-gradient);width:0;transition:width.3s}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:#1a1a1a;border:1px solid var(--border);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;z-index:1000;opacity:0;transition:.4s;box-shadow:0 10px 30px rgba(0,0,0,.5)}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.success{border-color:var(--gold)}
-.toast.error{border-color:#ff3b30}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes ripple{to{transform:scale(4);opacity:0}}
-@media(max-width:380px){.card{padding:16px}.header h1{font-size:28px}}
-</style>
-</head>
-<body>
-<div class="toast" id="toast"></div>
-<div class="container">
-<header class="header">
-<h1>RIM_NEX</h1>
-<p>IPA Signing Center</p>
-</header>
-<div class="card toggle">
-<span class="toggle-label">الشهادة المجانية</span>
-<label class="switch">
-<input type="checkbox" id="certToggle">
-<span class="slider"></span>
-</label>
-</div>
-<div class="card">
-<span class="select-label">اختر تطبيق التوقيع</span>
-<div class="select-wrapper">
-<div class="select-box" id="selectBox">
-<div class="selected-app">
-<div class="app-icon" id="selectedIcon">E</div>
-<span class="app-name" id="selectedName">ESign</span>
-</div>
-<i class="fa-solid fa-chevron-down"></i>
-</div>
-<div class="dropdown" id="dropdown">
-<div class="dropdown-item" data-app="ESign" data-icon="E"><div class="app-icon">E</div><span>ESign</span></div>
-<div class="dropdown-item" data-app="KSign" data-icon="K"><div class="app-icon">K</div><span>KSign</span></div>
-<div class="dropdown-item" data-app="Scarlet" data-icon="S"><div class="app-icon">S</div><span>Scarlet</span></div>
-<div class="dropdown-item" data-app="GBox" data-icon="G"><div class="app-icon">G</div><span>GBox</span></div>
-<div class="dropdown-item" data-app="Feather" data-icon="F"><div class="app-icon">F</div><span>Feather</span></div>
-</div>
-</div>
-</div>
-<div class="card upload-area" id="p12Upload">
-<input type="file" id="p12Input" accept=".p12,.pfx" hidden>
-<i class="fa-solid fa-file-circle-check upload-icon"></i>
-<div class="upload-text">📄 Drop P12 Certificate</div>
-<div class="upload-sub">or click to browse</div>
-<div class="file-name" id="p12Name"></div>
-</div>
-<div class="card upload-area" id="profileUpload">
-<input type="file" id="profileInput" accept=".mobileprovision" hidden>
-<i class="fa-solid fa-folder-open upload-icon"></i>
-<div class="upload-text">📁 Drop Provision Profile</div>
-<div class="upload-sub">or click to browse</div>
-<div class="file-name" id="profileName"></div>
-</div>
-<div class="card">
-<div class="input-field">
-<i class="fa-solid fa-lock icon-left"></i>
-<input type="password" id="passwordInput" placeholder="Password">
-<i class="fa-solid fa-eye icon-right" id="togglePass"></i>
-</div>
-</div>
-<div class="card" style="padding:0;background:transparent;border:none;box-shadow:none">
-<button class="btn" id="signBtn"><span>بدء التوقيع</span></button>
-<div class="progress" id="progress"><div class="progress-bar" id="progressBar"></div></div>
-</div>
-</div>
-<script>
-const p12Upload=document.getElementById('p12Upload'),p12Input=document.getElementById('p12Input'),p12Name=document.getElementById('p12Name')
-const profileUpload=document.getElementById('profileUpload'),profileInput=document.getElementById('profileInput'),profileName=document.getElementById('profileName')
-const selectBox=document.getElementById('selectBox'),dropdown=document.getElementById('dropdown'),selectedIcon=document.getElementById('selectedIcon'),selectedName=document.getElementById('selectedName')
-const passwordInput=document.getElementById('passwordInput'),togglePass=document.getElementById('togglePass')
-const signBtn=document.getElementById('signBtn'),progress=document.getElementById('progress'),progressBar=document.getElementById('progressBar'),toast=document.getElementById('toast')
-let files={p12:null,profile:null}
-function setupUpload(area,input,nameEl,key){
-http://area.onclick=()=>input.click()
-http://input.onchange=e=>{if(e.target.files){files=e.target.files;nameEl.textContent=e.target.files.name;area.classList.add('has-file')}}
-;['dragenter','dragover'].forEach(ev=>area.addEventListener(ev,e=>{e.preventDefault();area.style.borderColor='var(--gold)'}))
-;['dragleave','drop'].forEach(ev=>area.addEventListener(ev,e=>{e.preventDefault();area.style.borderColor='var(--border)'}))
-http://area.addEventListener('drop',e=>{let f=e.dataTransfer.files;if(f){input.files=e.dataTransfer.files;files=f;nameEl.textContent=f.name;area.classList.add('has-file')}})
+:root{
+ --bg:#000; --card:#141414; --border:rgba(255,255,255,.08);
+ --gold:#D4AF37; --gold-bright:#FFD700; --success:#34c759;
+ --gold-gradient:linear-gradient(135deg,#8a6a1f,#D4AF37,#FFD700,#b8860b);
+ --text:#f2f2f2; --text-dim:#8f8f8f; --text-faint:#5c5c5c;
+ --radius-lg:20px; --radius-md:14px;
 }
-setupUpload(p12Upload,p12Input,p12Name,'p12');setupUpload(profileUpload,profileInput,profileName,'profile')
-http://selectBox.onclick=()=>dropdown.classList.toggle('active')
-http://document.querySelectorAll('.dropdown-item').forEach(item=>{item.onclick=()=>{selectedName.textContent=item.dataset.app;selectedIcon.textContent=item.dataset.icon;dropdown.classList.remove('active')}})
-http://togglePass.onclick=()=>{passwordInput.type=passwordInput.type==='password'?'text':'password';togglePass.classList.toggle('fa-eye-slash')}
-function showToast(msg,type){toast.textContent=msg;toast.className=;setTimeout(()=>toast.classList.remove('show'),3000)}
-function createRipple(e,btn){let d=Math.max(btn.clientWidth,btn.clientHeight);let r=document.createElement('span');r.className='ripple';r.style.width=r.style.height=d+'px';r.style.left=e.clientX-btn.offsetLeft-d/2+'px';r.style.top=e.clientY-btn.offsetTop-d/2+'px';btn.appendChild(r);setTimeout(()=>r.remove(),600)}
-http://signBtn.onclick=e=>{createRipple(e,signBtn);if(!files.p12||!files.profile||!passwordInput.value){showToast('يرجى ملء جميع الحقول المطلوبة','error');return}
-http://signBtn.classList.add('loading');progress.style.display='block';let w=0;let i=setInterval(()=>{w+=10;progressBar.style.width=w+'%';if(w>=100){clearInterval(i);signBtn.classList.remove('loading');showToast('تم التوقيع بنجاح','success');progress.style.display='none';progressBar.style.width='0'}},200)}
-http://document.addEventListener('click',e=>{if(!selectBox.contains(e.target))dropdown.classList.remove('active')})
-</script>
-</body>
-</html>[0][key]
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+ min-height:100vh; background: radial-gradient(circle at 50% -10%, rgba(212,175,55,.14), transparent 55%), var(--bg);
+ color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+ display:flex; justify-content:center; padding:40px 16px 120px; line-height:1.5;
+}
+.wrap{width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;}
+.header{text-align:center;margin-bottom:26px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-size:32px;font-weight:900;letter-spacing:.5px;background:var(--gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.subtitle{ margin-top:6px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase; color:var(--text-dim);font-weight:700; }
+
+.card{ width:100%; background:#141414; border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:0 16px 40px -18px rgba(0,0,0,.7); }
+.card + .card{margin-top:14px;}
+
+/* toggle */
+.toggle-card{ padding:18px; display:flex;align-items:center;justify-content:space-between;gap:12px; text-align:right }
+.toggle-info .t{font-size:15px;font-weight:700;color:var(--text);display:block}
+.toggle-info .d{font-size:12px;color:var(--text-faint);}
+.switch{position:relative;width:52px;height:30px;flex-shrink:0;}
+.switch input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;z-index:2;}
+.switch .track{ position:absolute;inset:0;background:#2a2a2a;border:1px solid var(--border); border-radius:999px;transition:.3s; }
+.switch .thumb{ position:absolute;top:3px;right:3px;width:24px;height:24px;background:#fff; border-radius:50%;transition:.3s; box-shadow:0 2px 6px rgba(0,0,0,.4); }
+.switch input:checked ~ .track{background:var(--gold-gradient);box-shadow:0 0 16px rgba(212,175,55,.5);}
+.switch input:checked ~ .thumb{transform:translateX(-22px);}
+
+/* select */
+.select-card{padding:14px}
+.select-box{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.select-left{display:flex;align-items:center;gap:10px}
+.app-icon{width:40px;height:40px;border-radius:12px;background:var(--gold-gradient);display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:18px}
+.arrow{color:var(--gold);font-size:18px}
+
+/* upload */
+.upload-card{ padding:0; border:2px dashed var(--gold); background:rgba(212,175,55,.03); cursor:pointer; transition:.25s; text-align:center }
+.upload-card:hover{background:rgba(212,175,55,.07)}
+.upload-card.has-file{border-style:solid;border-color:var(--success);background:rgba(52,199,89,.05);}
+.upload-inner{padding:24px 16px;}
+.upload-card .emoji{font-size:28px;display:block;margin-bottom:8px;}
+.upload-card .main-text{font-size:15px;font-weight:700;}
+.upload-card .sub-text{font-size:12.5px;color:var(--text-faint);margin-top:4px;}
+.upload-card .file-info{ margin-top:8px;font-size:12px;color:var(--success);display:none; align-items:center;justify-content:center;gap:6px;word-break:break-all;font-weight:600; }
+.upload-card.has-file .file-info{display:flex;}
+.upload-card.has-file .main-text,.upload-card.has-file .sub-text{display:none;}
+.upload-card input[type=file]{position:absolute;width:1px;height:1px;opacity:0;}
+
+/* password */
+.password-card{padding:6px;}
+.field{ position:relative;display:flex;align-items:center; }
+.field .field-icon{ width:40px;height:40px;display:flex;align-items:center;justify-content:center; font-size:18px; }
+.field input{ flex:1;background:transparent;border:none;outline:none; color:var(--text);font-size:14.5px;padding:12px 4px;text-align:right; }
+.field input::placeholder{color:var(--text-faint);}
+.eye-toggle{ width:40px;height:40px;display:flex;align-items:center;justify-content:center; background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-dim); }
+
+/* button */
+.action-wrap{width:
