@@ -5,34 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RIM_NEX</title>
 <style>
-body{background:#000;margin:0;padding:20px;font-family:Arial;color:#fff}
-.card{background:#0a0a0a;border:1px solid #222;border-radius:24px;padding:24px;max-width:380px;margin:auto}
-.logo{text-align:center;font-size:28px;font-weight:900;color:#D4AF37;margin-bottom:5px}
-.sub{text-align:center;color:#666;font-size:12px;margin-bottom:25px}
-.row{background:#111;border:1px solid #222;border-radius:14px;padding:14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
-.badge{background:#D4AF37;color:#000;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900}
-.upload{border:2px dashed #333;border-radius:14px;padding:20px;text-align:center;color:#888;margin-bottom:12px;cursor:pointer}
-.upload.active{border-color:#D4AF37;color:#D4AF37}
-.file-name{color:#fff;font-size:12px;margin-top:8px;display:none}
-.btn{background:#D4AF37;color:#000;border:0;border-radius:14px;width:100%;padding:16px;font-weight:900;font-size:16px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Arial}
+body{background:#000;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.card{background:#0F0F0F;border-radius:30px;padding:28px;width:100%;max-width:400px}
+h1{text-align:center;color:#F4D03F;font-size:32px;font-weight:900;margin-bottom:5px}
+.sub{text-align:center;color:#888;font-size:13px;margin-bottom:25px}
+.toggle{background:#111;border:1px solid #1a1a1a;border-radius:20px;padding:16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.toggle span{font-size:15px}
+.switch{width:52px;height:30px;background:#F4D03F;border-radius:30px;position:relative}
+.switch::after{content:'';position:absolute;width:24px;height:24px;background:#fff;border-radius:50%;top:3px;left:3px}
+.label{color:#888;font-size:12px;text-align:right;margin-bottom:8px}
+.select{background:#111;border:1px solid #1a1a1a;border-radius:20px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+.badge{background:#F4D03F;color:#000;width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px}
+.upload{border:2px dashed #2a2a2a;border-radius:20px;padding:20px;text-align:center;color:#777;margin-bottom:12px;cursor:pointer;font-size:14px}
+.upload.active{border-color:#F4D03F}
+.file-name{color:#fff;font-size:12px;margin-top:6px;display:none}
+input[type="password"]{width:100%;background:#111;border:1px solid #1a1a1a;border-radius:20px;padding:16px;color:#fff;text-align:right;margin-bottom:15px;font-size:15px}
+.btn{width:100%;background:linear-gradient(180deg,#F4D03F,#D4AC0D);border:none;border-radius:20px;padding:18px;font-size:17px;font-weight:900;color:#000;cursor:pointer}
 input[type="file"]{display:none}
-input[type="password"]{background:#111;border:1px solid #222;border-radius:14px;width:100%;padding:14px;color:#fff;text-align:right;margin-bottom:12px}
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="logo">RIM_NEX 🛡️</div>
+  <h1>RIM_NEX</h1>
   <div class="sub">IPA Signing Center</div>
 
-  <div class="row">
+  <div class="toggle">
+    <div class="switch"></div>
     <span>الشهادة المجانية</span>
-    <input type="checkbox" checked style="width:50px;height:30px">
   </div>
 
-  <div style="text-align:right;color:#666;font-size:12px;margin-bottom:6px">اختر تطبيق التوقيع</div>
-  <div class="row">
+  <div class="label">اختر تطبيق التوقيع</div>
+  <div class="select">
     <span>▼</span>
-    <div style="display:flex;align-items:center;gap:8px">
+    <div style="display:flex;align-items:center;gap:10px">
       <span>ESign</span>
       <div class="badge">E</div>
     </div>
@@ -44,31 +50,30 @@ input[type="password"]{background:#111;border:1px solid #222;border-radius:14px;
   </label>
   <input type="file" id="p12" accept=".p12">
 
-  <label class="upload" for="mobileprovision">
+  <label class="upload" for="mobile">
     📁 اضغط لرفع Provision Profile
     <div class="file-name" id="mobile-name"></div>
   </label>
-  <input type="file" id="mobileprovision" accept=".mobileprovision">
+  <input type="file" id="mobile" accept=".mobileprovision">
 
   <input type="password" placeholder="Password">
   <button class="btn">بدء التوقيع</button>
 </div>
 
 <script>
-// لما تختار ملف P12
-document.getElementById('p12').onchange = function(e){
-  let name = e.target.files[0].name;
-  document.getElementById('p12-name').innerText = name;
-  document.getElementById('p12-name').style.display = 'block';
-  e.target.parentElement.classList.add('active');
+document.getElementById('p12').onchange = e => {
+  if(e.target.files[0]){
+    document.getElementById('p12-name').innerText = e.target.files[0].name;
+    document.getElementById('p12-name').style.display = 'block';
+    e.target.parentElement.classList.add('active');
+  }
 }
-
-// لما تختار ملف Provision
-document.getElementById('mobileprovision').onchange = function(e){
-  let name = e.target.files[0].name;
-  document.getElementById('mobile-name').innerText = name;
-  document.getElementById('mobile-name').style.display = 'block';
-  e.target.parentElement.classList.add('active');
+document.getElementById('mobile').onchange = e => {
+  if(e.target.files[0]){
+    document.getElementById('mobile-name').innerText = e.target.files[0].name;
+    document.getElementById('mobile-name').style.display = 'block';
+    e.target.parentElement.classList.add('active');
+  }
 }
 </script>
 </body>
