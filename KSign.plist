@@ -1,1 +1,25 @@
-https://cdn.fbsbx.com/v/t65.102178-21/741131119_1373757041305584_2463312799733206444_n.jpg/KSign.plist?_nc_ht=cdn.fbsbx.com&_nc_ohc=yYw473KwS5YQ7kNvwHMQbmA&sdl=1&ccb=14-4&oh=00_AQDeUT6vLd_zu2m_S6h8Dn8P_S_H4wPk15t0ENHFurT7Tg&oe=6A531C1B&_nc_sid=4ee932
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>items</key>
+  <array>
+    <dict>
+      <key>assets</key>
+      <array>
+        <dict>
+          <key>kind</key><string>software-package</string>
+          <key>url</key><string>https://rim-nex.vercel.app/Ksign.ipa</string>
+        </dict>
+      </array>
+      <key>metadata</key>
+      <dict>
+        <key>bundle-identifier</key><string>com.ksign.app</string>
+        <key>bundle-version</key><string>1.0</string>
+        <key>kind</key><string>software</string>
+        <key>title</key><string>KSign</string>
+      </dict>
+    </dict>
+  </array>
+</dict>
+</plist>
