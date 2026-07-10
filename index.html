@@ -2,59 +2,104 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>RIM_NEX</title>
 <style>
 :root{
   --bg:#000;
-  --border:#c9a961;
-  --gold:linear-gradient(180deg,#ffd700 0%,#d4af37 50%,#b8860b 100%);
-  --text:#ffffff;
-  --muted:#888;
+  --border:#d4af37;
+  --gold:linear-gradient(180deg, #FFD700 0%, #D4AF37 100%);
+  --text:#FFFFFF;
+  --muted:#999999;
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display"}
-body{background:radial-gradient(ellipse at 50% -30%,rgba(201,169,97,0.2) 0%,transparent 60%),var(--bg);min-height:100vh;padding:20px;color:var(--text)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(ellipse at 50% -10%,rgba(212,175,55,0.3) 0%,rgba(0,0,0,0) 70%),var(--bg);min-height:100vh;padding:20px 16px;color:var(--text);font-family:-apple-system,BlinkMacSystemFont}
 .container{max-width:430px;margin:0 auto}
 
-.header{text-align:center;padding:50px 0 40px}
+.header{text-align:center;padding:45px 0 35px}
 .header-title{display:flex;align-items:center;justify-content:center;gap:12px}
-.shield{width:38px;height:38px;fill:url(#goldGrad)}
-.header h1{font-size:42px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
-.header p{color:var(--muted);font-size:11px;letter-spacing:5px;margin-top:10px}
+.shield{width:38px;height:38px}
+.shield path{fill:url(#goldGrad)}
+.header h1{font-size:42px;font-weight:900;background:var(--gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:0.5px}
+.header p{color:var(--muted);font-size:10px;letter-spacing:7px;margin-top:12px;font-weight:300}
 
-.card{background:rgba(5,5,5,0.9);border:1.5px solid var(--border);border-radius:20px;padding:20px;margin-bottom:16px}
-.card.dashed{border:1.5px dashed var(--border);background:rgba(5,5,5,0.7)}
+.card{background:rgba(8,8,8,0.8);border:2px solid var(--border);border-radius:22px;padding:20px;margin-bottom:18px}
+.card.dashed{border:2px dashed var(--border)}
 
 .toggle{display:flex;justify-content:space-between;align-items:center}
 .toggle-text{text-align:right}
 .toggle-text b{font-size:17px;font-weight:700}
 .toggle-text small{font-size:12px;color:var(--muted);display:block;margin-top:5px}
-.switch{position:relative;width:60px;height:36px}
+.switch{position:relative;width:58px;height:36px;flex-shrink:0}
 .switch input{display:none}
 .slider{position:absolute;inset:0;background:var(--gold);border-radius:36px;cursor:pointer}
 .slider:before{content:"";position:absolute;width:30px;height:30px;right:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
-input:checked +.slider:before{transform:translateX(-24px)}
+input:checked +.slider:before{transform:translateX(-22px)}
 
-.select-wrapper{position:relative}
-.select-box{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.select-left{display:flex;align-items:center;gap:14px}
-.app-icon{width:48px;height:48px;border-radius:16px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:22px}
-.arrow{font-size:18px;color:#fff;transition:.3s}
+.select-box{display:flex;justify-content:space-between;align-items:center;cursor:pointer;position:relative}
+.select-left{display:flex;align-items:center;gap:15px}
+.app-icon{width:50px;height:50px;border-radius:18px;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;font-size:24px}
+.arrow{font-size:16px;color:#fff;transition:.3s}
 .arrow.rotate{transform:rotate(180deg)}
-.dropdown{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;background:#030303;border:1.5px solid var(--border);border-radius:18px;padding:8px;z-index:999}
+.dropdown{display:none;position:absolute;top:calc(100% + 12px);left:0;right:0;background:#000;border:2px solid var(--border);border-radius:20px;padding:10px;z-index:100}
 .dropdown.show{display:block}
-.dropdown-item{display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;cursor:pointer;justify-content:flex-end}
-.dropdown-item:hover{background:#0f0f0f}
+.dropdown-item{display:flex;align-items:center;gap:15px;padding:15px;border-radius:14px;cursor:pointer;justify-content:flex-end}
+.dropdown-item:hover{background:#111}
 
 .upload{text-align:center;cursor:pointer}
 .upload b{font-size:17px;font-weight:700}
-.upload small{font-size:12px;color:var(--muted);margin-top:6px;display:block}
-.file-name{font-size:14px;color:#d4af37;font-weight:700;margin-top:8px}
+.upload small{font-size:13px;color:var(--muted);margin-top:6px;display:block}
+.file-name{font-size:14px;color:#FFD700;font-weight:600;margin-top:10px;word-break:break-all}
 
 .input-wrap{display:flex;align-items:center;justify-content:space-between}
-.input-pass{background:transparent;border:none;outline:none;color:var(--text);width:85%;text-align:right;font-size:16px}
-.input-pass::placeholder{color:var(--muted)}
-.eye{font-size:22px;cursor:pointer;opacity:0.6}
+.input-pass{background:transparent;border:none;outline:none;color:var(--text);width:85%;text-align:right;font-size:16px;letter-spacing:2px}
+.eye{font-size:22px;cursor:pointer;opacity:0.7}
 
-.btn{width:100%;padding:20px;border:none;border-radius:18px;background:var(--gold);color:#000;font-weight:900;font-size:18px;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}
-</
+.btn{width:100%;padding:21px;border:none;border-radius:18px;background:var(--gold);color:#000;font-weight:900;font-size:18px;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:10px}
+</style>
+</head>
+<body>
+<svg width="0" height="0"><defs><linearGradient id="goldGrad"><stop offset="0%" stop-color="#FFD700"/><stop offset="100%" stop-color="#D4AF37"/></linearGradient></defs></svg>
+
+<div class="container">
+  <div class="header">
+    <div class="header-title">
+      <svg class="shield" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      <h1>RIM_NEX</h1>
+    </div>
+    <p>IOS SIGNING MANAGER</p>
+  </div>
+
+  <div class="card toggle">
+    <div class="switch"><input type="checkbox" checked><span class="slider"></span></div>
+    <div class="toggle-text"><b>شهادة التوقيع الخاصة بي</b><small>استخدم شهادة Apple Developer</small></div>
+  </div>
+
+  <div class="card">
+    <div class="select-box" id="selectBox">
+      <div class="arrow" id="arrow">▼</div>
+      <div class="select-left">
+        <span id="selectedName">ESign</span>
+        <div class="app-icon" id="selectedIcon">E</div>
+      </div>
+    </div>
+    <div class="dropdown" id="dropdown">
+      <div class="dropdown-item" data-name="ESign" data-icon="E" data-plist="ESign.plist"><span>ESign</span><div class="app-icon">E</div></div>
+      <div class="dropdown-item" data-name="KSign" data-icon="K" data-plist="KSign.plist"><span>KSign</span><div class="app-icon">K</div></div>
+      <div class="dropdown-item" data-name="Scarlet" data-icon="S" data-plist="Scarlet.plist"><span>Scarlet</span><div class="app-icon">S</div></div>
+      <div class="dropdown-item" data-name="GBox" data-icon="G" data-plist="GBox.plist"><span>GBox</span><div class="app-icon">G</div></div>
+      <div class="dropdown-item" data-name="Feather" data-icon="F" data-plist="Feather.plist"><span>Feather</span><div class="app-icon">F</div></div>
+    </div>
+  </div>
+
+  <div class="card dashed upload" id="p12Card"><b>شهادة P12</b><small>اسحب الملف هنا</small><div class="file-name" id="p12Name"></div></div>
+  <div class="card dashed upload" id="provCard"><b>Provisioning Profile</b><small>اسحب الملف هنا</small><div class="file-name" id="provName"></div></div>
+  <div class="card input-wrap"><input type="password" class="input-pass" id="password" placeholder="Password"><span class="eye" id="togglePass">👁️</span></div>
+  <button class="btn" id="signBtn">بدء التوقيع والتثبيت</button>
+</div>
+
+<script>
+const baseUrl = "https://raw.githubusercontent.com/rimnex/RIM_NEX/main/";
+let selectedPlist = "ESign.plist"; let p12File = null; let provFile = null;
+
+document.getElementById('selectBox').onclick = (e) => {e.stopPropagation(); document.get
