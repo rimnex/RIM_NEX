@@ -3,33 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIM_NEX | حل مشاكل الحسابات المحظورة</title>
+    <title>RIM_NEX | مركز حل مشاكل الحسابات المحظورة</title>
+    <!-- Google Fonts: Cairo & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.75);
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #10b981;
-        }
-
-        * {
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bg: #0d0d0d;
+            --card: #171717;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-gold: rgba(212, 175, 55, 0.4);
+            --success: #3ecf8e;
+            --error: #ff5d73;
+            --text-main: #f5f5f7;
+            --text-muted: #9ca3af;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
             overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            content: "";
+            opacity: 0.035;
+            pointer-events: none;
+            z-index: 999;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #0d0d0d;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            animation: pulseLoader 1.2s infinite alternate;
+        }
+        @keyframes pulseLoader {
+            0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            100% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 45px rgba(212, 175, 55, 0.6); }
+        }
+
+        /* Floating Blobs Background */
+        .blobs-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            animation: floatBlob 20s infinite alternate ease-in-out;
+        }
+        .blob-1 {
+            width: 450px;
+            height: 450px;
+            background: #d4af37;
+            top: -100px;
+            right: -100px;
+            animation-duration: 18s;
+        }
+        .blob-2 {
+            width: 550px;
+            height: 550px;
+            background: #aa7c11;
+            bottom: -150px;
+            left: -150px;
+            animation-duration: 25s;
+            animation-direction: alternate-reverse;
+        }
+        .blob-3 {
+            width: 350px;
+            height: 350px;
+            background: #f3e5ab;
+            top: 40%;
+            left: 30%;
+            animation-duration: 22s;
+        }
+        @keyframes floatBlob {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 80px) scale(1.1); }
+            100% { transform: translate(-40px, -60px) scale(0.9); }
         }
 
         /* Header */
@@ -38,282 +143,1160 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem 2rem;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(13, 13, 13, 0.75);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 5%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
+        .brand {
             display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
-
-        .nav-links a:hover {
-            color: var(--primary);
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--gold-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d0d0d;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+        }
+        .brand-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid var(--border-gold);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
         }
 
         /* Main Container */
         main {
-            margin-top: 90px;
-            padding: 3rem 1rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4rem;
+            position: relative;
+            z-index: 10;
+            padding-top: 140px;
+            padding-bottom: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         /* Hero Section */
         .hero {
             text-align: center;
-            max-width: 800px;
-            padding: 2rem 1rem;
+            margin-bottom: 50px;
         }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #f8fafc, var(--primary));
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 88px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 52px;
+            }
+        }
+        .hero-title .nex-text {
+            background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .hero p {
-            font-size: 1.2rem;
+        .hero-subtitle {
+            font-size: 20px;
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+        .hero-line {
+            width: 80px;
+            height: 3px;
+            background: var(--gold-gradient);
+            margin: 0 auto;
+            border-radius: 2px;
+            animation: linePulse 3s infinite ease-in-out;
+        }
+        @keyframes linePulse {
+            0%, 100% { width: 60px; opacity: 0.6; }
+            50% { width: 120px; opacity: 1; }
         }
 
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), #4f46e5);
-            color: white;
-            padding: 0.9rem 2.2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 20px var(--primary-glow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: none;
-            cursor: pointer;
+        /* Form Card */
+        .form-card {
+            max-width: 760px;
+            margin: 0 auto;
+            background: rgba(23, 23, 23, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 48px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.05);
+            position: relative;
+        }
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 24px;
+            }
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px var(--primary-glow);
+        .section-header-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+        }
+        .section-header-title span.step-num {
+            display: inline-flex;
+            width: 28px;
+            height: 28px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* Features / Services Grid */
-        .features {
+        /* Step 1: Platforms Grid */
+        .platforms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1000px;
-            padding: 0 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
         }
-
-        .feature-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s ease;
+        @media (min-width: 768px) {
+            .platforms-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
+        .platform-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px 20px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 14px;
         }
-
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            color: var(--text-color);
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(212, 175, 55, 0.12), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
         }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
+        .platform-card:hover::before {
+            opacity: 1;
         }
-
-        /* Service Form Section */
-        .service-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            width: 100%;
-            max-width: 600px;
+        .platform-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.04);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .platform-card.selected {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.08);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+            transform: scale(1.02);
+            animation: borderPulse 2s infinite;
+        }
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        .platform-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            transition: all 0.3s;
+        }
+        .platform-card.selected .platform-icon-wrapper {
+            background: var(--gold-gradient);
+            color: #0d0d0d;
+        }
+        .platform-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+        .platform-info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .platform-info p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        .platform-check {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 22px;
+            height: 22px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d0d0d;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .platform-card.selected .platform-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .platform-check svg {
+            width: 12px;
+            height: 12px;
+            stroke: #0d0d0d;
+            stroke-width: 3;
+            fill: none;
+        }
+
+        /* Step 2: Hidden Initially */
+        .step-2-container {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 0;
+        }
+        .step-2-container.active {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+        }
+
+        /* Custom Select */
+        .custom-select-wrapper {
+            position: relative;
+            margin-bottom: 24px;
+            user-select: none;
+        }
+        .custom-select-trigger {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 20px;
+            font-size: 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+        .custom-select-trigger.selected {
+            color: var(--text-main);
+            border-color: var(--border-gold);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-select-trigger:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        .custom-select-trigger svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-muted);
+            transition: transform 0.3s;
+        }
+        .custom-select-wrapper.open .custom-select-trigger svg {
+            transform: rotate(180deg);
+        }
+        .custom-options {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #1c1c1c;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 50;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .custom-select-wrapper.open .custom-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .custom-option {
+            padding: 14px 20px;
+            font-size: 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .custom-option:last-child {
+            border-bottom: none;
+        }
+        .custom-option:hover {
+            background: rgba(212, 175, 55, 0.08);
+            color: var(--text-main);
+            padding-right: 24px;
+        }
+        .custom-option.selected {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Textarea */
+        .textarea-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px 20px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            color: var(--text-main);
+            resize: vertical;
+            min-height: 140px;
+            transition: all 0.3s;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+        textarea::placeholder {
+            color: #6b7280;
+        }
+        .char-counter {
+            position: absolute;
+            bottom: 12px;
+            left: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.4);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            background: var(--gold-gradient);
+            color: #0d0d0d;
+            font-family: 'Cairo', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        .submit-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #0d0d0d;
+            transition: transform 0.3s;
+        }
+        .submit-btn:hover svg {
+            transform: translateX(-4px) translateY(-4px);
+        }
+        /* Shine Effect */
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent 40%, rgba(255,255,255,0.4) 50%, transparent 60%);
+            transform: translateX(-100%);
+            transition: transform 0.7s ease;
+        }
+        .submit-btn:hover::after {
+            transform: translateX(100%);
+        }
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            pointer-events: none;
+        }
+        .toast {
+            background: rgba(23, 23, 23, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            padding: 16px 22px;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            pointer-events: auto;
+            animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            max-width: 380px;
+        }
+        .toast.success { border-color: rgba(62, 207, 142, 0.4); }
+        .toast.error { border-color: rgba(255, 93, 115, 0.4); }
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .toast.success .toast-icon { background: rgba(62, 207, 142, 0.2); color: var(--success); }
+        .toast.error .toast-icon { background: rgba(255, 93, 115, 0.2); color: var(--error); }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .toast.fade-out {
+            animation: toastOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes toastOut {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to { opacity: 0; transform: translateY(20px) scale(0.95); }
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            margin-top: 60px;
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.03) 0%, rgba(212, 175, 55, 0.08) 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 28px;
+            padding: 50px 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
             text-align: center;
         }
-
-        .service-section h2 {
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
+        @media (min-width: 768px) {
+            .stats-section {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: right;
+        .stat-item h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
         }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .stat-item p {
+            font-size: 15px;
             color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .form-control {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s ease;
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .form-control:focus {
-            border-color: var(--primary);
+        .section-title {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
         }
-
-        /* Alert Notification */
-        .alert {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 10px;
-            display: none;
-            font-weight: 500;
+        .section-desc {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 40px;
         }
-
-        .alert.success {
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            display: block;
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .faq-item {
+            background: rgba(23, 23, 23, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .faq-item.active {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(23, 23, 23, 0.9);
+        }
+        .faq-question {
+            padding: 22px 24px;
+            font-size: 17px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+        .faq-question svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--gold);
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 24px;
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-bottom: 24px;
         }
 
         /* Footer */
         footer {
-            background: rgba(15, 23, 42, 0.95);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+            border-top: 1px solid var(--border);
+            padding: 60px 5% 40px;
+            background: rgba(10, 10, 10, 0.8);
             text-align: center;
-            padding: 1.5rem;
+        }
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .footer-desc {
+            font-size: 15px;
             color: var(--text-muted);
-            font-size: 0.9rem;
         }
-
-        footer a {
-            color: var(--primary);
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--border-gold);
+            padding: 10px 24px;
+            border-radius: 50px;
+            color: var(--gold);
             text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .footer-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateY(-2px);
+        }
+        .copyright {
+            margin-top: 40px;
+            font-size: 13px;
+            color: #6b7280;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .nav-links {
-                display: none;
-            }
+        /* Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
 
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-logo">R</div>
+    </div>
+
+    <!-- Floating Background Blobs -->
+    <div class="blobs-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Header -->
     <header>
-        <div class="logo">RIM_NEX</div>
-        <ul class="nav-links">
-            <li><a href="#">الرئيسية</a></li>
-            <li><a href="#features">المميزات</a></li>
-            <li><a href="#service">فحص الحساب</a></li>
-            <li><a href="https://t.me/YourTelegramChannel" target="_blank">دعم تليجرام</a></li>
-        </ul>
+        <a href="#" class="brand">
+            <div class="brand-icon">R</div>
+            <div class="brand-name">RIM_NEX</div>
+        </a>
+        <div class="header-badge">
+            <span>⚡</span>
+            <span>دعم فوري • 24/7</span>
+        </div>
     </header>
 
+    <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <h1>استعد حسابك المحظور بكفاءة واحترافية</h1>
-            <p>منصة RIM_NEX المتقدمة لحل مشاكل الحسابات وتقديم الدعم الفني السريع والآمن عبر قنوات اتصال مباشرة.</p>
-            <a href="https://t.me/YourTelegramChannel" target="_blank" class="btn">تواصل عبر تليجرام</a>
+        <section class="hero reveal">
+            <h1 class="hero-title">RIM_<span class="nex-text">NEX</span></h1>
+            <p class="hero-subtitle">حل مشاكل الحسابات المحظورة بسرعة واحترافية عالية.</p>
+            <div class="hero-line"></div>
         </section>
 
-        <!-- Features Section -->
-        <section id="features" class="features">
-            <div class="feature-card">
-                <h3>دعم فوري</h3>
-                <p>متابعة سريعة لحل جميع مشاكل الحظر واستعادة الحسابات بدقة عالية.</p>
-            </div>
-            <div class="feature-card">
-                <h3>أمان تام</h3>
-                <p>حماية كاملة لبياناتك الشخصية وسرية تامة في التعامل مع الحالات.</p>
-            </div>
-            <div class="feature-card">
-                <h3>خبرة احترافية</h3>
-                <p>فريق متخصص لتقديم الاستشارات وحل عوائق منصات التواصل الاجتماعي.</p>
-            </div>
-        </section>
-
-        <!-- Service / Form Section -->
-        <section id="service" class="service-section">
-            <h2>فحص حالة الحساب</h2>
-            <form id="checkForm">
-                <div class="form-group">
-                    <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
-                    <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم هنا..." required>
+        <!-- Form Card Section -->
+        <div class="form-card reveal">
+            <form id="supportForm" onsubmit="handleSubmit(event)">
+                <!-- Step 1: Platform Selection -->
+                <div class="section-header-title">
+                    <span class="step-num">1</span>
+                    <span>اختر المنصة التي تعاني من مشكلة فيها</span>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">بدء الفحص</button>
+
+                <div class="platforms-grid" id="platformsGrid">
+                    <!-- Instagram -->
+                    <div class="platform-card" data-platform="Instagram" onmousemove="updateMouseGradient(event, this)">
+                        <div class="platform-check">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="platform-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Instagram</h3>
+                            <p>استرجاع الحسابات المعطلة والمخترقة</p>
+                        </div>
+                    </div>
+
+                    <!-- Facebook -->
+                    <div class="platform-card" data-platform="Facebook" onmousemove="updateMouseGradient(event, this)">
+                        <div class="platform-check">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="platform-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.378 14.5 5 15.5 5H18V0h-3.808C10.59 0 9 1.581 9 4.75V8z"/></svg>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Facebook</h3>
+                            <p>فك الحظر والتعطيل الكلي والمؤقت</p>
+                        </div>
+                    </div>
+
+                    <!-- TikTok -->
+                    <div class="platform-card" data-platform="TikTok" onmousemove="updateMouseGradient(event, this)">
+                        <div class="platform-check">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="platform-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.242V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002-.001a2.895 2.895 0 0 1 3.144-4.25v-3.47a6.347 6.347 0 0 0-5.836 7.027 6.347 6.347 0 0 0 10.968-4.412V8.04a8.19 8.19 0 0 0 4.12 1.135V5.733a4.78 4.78 0 0 1-1.074.953z"/></svg>
+                        </div>
+                        <div class="platform-info">
+                            <h3>TikTok</h3>
+                            <p>حل مشاكل الحظر والديفايس</p>
+                        </div>
+                    </div>
+
+                    <!-- Snapchat -->
+                    <div class="platform-card" data-platform="Snapchat" onmousemove="updateMouseGradient(event, this)">
+                        <div class="platform-check">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="platform-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M12.016 2.125c2.31 0 4.156 1.733 4.156 3.868 0 .546-.11 1.07-.323 1.554.43.084.87.165 1.32.247 1.517.278 2.657 1.487 2.657 3.014 0 1.53-.163 2.148-.52 2.76-.367.625-.972 1.157-1.744 1.706-.525.372-1.12.793-1.637 1.258-.27.243-.497.513-.674.805-.285.474-.43 1.054-.51 1.838-.02.196-.188.344-.386.344h-4.306c-.198 0-.366-.148-.386-.344-.08-.784-.225-1.364-.51-1.838-.177-.292-.404-.562-.674-.805-.517-.465-1.112-.886-1.637-1.258-.772-.55-1.377-1.081-1.744-1.706-.357-.612-.52-1.23-.52-2.76 0-1.527 1.14-2.736 2.657-3.014.45-.082.89-.163 1.32-.247-.213-.484-.323-1.008-.323-1.554 0-2.135 1.846-3.868 4.156-3.868z"/></svg>
+                        </div>
+                        <div class="platform-info">
+                            <h3>Snapchat</h3>
+                            <p>استعادة الحسابات المغلقة نهائياً</p>
+                        </div>
+                    </div>
+
+                    <!-- WhatsApp -->
+                    <div class="platform-card" data-platform="WhatsApp" onmousemove="updateMouseGradient(event, this)">
+                        <div class="platform-check">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="platform-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                        </div>
+                        <div class="platform-info">
+                            <h3>WhatsApp</h3>
+                            <p>فك الحظر عن الأرقام المحظورة</p>
+                        </div>
+                    </div>
+
+                    <!-- IP Ban -->
+                    <div class="platform-card" data-platform="IP Ban" onmousemove="updateMouseGradient(event, this)">
+                        <div class="platform-check">
+                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="platform-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        </div>
+                        <div class="platform-info">
+                            <h3>IP Ban</h3>
+                            <p>إزالة الحظر عن الأجهزة وشبكات الإنترنت</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hidden Input to store selected platform -->
+                <input type="hidden" id="selectedPlatform" name="platform" value="">
+
+                <!-- Step 2: Issue Type & Description -->
+                <div class="step-2-container" id="step2Container">
+                    <div class="section-header-title">
+                        <span class="step-num">2</span>
+                        <span>تفاصيل المشكلة</span>
+                    </div>
+
+                    <!-- Custom Select Dropdown -->
+                    <div style="margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--text-muted);">اختر نوع المشكلة</div>
+                    <div class="custom-select-wrapper" id="customSelect">
+                        <div class="custom-select-trigger" id="selectTrigger">
+                            <span>اختر نوع المشكلة من القائمة...</span>
+                            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                        <div class="custom-options">
+                            <div class="custom-option" data-value="تم تعطيل الحساب">تم تعطيل الحساب</div>
+                            <div class="custom-option" data-value="الحساب محظور">الحساب محظور</div>
+                            <div class="custom-option" data-value="نسيت كلمة المرور">نسيت كلمة المرور</div>
+                            <div class="custom-option" data-value="لا يصل رمز التحقق">لا يصل رمز التحقق</div>
+                            <div class="custom-option" data-value="مشكلة تسجيل الدخول">مشكلة تسجيل الدخول</div>
+                            <div class="custom-option" data-value="تم اختراق الحساب">تم اختراق الحساب</div>
+                            <div class="custom-option" data-value="حظر IP">حظر IP</div>
+                            <div class="custom-option" data-value="مشكلة أخرى">مشكلة أخرى</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selectedIssue" name="issue" value="">
+
+                    <!-- Textarea -->
+                    <div style="margin-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--text-muted);">وصف المشكلة بالتفصيل</div>
+                    <div class="textarea-wrapper">
+                        <textarea id="issueDescription" placeholder="اكتب وصف المشكلة بالتفصيل... (يجب أن يكون 10 أحرف على الأقل)" oninput="updateCharCount(this)"></textarea>
+                        <div class="char-counter" id="charCounter">0 / 10 أحرف</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn" onclick="createRipple(event)">
+                        <span>إرسال الطلب والانتقال للدعم</span>
+                        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+                    </button>
+                </div>
             </form>
-            <div id="alertBox" class="alert"></div>
+        </div>
+
+        <!-- Statistics Section -->
+        <section class="stats-section reveal">
+            <div class="stat-item">
+                <h4 class="counter" data-target="8420" data-prefix="+">0</h4>
+                <p>عميل تمت مساعدته</p>
+            </div>
+            <div class="stat-item">
+                <h4 class="counter" data-target="98" data-suffix="%">0</h4>
+                <p>نسبة نجاح</p>
+            </div>
+            <div class="stat-item">
+                <h4 class="counter" data-target="24" data-suffix="/7">0</h4>
+                <p>دعم فني</p>
+            </div>
+            <div class="stat-item">
+                <h4 class="counter" data-target="5" data-prefix="+">0</h4>
+                <p>سنوات خبرة</p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section reveal">
+            <h2 class="section-title">الأسئلة الشائعة</h2>
+            <p class="section-desc">إجابات واضحة حول خدماتنا وآلية العمل</p>
+
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>هل الخدمة مجانية؟</span>
+                        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        نقدم تقييم الحساب والاستشارة الأولية مجاناً بالكامل. بعد دراسة حالتك يتم توضيح التفاصيل والتكلفة إن وجدت بناءً على نوع وحجم المشكلة بدقة واحترافية.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>كم يستغرق الرد على الطلب؟</span>
+                        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        يبدأ فريقنا بمراجعة طلبك فور إرساله عبر تيليجرام، وغالباً ما يتم الرد وتقديم الحل الأولي خلال أقل من 10 إلى 15 دقيقة.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>هل يمكن حل جميع أنواع الحظر؟</span>
+                        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        نمتلك نسبة نجاح عالية جداً تتجاوز 98% في حل معظم مشاكل الحظر المؤقت والتعطيل والأخطاء البرمجية وحظر الأجهزة وشبكات IP.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>كيف يتم التواصل بعد إرسال النموذج؟</span>
+                        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                    <div class="faq-answer">
+                        بمجرد النقر على زر إرسال الطلب، سيتم تحويلك مباشرة إلى قناة ومحادثة الدعم الرسمية على Telegram (RIM_NEX2) مع كافة تفاصيل طلبك لتتم متابعته فوراً.
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 RIM_NEX | <a href="https://t.me/YourTelegramChannel" target="_blank">قناة الدعم الفني</a></p>
+        <div class="footer-content">
+            <div class="footer-brand">RIM_NEX</div>
+            <p class="footer-desc">مركز متخصص لمساعدة المستخدمين في حل مشاكل الحسابات المحظورة واسترجاعها بأعلى معايير الأمان والسرعة.</p>
+            <a href="https://t.me/RIM_NEX2" target="_blank" class="footer-link">
+                <span>تواصل معنا عبر Telegram</span>
+                <span>↗</span>
+            </a>
+            <div class="copyright">© 2026 RIM_NEX. جميع الحقوق محفوظة.</div>
+        </div>
     </footer>
 
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- JavaScript -->
     <script>
-        document.getElementById('checkForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const alertBox = document.getElementById('alertBox');
-            
-            if (username) {
-                alertBox.className = 'alert success';
-                alertBox.textContent = `تم استلام طلب الفحص للحساب: (${username}). سيتم تحويلك إلى الدعم الفني لمتابعة الحالة.`;
-                
-                setTimeout(() => {
-                    window.open('https://t.me/YourTelegramChannel', '_blank');
-                }, 2000);
-            }
+        // 1. Loading Screen Handler
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('hidden');
+            }, 1000);
         });
+
+        // 2. Mouse Tracking Gradient for Platform Cards
+        function updateMouseGradient(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        }
+
+        // 3. Platform Selection Logic
+        const platformCards = document.querySelectorAll('.platform-card');
+        const selectedPlatformInput = document.getElementById('selectedPlatform');
+        const step2Container = document.getElementById('step2Container');
+
+        platformCards.forEach(card => {
+            card.addEventListener('click', () => {
+                platformCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                const platformName = card.getAttribute('data-platform');
+                selectedPlatformInput.value = platformName;
+
+                // Show Step 2 smoothly
+                step2Container.classList.add('active');
+
+                // Smooth scroll to step 2 slightly if needed
+                setTimeout(() => {
+                    step2Container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 200);
+            });
+        });
+
+        // 4. Custom Select Dropdown Logic
+        const customSelect = document.getElementById('customSelect');
+        const selectTrigger = document.getElementById('selectTrigger');
+        const customOptions = document.querySelectorAll('.custom-option');
+        const selectedIssueInput = document.getElementById('selectedIssue');
+
+        selectTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('open');
+        });
+
+        customOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                customOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                
+                const val = option.getAttribute('data-value');
+                selectedIssueInput.value = val;
+                selectTrigger.querySelector('span').textContent = option.textContent;
+                selectTrigger.classList.add('selected');
+                customSelect.classList.remove('open');
+            });
+        });
+
+        window.addEventListener('click', () => {
+            customSelect.classList.remove('open');
+        });
+
+        // 5. Character Counter
+        function updateCharCount(textarea) {
+            const len = textarea.value.trim().length;
+            const counter = document.getElementById('charCounter');
+            counter.textContent = `${len} / 10 أحرف`;
+            if (len >= 10) {
+                counter.style.color = 'var(--success)';
+            } else {
+                counter.style.color = 'var(--text-muted)';
+            }
+        }
+
+        // 6. Toast Notification System
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            const iconSvg = type === 'success' 
+                ? '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+                : '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+
+            toast.innerHTML = `
+                <div class="toast-icon">${iconSvg}</div>
+                <div>${message}</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // 7. Ripple Effect on Button
+        function createRipple(event) {
+            const btn = event.currentTarget;
+            const ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            const rect = btn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${event.clientX - rect.left - size/2}px`;
+            ripple.style.top = `${event.clientY - rect.top - size/2}px`;
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        // 8. Form Validation & Submission
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            const platform = selectedPlatformInput.value;
+            const issue = selectedIssueInput.value;
+            const description = document.getElementById('issueDescription').value.trim();
+
+            if (!platform) {
+                showToast('اختر المنصة أولاً', 'error');
+                return;
+            }
+
+            if (!issue) {
+                showToast('نوع المشكلة مطلوب', 'error');
+                return;
+            }
+
+            if (description.length < 10) {
+                showToast('الوصف قصير جداً (10 أحرف على الأقل)', 'error');
+                return;
+            }
+
+            // Success Case
+            showToast('جارٍ تحويلك إلى Telegram...', 'success');
+
+            setTimeout(() => {
+                window.open('https://t.me/RIM_NEX2', '_blank');
+            }, 900);
+        }
+
+        // 9. FAQ Accordion Logic
+        function toggleFaq(questionEl) {
+            const item = questionEl.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                faq.classList.remove('active');
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // 10. Statistics Counter Animation (IntersectionObserver)
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !animated) {
+                    animated = true;
+                    counters.forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        const prefix = counter.getAttribute('data-prefix') || '';
+                        const suffix = counter.getAttribute('data-suffix') || '';
+                        let current = 0;
+                        const duration = 2000; // 2 seconds
+
+                        const timer = setInterval(() => {
+                            current += Math.ceil(target / 50);
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            counter.textContent = prefix + current + suffix;
+                        }, 40);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // 11. Reveal On Scroll Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
