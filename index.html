@@ -26,6 +26,7 @@ body{
   color:var(--text);
   overflow-x:hidden;
   line-height:1.6;
+  -webkit-font-smoothing:antialiased;
 }
 .bg-wrap{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
 .bg-blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35}
@@ -33,175 +34,446 @@ body{
 .blob-2{width:500px;height:500px;background:radial-gradient(circle, rgba(212,175,55,.15), transparent 70%);bottom:10%;left:-100px}
 .blob-3{width:900px;height:600px;background:radial-gradient(ellipse, rgba(255,255,255,.06), transparent 70%);top:40%;left:50%;transform:translateX(-50%)}
 .container{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+.glass{
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--border);
+}
 .header{
   position:sticky;top:0;z-index:50;
   backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
   background:rgba(13,13,13,.7);
   border-bottom:1px solid var(--border);
 }
 .header-inner{height:68px;display:flex;align-items:center;justify-content:space-between}
-.logo-head{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;letter-spacing:.12em;font-weight:700;font-size:20px;}
-.logo-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg, var(--gold), var(--gold-2));display:grid;place-items:center;color:#000;font-weight:800;box-shadow:0 0 20px var(--gold-glow);}
-.header-badge{font-size:11px;padding:6px 12px;border-radius:100px;border:1px solid rgba(212,175,55,.25);background:rgba(212,175,55,.1);color:var(--gold);}
-.hero{padding:68px 0 32px;text-align:center}
-.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(42px,10vw,88px);font-weight:700;letter-spacing:.14em;line-height:1;background:linear-gradient(180deg,#fff 20%,#a3a3a3 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero h1 span{background:linear-gradient(135deg,var(--gold) 20%,#f5e6a8 50%,var(--gold) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero-sub{margin-top:18px;font-size:clamp(16px,4vw,20px);color:var(--muted);}
-.hero-line{width:80px;height:1px;margin:28px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;transition:all.35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;}
-.form-wrap{max-width:760px;margin:0 auto;background:linear-gradient(180deg,rgba(23,23,23,.9),rgba(17,17,17,.9));border:1px solid var(--border);border-radius:28px;padding:28px 22px;box-shadow:0 20px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(24px);}
+.logo-head{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Space Grotesk',sans-serif;letter-spacing:.12em;font-weight:700;font-size:20px;
+}
+.logo-mark{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg, var(--gold), var(--gold-2));
+  display:grid;place-items:center;color:#000;font-size:16px;font-weight:800;
+  box-shadow:0 0 20px var(--gold-glow);
+}
+.header-badge{
+  font-size:11px;padding:6px 12px;border-radius:100px;
+  border:1px solid rgba(212,175,55,.25);
+  background:rgba(212,175,55,.1);color:var(--gold);
+  letter-spacing:.06em;
+}
+.hero{padding:68px 0 32px;text-align:center;position:relative}
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(42px, 10vw, 88px);
+  font-weight:700;letter-spacing:.14em;line-height:1;
+  background:linear-gradient(180deg, #fff 20%, #a3a3a3 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.6));
+  animation:heroIn.9s ease both;
+}
+.hero h1 span{
+  background:linear-gradient(135deg, var(--gold) 20%, #f5e6a8 50%, var(--gold) 80%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{
+  margin-top:18px;font-size:clamp(16px, 4vw, 20px);color:var(--muted);
+  font-weight:400;animation:heroIn.9s.15s ease both;
+}
+.hero-line{
+  width:80px;height:1px;margin:28px auto;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation:heroIn.9s.25s ease both;
+}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  transition:all.35s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;
+}
+.card:before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(400px circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.06), transparent 40%);
+  opacity:0;transition:opacity.4s;
+}
+.card:hover:before{opacity:1}
+.card:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+.form-wrap{
+  max-width:760px;margin:0 auto;
+  background:linear-gradient(180deg, rgba(23,23,23,.9), rgba(17,17,17,.9));
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:28px 22px;
+  box-shadow:0 20px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(24px);
+}
 @media(min-width:768px){.form-wrap{padding:36px}}
-.section-label{font-size:13px;letter-spacing:.12em;color:var(--gold);font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.section-label{
+  font-size:13px;letter-spacing:.12em;color:var(--gold);font-weight:700;
+  display:flex;align-items:center;gap:10px;margin-bottom:18px
+}
 .section-label i{width:24px;height:1px;background:var(--gold);display:inline-block}
-.section-title{font-size:22px;font-weight:800;margin-bottom:22px}
-.platforms{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.section-title{font-size:22px;font-weight:800;margin-bottom:22px;letter-spacing:-.02em}
+.platforms{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+}
 @media(min-width:640px){.platforms{grid-template-columns:repeat(3,1fr);gap:14px}}
-.platform-card{padding:20px 16px;border-radius:18px;cursor:pointer;background:var(--card);border:1px solid var(--border);text-align:center;position:relative;transition:all.4s;user-select:none;}
-.platform-card.icon-box{width:54px;height:54px;margin:0 auto 14px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);transition:all.4s;}
-.platform-card.name{font-weight:700;font-size:14px}
+.platform-card{
+  padding:20px 16px;border-radius:18px;cursor:pointer;
+  background:var(--card);border:1px solid var(--border);
+  text-align:center;position:relative;isolation:isolate;
+  transition:all.4s cubic-bezier(.16,1,.3,1);
+  user-select:none;
+}
+.platform-card.icon-box{
+  width:54px;height:54px;margin:0 auto 14px;border-radius:14px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  transition:all.4s;
+  font-size:24px;
+}
+.platform-card.name{font-weight:700;font-size:14px;letter-spacing:.02em}
 .platform-card.sub{font-size:11px;color:var(--muted-2);margin-top:4px}
-.platform-card.selected{border-color:var(--gold);background:linear-gradient(180deg,rgba(212,175,55,.12),rgba(23,23,23,1));box-shadow:0 0 0 1px var(--gold) inset,0 0 32px rgba(212,175,55,.22);transform:translateY(-2px) scale(1.02);}
-.platform-card.selected.icon-box{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#000;box-shadow:0 8px 20px var(--gold-glow);transform:scale(1.05);}
-.check-badge{position:absolute;top:10px;left:10px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#000;display:grid;place-items:center;font-size:12px;font-weight:800;transform:scale(0);transition:transform.35s cubic-bezier(.34,1.56,.64,1);}
+.platform-card.selected{
+  border-color:var(--gold);
+  background:linear-gradient(180deg, rgba(212,175,55,.12), rgba(23,23,23,1));
+  box-shadow:0 0 0 1px var(--gold) inset, 0 0 32px rgba(212,175,55,.22), 0 10px 30px rgba(0,0,0,.4);
+  transform:translateY(-2px) scale(1.02);
+}
+.platform-card.selected.icon-box{
+  background:linear-gradient(135deg, var(--gold), var(--gold-2));
+  color:#000;border-color:transparent;
+  box-shadow:0 8px 20px var(--gold-glow);
+  transform:scale(1.05);
+}
+.platform-card.selected:after{
+  content:"";position:absolute;inset:-1px;border-radius:18px;
+  border:1px solid var(--gold);pointer-events:none;
+  animation:borderPulse 2s infinite;
+}
+@keyframes borderPulse{
+  0%{box-shadow:0 0 0 0 rgba(212,175,55,.4)}
+  70%{box-shadow:0 0 0 10px rgba(212,175,55,0)}
+  100%{box-shadow:0 0 0 0 rgba(212,175,55,0)}
+}
+.check-badge{
+  position:absolute;top:10px;left:10px;width:20px;height:20px;border-radius:50%;
+  background:var(--gold);color:#000;display:grid;place-items:center;
+  font-size:12px;font-weight:800;transform:scale(0);transition:transform.35s cubic-bezier(.34,1.56,.64,1);
+}
 .platform-card.selected.check-badge{transform:scale(1)}
-.reveal{max-height:0;opacity:0;overflow:hidden;transform:translateY(10px);transition:all.6s}
+.reveal{max-height:0;opacity:0;overflow:hidden;transform:translateY(10px);transition:all.6s cubic-bezier(.16,1,.3,1)}
 .reveal.show{max-height:1000px;opacity:1;transform:translateY(0);margin-top:32px}
 .select-wrap{position:relative}
-.select-wrap select{width:100%;appearance:none;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px 16px 44px;color:var(--text);font-family:inherit;font-size:15px;font-weight:600;outline:none;cursor:pointer;}
-.select-arrow{position:absolute;left:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--muted);}
-.textarea-wrap{margin-top:18px}
-.textarea-wrap textarea{width:100%;min-height:138px;resize:vertical;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;color:var(--text);font-family:inherit;font-size:14px;line-height:1.8;outline:none;}
+.select-wrap select{
+  width:100%;appearance:none;-webkit-appearance:none;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:16px 18px 16px 44px;
+  color:var(--text);font-family:inherit;font-size:15px;font-weight:600;
+  outline:none;transition:all.3s;cursor:pointer;
+}
+.select-wrap select:focus{border-color:rgba(212,175,55,.5);box-shadow:0 0 0 4px rgba(212,175,55,.1)}
+.select-arrow{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  pointer-events:none;color:var(--muted);transition:transform.3s;
+}
+.select-wrap:focus-within.select-arrow{transform:translateY(-50%) rotate(180deg);color:var(--gold)}
+.textarea-wrap{position:relative;margin-top:18px}
+.textarea-wrap textarea{
+  width:100%;min-height:138px;resize:vertical;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:16px 18px;
+  color:var(--text);font-family:inherit;font-size:14px;line-height:1.8;
+  outline:none;transition:all.3s;
+}
+.textarea-wrap textarea::placeholder{color:var(--muted-2)}
+.textarea-wrap textarea:focus{border-color:rgba(212,175,55,.5);box-shadow:0 0 0 4px rgba(212,175,55,.1)}
 .textarea-foot{display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:var(--muted-2)}
-.btn-gold{width:100%;margin-top:24px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--gold) 0%,#f0d27a 50%,var(--gold) 100%);color:#0d0d0d;font-family:inherit;font-size:16px;font-weight:800;padding:18px;border-radius:16px;box-shadow:0 10px 30px rgba(212,175,55,.3);transition:all.4s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.btn-gold{
+  width:100%;margin-top:24px;border:none;cursor:pointer;
+  background:linear-gradient(135deg, var(--gold) 0%, #f0d27a 50%, var(--gold) 100%);
+  background-size:200% 100%;
+  color:#0d0d0d;font-family:inherit;font-size:16px;font-weight:800;
+  padding:18px;border-radius:16px;letter-spacing:.02em;
+  box-shadow:0 10px 30px rgba(212,175,55,.3), inset 0 1px 0 rgba(255,255,255,.6);
+  transition:all.4s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-gold:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+  transform:translateX(-100%);transition:transform.7s;
+}
+.btn-gold:hover:before{transform:translateX(100%)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(212,175,55,.4);background-position:100% 0}
+.btn-gold:active{transform:translateY(0) scale(.98)}
 .features{padding:70px 0 30px}
 .features-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:640px){.features-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:980px){.features-grid{grid-template-columns:repeat(3,1fr)}}
-.feat-card{padding:20px;border-radius:18px;display:flex;align-items:center;gap:14px;background:rgba(23,23,23,.7);backdrop-filter:blur(12px);}
-.feat-icon{width:42px;height:42px;border-radius:12px;flex-shrink:0;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.2);color:var(--gold);display:grid;place-items:center;font-weight:800;}
+.feat-card{
+  padding:20px;border-radius:18px;display:flex;align-items:center;gap:14px;
+  background:rgba(23,23,23,.7);backdrop-filter:blur(12px);
+}
+.feat-icon{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.2);
+  color:var(--gold);display:grid;place-items:center;font-size:18px;font-weight:800;
+}
 .feat-text b{display:block;font-size:14px;font-weight:700}
 .feat-text span{font-size:12px;color:var(--muted)}
-.stats{margin:40px 0 0;padding:36px 22px;border-radius:28px;background:linear-gradient(180deg,rgba(212,175,55,.08),rgba(23,23,23,.8));border:1px solid rgba(212,175,55,.15);display:grid;grid-template-columns:repeat(2,1fr);gap:28px;text-align:center;position:relative;overflow:hidden;}
+.stats{
+  margin:40px 0 0;padding:36px 22px;border-radius:28px;
+  background:linear-gradient(180deg, rgba(212,175,55,.08), rgba(23,23,23,.8));
+  border:1px solid rgba(212,175,55,.15);
+  display:grid;grid-template-columns:repeat(2,1fr);gap:28px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.stats:before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(600px circle at 50% 0%, rgba(212,175,55,.12), transparent 70%);
+}
 @media(min-width:700px){.stats{grid-template-columns:repeat(4,1fr);padding:42px 28px}}
-.stat-num{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,5vw,40px);font-weight:700;background:linear-gradient(180deg,#fff,#d4af37);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.stat-label{margin-top:6px;font-size:12px;color:var(--muted)}
-.stat-plus{color:var(--gold)}
+.stat{position:relative}
+.stat-num{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(28px, 5vw, 40px);
+  font-weight:700;letter-spacing:.04em;
+  background:linear-gradient(180deg, #fff, #d4af37);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.stat-label{margin-top:6px;font-size:12px;color:var(--muted);letter-spacing:.04em}
+.stat-plus{color:var(--gold);margin-left:2px}
 .footer{padding:40px 0 60px;text-align:center;color:var(--muted-2);font-size:12px}
-.toast-container{position:fixed;top:84px;left:50%;transform:translateX(-50%);z-index:100;width:min(92%,420px);pointer-events:none}
-.toast{background:rgba(23,23,23,.92);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 16px;display:flex;gap:12px;transform:translateY(-20px) scale(.96);opacity:0;transition:all.5s;pointer-events:auto;}
+.footer strong{color:var(--muted);letter-spacing:.1em}
+.toast-container{position:fixed;top:84px;left:50%;transform:translateX(-50%);z-index:100;width:min(92%, 420px);pointer-events:none}
+.toast{
+  background:rgba(23,23,23,.92);backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.12);border-radius:16px;
+  padding:14px 16px;display:flex;gap:12px;align-items:flex-start;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);transform:translateY(-20px) scale(.96);
+  opacity:0;transition:all.5s cubic-bezier(.16,1,.3,1);
+  pointer-events:auto;
+}
 .toast.show{transform:translateY(0) scale(1);opacity:1}
-.toast.error{border-color:rgba(255,80,80,.3)}
+.toast.error{border-color:rgba(255,80,80,.3);background:linear-gradient(180deg, rgba(60,20,20,.9), rgba(23,23,23,.95))}
 .toast.success{border-color:rgba(212,175,55,.35)}
+.toast-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;font-size:16px}
+.toast.error.toast-icon{background:rgba(255,80,80,.15);color:#ff6b6b}
+.toast.success.toast-icon{background:rgba(212,175,55,.15);color:var(--gold)}
+.toast-text b{display:block;font-size:13px;font-weight:700;color:#fff}
+.toast-text span{font-size:12px;color:rgba(255,255,255,.65);line-height:1.5}
+.reveal-anim{opacity:0;transform:translateY(18px);transition:all.7s cubic-bezier(.16,1,.3,1)}
+.reveal-anim.in{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 <div class="bg-wrap"><div class="bg-blob blob-1"></div><div class="bg-blob blob-2"></div><div class="bg-blob blob-3"></div></div>
-<header class="header"><div class="container header-inner"><div class="logo-head"><div class="logo-mark">R</div> RIM_NEX</div><div class="header-badge">دعم فوري • 24/7</div></div></header>
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo-head"><div class="logo-mark">R</div> RIM_NEX</div>
+    <div class="header-badge">دعم فوري • 24/7</div>
+  </div>
+</header>
 <div class="toast-container" id="toastContainer"></div>
 <main class="container">
-<section class="hero"><h1>RIM_<span>NEX</span></h1><p class="hero-sub">حل مشاكل الحسابات المحظورة بسرعة.</p><div class="hero-line"></div></section>
-<section class="form-wrap" id="mainForm">
-<div class="section-label"><i></i> الخطوة 1 — اختر المنصة</div>
-<h2 class="section-title">أين تواجه المشكلة؟</h2>
-<div class="platforms" id="platforms">
-<div class="platform-card" data-platform="Instagram"><div class="check-badge">✓</div><div class="icon-box">📸</div><div class="name">Instagram</div><div class="sub">استرجاع و حظر</div></div>
-<div class="platform-card" data-platform="Facebook"><div class="check-badge">✓</div><div class="icon-box">f</div><div class="name">Facebook</div><div class="sub">تعطيل الحساب</div></div>
-<div class="platform-card" data-platform="TikTok"><div class="check-badge">✓</div><div class="icon-box">♪</div><div class="name">TikTok</div><div class="sub">حظر مباشر</div></div>
-<div class="platform-card" data-platform="Snapchat"><div class="check-badge">✓</div><div class="icon-box">👻</div><div class="name">Snapchat</div><div class="sub">قفل مؤقت</div></div>
-<div class="platform-card" data-platform="WhatsApp"><div class="check-badge">✓</div><div class="icon-box">✆</div><div class="name">WhatsApp</div><div class="sub">حظر الرقم</div></div>
-<div class="platform-card" data-platform="IP Ban"><div class="check-badge">✓</div><div class="icon-box">⚙️</div><div class="name">IP Ban</div><div class="sub">حظر الشبكة</div></div>
-</div>
-<div class="reveal" id="step2">
-<div class="section-label" style="margin-top:4px"><i></i> الخطوة 2 — نوع المشكلة</div>
-<div class="select-wrap">
-<select id="problemType">
-<option value="" disabled selected>اختر نوع المشكلة</option>
-<option>تم تعطيل الحساب</option>
-<option>الحساب محظور</option>
-<option>نسيت كلمة المرور</option>
-<option>لا يصل رمز التحقق</option>
-<option>مشكلة تسجيل الدخول</option>
-<option>تم اختراق الحساب</option>
-<option>حظر IP</option>
-<option>مشكلة أخرى</option>
-</select>
-<div class="select-arrow">▼</div>
-</div>
-<div class="section-label" style="margin-top:28px"><i></i> الخطوة 3 — وصف المشكلة</div>
-<div class="textarea-wrap">
-<textarea id="desc" placeholder="اكتب وصف المشكلة بالتفصيل..."></textarea>
-<div class="textarea-foot"><span>كلما كان الوصف دقيقاً، كان الحل أسرع</span><span id="charCount">0 حرف</span></div>
-</div>
-<button class="btn-gold" id="submitBtn"><span>الحصول على المساعدة</span> ✈️</button>
-<p style="text-align:center;margin-top:14px;font-size:11px;color:var(--muted-2)">سيتم تحويلك مباشرة إلى فريق الدعم على Telegram</p>
-</div>
-</section>
-<section class="features">
-<div class="section-label"><i></i> لماذا RIM_NEX ؟</div>
-<div class="features-grid">
-<div class="card feat-card"><div class="feat-icon">✓</div><div class="feat-text"><b>حل مشاكل Instagram</b><span>استرجاع، تعطيل، تحقق</span></div></div>
-<div class="card feat-card"><div class="feat-icon">✓</div><div class="feat-text"><b>حل مشاكل TikTok</b><span>فك الحظر و استئناف النشر</span></div></div>
-<div class="card feat-card"><div class="feat-icon">✓</div><div class="feat-text"><b>حل مشاكل Facebook</b><span>تعطيل، هاك، مصادقة</span></div></div>
-<div class="card feat-card"><div class="feat-icon">✓</div><div class="feat-text"><b>حل مشاكل WhatsApp</b><span>حظر رقم، تفعيل، رسائل</span></div></div>
-<div class="card feat-card"><div class="feat-icon">✓</div><div class="feat-text"><b>حل مشاكل Snapchat</b><span>قفل دائم و مؤقت</span></div></div>
-<div class="card feat-card"><div class="feat-icon">✓</div><div class="feat-text"><b>حل مشاكل IP Ban</b><span>حظر شبكة و تجاوز الحظر</span></div></div>
-</div>
-<div class="stats" id="statsSection">
-<div class="stat"><div class="stat-num"><span class="stat-plus">+</span><span data-target="8420">0</span></div><div class="stat-label">عميل تمت مساعدته</div></div>
-<div class="stat"><div class="stat-num"><span data-target="98">0</span><span class="stat-plus">%</span></div><div class="stat-label">نسبة نجاح</div></div>
-<div class="stat"><div class="stat-num"><span data-target="24">0</span><span class="stat-plus">/7</span></div><div class="stat-label">دعم متواصل</div></div>
-<div class="stat"><div class="stat-num"><span class="stat-plus">+</span><span data-target="5">0</span></div><div class="stat-label">سنوات خبرة</div></div>
-</div>
-</section>
-<footer class="footer"><strong>RIM_NEX</strong> — مركز حل مشاكل الحسابات المحظورة<br>© 2026 RIM_NEX</footer>
+  <section class="hero">
+    <h1>RIM_<span>NEX</span></h1>
+    <p class="hero-sub">حل مشاكل الحسابات المحظورة بسرعة.</p>
+    <div class="hero-line"></div>
+  </section>
+  <section class="form-wrap reveal-anim" id="mainForm">
+    <div class="section-label"><i></i> الخطوة 1 — اختر المنصة</div>
+    <h2 class="section-title">أين تواجه المشكلة؟</h2>
+    <div class="platforms" id="platforms">
+      <div class="platform-card" data-platform="Instagram">
+        <div class="check-badge">✓</div>
+        <div class="icon-box">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="name">Instagram</div>
+        <div class="sub">استرجاع و حظر</div>
+      </div>
+      <div class="platform-card" data-platform="Facebook">
+        <div class="check-badge">✓</div>
+        <div class="icon-box">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V3h-3c-3.3 0-6 2.7-6 6v3H5v5h3v5h5v-5h3l1-5h-4V9c0-.6.4-1 1-1z"/></svg>
+        </div>
+        <div class="name">Facebook</div>
+        <div class="sub">تعطيل الحساب</div>
+      </div>
+      <div class="platform-card" data-platform="TikTok">
+        <div class="check-badge">✓</div>
+        <div class="icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-1.92V15a5.5 5.5 0 1 1-5.5a5.4 5.4 0 0 1 1.05.1V12a2.9 2.9 0 1 0 2.9 2.9V2h3.32a4.8 4.8 0 0 0 2 3.69Z"/></svg>
+        </div>
+        <div class="name">TikTok</div>
+        <div class="sub">حظر مباشر</div>
+      </div>
+      <div class="platform-card" data-platform="Snapchat">
+        <div class="check-badge">✓</div>
+        <div class="icon-box">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c-1.2 0-2.3.7-3 1.7a5 5 0 0 0-.6 2.3c0 1.5 2.5 2s-1.1.3-2.8c-.9.5-1.9 1.4-1.9 2.7c0 1.2.9 1.9 2 2.1c.3 0.5.2.4.5c-.1.5-.4 1.6.8 2.4c1.2.8 2.6.3 3.2c.4 0.8.4 1.8.4s1.4-.4 1.8-.4c.4.1 1.8.6 3-.2c1.2-.8.9-1.9.8-2.4c-.1-.3.1-.5.4-.5c1.1-.2 2-.9 2-2.1c0-1.3-1-2.2-1.9-2.7c-.9-.5-2-.8-2-.8s.5-1.5-2a5 5 0 0 0-.6-2.3C14.3 3.7 13.2 3 12 3z"/></svg>
+        </div>
+        <div class="name">Snapchat</div>
+        <div class="sub">قفل مؤقت</div>
+      </div>
+      <div class="platform-card" data-platform="WhatsApp">
+        <div class="check-badge">✓</div>
+        <div class="icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.05 4.94A9.82 9.82 0 0 0 12.04 2C6.58 2 2.15 6.43 2.15 10.9c0 1.57.41 3.1 1.18 4.45L2 22l6.84-1.79A9.8 9.8 0 0 0 12.04 21c5.46 0 9.89-4.43 9.89-9.9c0-2.65-1.03-5.14-2.88-7.16ZM12.04 19.13a8 8 0 0 1-4.08-1.11l-.29-.18l-4.06 1.06l1.09-3.96l-.19-.31A8.03 0 0 1 3.96 10.9C3.96 6.45 7.59 3.82 12.04 3.82a8.08 0 0 1 5.72 2.37a8.05 8.05 0 0 1 2.37 5.71c0 4.46-3.63 8.08-8.09 8.23ZM16.6 13.33c-.25-.13-1.48-.73-1.71-.82c-.23-.08-.4-.13-.57.13c-.17.25-.66.82-.81.99c-.15.17-.3.19-.55.06c-.25-.13-1.05-.39-2-1.24c-.74-.66-1.24-1.47-1.38-1.72c-.15-.25-.02-.38.11-.51c.11-.11.25-.29.37-.44c.13-.15.17-.25.25-.42c.08-.17.04-.31-.02-.44c-.06-.13-.57-1.38-.78-1.89c-.21-.5-.42-.43-.57-.44h-.49c-.17 0-.44.06-.68.31c-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.6c.13.17 1.77 2.7 4.29 3.79c.6.26 1.07.41 1.43.53c.6.19 1.15.16 1.58.1c.48-.07 1.48-.6 1.69-1.19c.21-.58.21-1.08.15-1.19c-.07-.1-.23-.16-.48-.29Z"/></svg>
+        </div>
+        <div class="name">WhatsApp</div>
+        <div class="sub">حظر الرقم</div>
+      </div>
+      <div class="platform-card" data-platform="IP Ban">
+        <div class="check-badge">✓</div>
+        <div class="icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0.33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 0 0 0-1.82-.33a1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51a1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 0 0 0 9 15a1.65 1.65 0 0 0-1-1.51V13a2 2 0 0 1 0-4v-.49a1.65 1.65 0 0 0 1-1.51a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 13.32 2a1.65 1.65 0 0 0 1-1.51V0a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 15 9v.49a1.65 1.65 0 0 0 1 1.51Z"/></svg>
+        </div>
+        <div class="name">IP Ban</div>
+        <div class="sub">حظر الشبكة</div>
+      </div>
+    <div class="reveal" id="step2">
+      <div class="section-label" style="margin-top:4px"><i></i> الخطوة 2 — نوع المشكلة</div>
+      <div class="select-wrap">
+        <select id="problemType">
+          <option value="" disabled selected>اختر نوع المشكلة</option>
+          <option>تم تعطيل الحساب</option>
+          <option>الحساب محظور</option>
+          <option>نسيت كلمة المرور</option>
+          <option>لا يصل رمز التحقق</option>
+          <option>مشكلة تسجيل الدخول</option>
+          <option>تم اختراق الحساب</option>
+          <option>حظر IP</option>
+          <option>مشكلة أخرى</option>
+        </select>
+        <div class="select-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="section-label" style="margin-top:28px"><i></i> الخطوة 3 — وصف المشكلة</div>
+      <div class="textarea-wrap">
+        <textarea id="desc" placeholder="اكتب وصف المشكلة بالتفصيل... مثلاً متى تم الحظر، ما الرسالة التي تظهر لك، هل جربت حلول سابقة؟"></textarea>
+        <div class="textarea-foot"><span>كلما كان الوصف دقيقاً، كان الحل أسرع</span><span id="charCount">0 حرف</span></div>
+      </div>
+      <button class="btn-gold" id="submitBtn">
+        <span>الحصول على المساعدة</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+      </button>
+      <p style="text-align:center;margin-top:14px;font-size:11px;color:var(--muted-2)">سيتم تحويلك مباشرة إلى فريق الدعم على Telegram</p>
+    </div>
+  </section>
+  <section class="features">
+    <div class="stats reveal-anim" id="statsSection">
+      <div class="stat"><div class="stat-num"><span class="stat-plus">+</span><span data-target="8420">0</span></div><div class="stat-label">عميل تمت مساعدته</div></div>
+      <div class="stat"><div class="stat-num"><span data-target="98">0</span><span class="stat-plus">%</span></div><div class="stat-label">نسبة نجاح الحلول</div></div>
+      <div class="stat"><div class="stat-num"><span data-target="24">0</span><span class="stat-plus">/7</span></div><div class="stat-label">دعم فني متواصل</div></div>
+      <div class="stat"><div class="stat-num"><span class="stat-plus">+</span><span data-target="5">0</span></div><div class="stat-label">سنوات خبرة</div></div>
+    </div>
+  </section>
+  <footer class="footer">
+    <strong>RIM_NEX</strong> — مركز حل مشاكل الحسابات المحظورة<br>
+    <span style="display:inline-block;margin-top:8px;opacity:.6">© 2026 RIM_NEX. جميع الحقوق محفوظة. تصميم فاخر.</span>
+  </footer>
 </main>
 <script>
-const platforms=document.querySelectorAll('.platform-card');
-const step2=document.getElementById('step2');
-const problemType=document.getElementById('problemType');
-const desc=document.getElementById('desc');
-const charCount=document.getElementById('charCount');
-const submitBtn=document.getElementById('submitBtn');
-let selectedPlatform=null;
+const platforms = document.querySelectorAll('.platform-card');
+const step2 = document.getElementById('step2');
+const problemType = document.getElementById('problemType');
+const desc = document.getElementById('desc');
+const charCount = document.getElementById('charCount');
+const submitBtn = document.getElementById('submitBtn');
+let selectedPlatform = null;
 platforms.forEach(card=>{
-  card.addEventListener('click',()=>{
+  card.addEventListener('mousemove', e=>{
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--x', (e.clientX - r.left)+'px');
+    card.style.setProperty('--y', (e.clientY - r.top)+'px');
+  });
+  card.addEventListener('click', ()=>{
     platforms.forEach(c=>c.classList.remove('selected'));
     card.classList.add('selected');
-    selectedPlatform=card.dataset.platform;
+    selectedPlatform = card.dataset.platform;
     step2.classList.add('show');
-    setTimeout(()=>{step2.scrollIntoView({behavior:'smooth'})},250);
+    setTimeout(()=>{ step2.scrollIntoView({behavior:'smooth', block:'start'}); }, 250);
   });
 });
-desc.addEventListener('input',()=>{charCount.textContent=desc.value.length+' حرف';});
-function showToast(type,title,msg){
-  const container=document.getElementById('toastContainer');
-  const toast=document.createElement('div');
-  toast.className=`toast ${type}`;
-  toast.innerHTML=`<div><b>${title}</b><br><span style="font-size:12px;opacity:.7">${msg}</span></div>`;
-  container.appendChild(toast);
-  requestAnimationFrame(()=>toast.classList.add('show'));
-  setTimeout(()=>{toast.classList.remove('show');setTimeout(()=>toast.remove(),500)},3500);
-}
-submitBtn.addEventListener('click',()=>{
-  if(!selectedPlatform){showToast('error','اختر المنصة','يجب اختيار منصة واحدة');return;}
-  if(!problemType.value){showToast('error','نوع المشكلة مطلوب','اختر نوع المشكلة');return;}
-  if(desc.value.trim().length<10){showToast('error','الوصف قصير','اكتب 10 أحرف على الأقل');return;}
-  showToast('success','تم تجهيز طلبك','سيتم تحويلك إلى Telegram');
-  setTimeout(()=>{window.open('https://t.me/RIM_NEX2','_blank');},900);
+desc.addEventListener('input', ()=>{
+  charCount.textContent = desc.value.length + ' حرف';
 });
-const statNumbers=document.querySelectorAll('[data-target]');
-let counted=false;
-const observer=new IntersectionObserver((entries)=>{
+function showToast(type, title, msg){
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${type==='error'? '!' : '✓'}</div>
+    <div class="toast-text"><b>${title}</b><span>${msg}</span></div>
+  `;
+  container.appendChild(toast);
+  requestAnimationFrame(()=> toast.classList.add('show'));
+  setTimeout(()=>{ toast.classList.remove('show'); setTimeout(()=>toast.remove(), 500)}, 3500);
+}
+submitBtn.addEventListener('click', ()=>{
+  if(!selectedPlatform){
+    showToast('error','اختر المنصة أولاً','يجب اختيار منصة واحدة من القائمة أعلاه');
+    document.getElementById('platforms').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  if(!problemType.value){
+    showToast('error','نوع المشكلة مطلوب','الرجاء اختيار نوع المشكلة من القائمة');
+    problemType.focus();
+    problemType.style.borderColor = 'rgba(255,80,80,.5)';
+    setTimeout(()=> problemType.style.borderColor='', 2000);
+    return;
+  }
+  if(desc.value.trim().length < 10){
+    showToast('error','الوصف قصير جداً','اكتب وصف المشكلة بالتفصيل (10 أحرف على الأقل)');
+    desc.focus();
+    desc.style.borderColor = 'rgba(255,80,80,.5)';
+    setTimeout(()=> desc.style.borderColor='', 2000);
+    return;
+  }
+  submitBtn.innerHTML = `<span>جاري التحويل...</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg>`;
+  showToast('success','تم تجهيز طلبك','سيتم تحويلك الآن إلى فريق الدعم على Telegram');
+  setTimeout(()=>{
+    window.open('https://t.me/RIM_NEX2', '_blank');
+    submitBtn.innerHTML = `<span>الحصول على المساعدة</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>`;
+  }, 900);
+});
+const statNumbers = document.querySelectorAll('[data-target]');
+let counted = false;
+const observer = new IntersectionObserver((entries)=>{
   if(entries[0].isIntersecting &&!counted){
-    counted=true;
+    counted = true;
     statNumbers.forEach(el=>{
-      const target=+el.dataset.target;let cur=0;const inc=target/60;
-      const update=()=>{cur+=inc;if(cur<target){el.textContent=Math.floor(cur);requestAnimationFrame(update);}else el.textContent=target;};
+      const target = +el.dataset.target;
+      let cur = 0;
+      const inc = target / 60;
+      const update = ()=>{
+        cur += inc;
+        if(cur < target){ el.textContent = Math.floor(cur).toLocaleString('en-US'); requestAnimationFrame(update); }
+        else el.textContent = target.toLocaleString('en-US');
+      };
       update();
     });
   }
 },{threshold:.4});
 observer.observe(document.getElementById('statsSection'));
+const revealEls = document.querySelectorAll('.reveal-anim');
+const revObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('in');
+  });
+},{threshold:.12});
+revealEls.forEach(el=> revObserver.observe(el));
+const style = document.createElement('style');
+style.textContent = '@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}';
+document.head.appendChild(style);
 </script>
 </body>
 </html>
