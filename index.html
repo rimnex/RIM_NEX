@@ -3,133 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RIM_NEX - Gold</title>
+<title>RIM_NEX - حل مشاكل الحسابات المحظورة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#070707;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:20px 14px;font-family:system-ui,-apple-system,'Cairo',Arial,sans-serif;color:#EDE8D8}
-.card{width:100%;max-width:390px;background:#16130E;border:1px solid rgba(212,175,55,0.22);border-radius:26px;padding:24px 18px 18px;box-shadow:0 20px 60px rgba(0,0,0,0.8)}
-.title-row{display:flex;align-items:center;justify-content:center;gap:10px}
-h1{font-size:34px;font-weight:900;color:#E9C86A;letter-spacing:.5px;line-height:1}
-.shield{width:32px;height:32px;border-radius:9px;background:linear-gradient(180deg,#FFFFFF 0%,#D1D5DB 45%,#9CA3AF 100%);display:grid;place-items:center;border:1px solid #E5E7EB;box-shadow:0 2px 8px rgba(255,255,255,0.18);font-size:17px;flex-shrink:0}
-.sub{text-align:center;color:#8F8A7E;font-size:11.5px;letter-spacing:1px;margin:6px 0 22px}
-.box{background:#201D14;border:1px solid rgba(212,175,55,0.13);border-radius:15px;padding:13px 14px;margin-bottom:11px}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
-.toggle-row span{font-size:13.5px;font-weight:700;color:#E6DDC2}
-.switch{width:50px;height:28px;background:#2B2920;border-radius:28px;position:relative;transition:.25s;border:1px solid rgba(255,255,255,0.06);flex-shrink:0}
-.switch::after{content:'';position:absolute;width:22px;height:22px;background:#fff;border-radius:50%;top:2px;right:2px;transition:.25s;box-shadow:0 1px 5px rgba(0,0,0,.4)}
-.switch.on{background:linear-gradient(90deg,#FDE68A,#D4AF37 60%,#8C6B14);box-shadow:0 0 12px rgba(212,175,55,.3)}
-.switch.on::after{transform:translateX(-22px);background:#111}
-.label{color:#A69F8E;font-size:11.5px;margin:16px 4px 7px}
-.select-wrap{position:relative}
-.select{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-.select-right{display:flex;align-items:center;gap:10px}
-.badge{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#FFF2A8,#D4AF37 55%,#9C7A14);color:#1A1400;display:grid;place-items:center;font-weight:800;font-size:16px;border:1px solid rgba(255,255,255,0.25)}
-#app-name{font-size:14px;font-weight:700;color:#E8DCC0}
-.arrow{color:#6A665C;font-size:10px;transition:.2s}
-.select.open.arrow{transform:rotate(180deg)}
-.dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;left:0;background:#1D1A12;border:1px solid rgba(212,175,55,0.18);border-radius:14px;overflow:hidden;z-index:20;box-shadow:0 14px 36px rgba(0,0,0,.6)}
-.dropdown.show{display:block}
-.dropdown-item{padding:11px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;color:#CFC6B0;font-size:13.5px;font-weight:600}
-.dropdown-item:hover{background:rgba(212,175,55,0.08)}
-.dropdown-item.active{background:rgba(212,175,55,0.13);color:#FFE99A}
-.upload{border:1.5px dashed rgba(212,175,55,0.28);border-radius:14px;padding:18px 12px;text-align:center;color:#9A9588;font-size:13px;cursor:pointer;margin-bottom:11px;display:block;background:#1C1911;line-height:1.6;transition:.2s}
-.upload:hover{border-color:#D4AF37;background:rgba(212,175,55,0.06)}
-.file-name{color:#FFEB85;font-size:10.5px;margin-top:7px;display:none;word-break:break-all;background:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.18);padding:5px 8px;border-radius:7px}
-.input-wrap{position:relative;margin-bottom:12px}
-.input-wrap input{width:100%;background:#201D14;border:1px solid rgba(212,175,55,0.14);border-radius:14px;padding:13px 14px;color:#fff;text-align:right;font-size:13.5px;outline:none;font-family:inherit}
-.input-wrap input::placeholder{color:#7A756C}
-.input-wrap input:focus{border-color:rgba(212,175,55,0.42)}
-.btn{width:100%;display:block;background:linear-gradient(90deg,#FFF0A0 0%,#FFDF6E 20%,#D4AF37 50%,#B78E1E 90%);border:none;border-radius:14px;padding:14px;font-size:16px;font-weight:800;color:#1A1400;cursor:pointer;box-shadow:0 6px 18px rgba(180,135,40,0.32);transition:.18s}
-.btn:active{transform:scale(0.98)}
-.btn:disabled{opacity:0.7}
-.tg{margin-top:11px;display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:#1C1911;border:1px solid rgba(212,175,55,0.16);border-radius:13px;padding:11px;color:#B8B0A0;text-decoration:none;font-size:12.5px;font-weight:700;transition:.2s}
-.tg:hover{background:rgba(212,175,55,0.08);color:#FFE9A0;border-color:rgba(212,175,55,0.28)}
-.tg svg{width:16px;height:16px}
-input[type=file]{display:none}
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(90px);background:#221E15;color:#F5E9C0;padding:10px 14px;border-radius:10px;font-size:12px;border:1px solid rgba(212,175,55,0.2);opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
+:root{
+  --bg:#0d0d0d;
+  --card:#171717;
+  --border:rgba(255,255,255,.08);
+  --gold:#d4af37;
+  --gold-dark:#b8962f;
+  --text:#f5f5f5;
+  --muted:#a1a1a1;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif}
+body{background:radial-gradient(800px 600px at 50% -20%, rgba(212,175,55,0.08), transparent 70%), var(--bg);color:var(--text);overflow-x:hidden}
+.glass{background:rgba(23,23,23,0.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--border);border-radius:20px}
+
+.container{max-width:650px;margin:0 auto;padding:24px 16px}
+
+/* Header */
+.header{text-align:center;padding:50px 20px 35px}
+.logo{
+  width:80px;height:80px;margin:0 auto 16px;
+  background:linear-gradient(135deg,#d4af37,#e6c757);
+  border-radius:20px;display:flex;align-items:center;justify-content:center;
+  font-size:36px;font-weight:800;color:#000;box-shadow:0 0 30px rgba(212,175,55,.4);
+  animation:float 3s ease-in-out infinite
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.header h1{
+  font-size:44px;font-weight:800;letter-spacing:2px;
+  background:linear-gradient(90deg,#fff,#d4af37,#fff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:shine 3s infinite;
+}
+@keyframes shine{0%,100%{filter:brightness(1)}50%{filter:brightness(1.4)}}
+.header p{color:var(--muted);margin-top:10px;font-size:15px}
+
+/* Platform Cards */
+.section{margin-bottom:28px}
+.section-title{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--gold)}
+.platforms{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.platform{
+  padding:20px 12px;text-align:center;cursor:pointer;transition:.35s cubic-bezier(.4,0,.2,1);
+  position:relative
+}
+.platform svg{width:32px;height:32px;margin-bottom:8px;fill:var(--muted);transition:.3s}
+.platform:hover{transform:translateY(-4px)}
+.platform.active{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 0 25px rgba(212,175,55,.4)}
+.platform.active svg{fill:var(--gold)}
+.platform .name{font-size:13px;font-weight:700}
+
+/* Form */
+.field{margin-bottom:18px}
+select,textarea{
+  width:100%;padding:16px;background:var(--card);border:1px solid var(--border);
+  border-radius:14px;color:var(--text);font-size:14px;outline:none;transition:.3s;resize:none
+}
+select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.12)}
+textarea{min-height:130px}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg fill='%23d4af37' height='24' viewBox='0 0 24 24' width='24' xmlns=N/A%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 16px center}
+
+/* Button */
+.btn{
+  width:100%;padding:18px;background:linear-gradient(90deg,var(--gold),#e6c757);
+  border:none;border-radius:14px;color:#000;font-size:17px;font-weight:800;
+  cursor:pointer;transition:.3s;box-shadow:0 8px 25px rgba(212,175,55,.3);position:relative;overflow:hidden
+}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:.5s}
+.btn:hover::before{left:100%}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(212,175,55,.4)}
+
+/* Features */
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.feature{padding:18px;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;transition:.3s}
+.feature:hover{border-color:var(--gold)}
+.feature .check{color:var(--gold);font-size:20px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:center}
+.stat{padding:22px}
+.stat .num{font-size:32px;font-weight:800;color:var(--gold)}
+.stat .label{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--card);border:1px solid var(--border);padding:14px 22px;
+  border-radius:12px;opacity:0;transition:.4s;z-index:999;font-size:14px;font-weight:600
+}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.note{margin-top:10px;text-align:center;color:#8E8878;font-size:11px;line-height:1.6;background:rgba(212,175,55,0.06);border:1px dashed rgba(212,175,55,0.18);border-radius:10px;padding:8px 10px;display:none}
+.toast.error{border-color:#ef4444;color:#ef4444}
+.toast.success{border-color:var(--gold);color:var(--gold)}
+
+@media(min-width:768px){
+  .platforms{grid-template-columns:repeat(6,1fr)}
+  .features{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="title-row">
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">R</div>
     <h1>RIM_NEX</h1>
-    <div class="shield">🛡️</div>
-  </div>
-  <div class="sub">IPA Signing Center</div>
-
-  <div class="box toggle-row" id="toggleBox"><div class="switch on" id="sw"></div><span>الشهادة المجانية</span></div>
-
-  <div class="label">اختر تطبيق التوقيع</div>
-  <div class="select-wrap">
-    <div class="box select" id="selBtn"><span class="arrow">▼</span><div class="select-right"><span id="appName">ESign</span><div class="badge" id="appBadge">E</div></div></div>
-    <div class="dropdown" id="dd">
-      <div class="dropdown-item active" data-l="E" data-n="ESign"><div class="badge">E</div> ESign</div>
-      <div class="dropdown-item" data-l="K" data-n="KSign"><div class="badge">K</div> KSign</div>
-      <div class="dropdown-item" data-l="S" data-n="Scarlet"><div class="badge">S</div> Scarlet</div>
-      <div class="dropdown-item" data-l="G" data-n="GBox"><div class="badge">G</div> GBox</div>
-      <div class="dropdown-item" data-l="F" data-n="Feather"><div class="badge">F</div> Feather</div>
-    </div>
+    <p>حل مشاكل الحسابات المحظورة بسرعة</p>
   </div>
 
-  <label class="upload" id="a1" for="p12">📁 اضغط لرفع P12 Certificate<div class="file-name" id="n1"></div></label>
-  <input type="file" id="p12" accept=".p12,.pfx">
-  <label class="upload" id="a2" for="mob">📄 اضغط لرفع Provision Profile<div class="file-name" id="n2"></div></label>
-  <input type="file" id="mob" accept=".mobileprovision">
-
-  <div class="input-wrap"><input type="password" id="pw" placeholder="كلمة سر الشهادة" required></div>
-
-  <button class="btn" id="go">بدء التوقيع</button>
-  <div class="note" id="note">إذا لم تظهر نافذة التثبيت، تأكد من فتح الصفحة في <b>Safari</b> وليس داخل تليجرام.</div>
-
-  <a class="tg" href="https://t.me/ChatPUBG_RIM" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm3.95 7.2-.9 4.26c-.13.57-.48.71-.97.44l-2.69-1.98-1.3 1.25c-.14.14-.26.26-.53.26l.19-2.7 4.9-4.43c.21-.19-.05-.3-.33-.11L8.8 10.5l-2.8-.88c-.6-.19-.62-.6.13-.89l10.9-4.2c.5-.18.94.11.78.89Z"/></svg>
-    قناتي تلجرام
-  </a>
-</div>
-
-<div class="toast" id="toast"></div>
-<script>
-const $=id=>document.getElementById(id);
-const selBtn=$('selBtn'),dd=$('dd'),badge=$('appBadge'),appName=$('appName'),sw=$('sw'),tog=$('toggleBox');
-function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
-selBtn.onclick=e=>{e.stopPropagation();dd.classList.toggle('show');selBtn.classList.toggle('open')};
-document.querySelectorAll('.dropdown-item').forEach(it=>{it.onclick=e=>{e.stopPropagation();badge.textContent=it.dataset.l;appName.textContent=it.dataset.n;document.querySelectorAll('.dropdown-item').forEach(x=>x.classList.remove('active'));it.classList.add('active');dd.classList.remove('show');selBtn.classList.remove('open');toast('تم اختيار '+it.dataset.n)}});
-document.addEventListener('click',()=>{dd.classList.remove('show');selBtn.classList.remove('open')});
-let free=true;tog.onclick=()=>{free=!free;sw.classList.toggle('on',free);toast(free?'الشهادة المجانية مفعلة':'الشهادة المدفوعة مفعلة')};
-function bind(inpId,nameId,areaId){const inp=$(inpId),nm=$(nameId),ar=$(areaId);inp.onchange=e=>{const f=e.target.files[0];if(f){nm.textContent='✦ '+f.name;nm.style.display='block';ar.style.borderColor='#D4AF37'}};['dragenter','dragover'].forEach(ev=>ar.addEventListener(ev,e=>{e.preventDefault();ar.style.borderColor='#D4AF37'}));['dragleave','drop'].forEach(ev=>ar.addEventListener(ev,e=>{e.preventDefault()}));ar.addEventListener('drop',e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(f){inp.files=e.dataTransfer.files;nm.textContent='✦ '+f.name;nm.style.display='block'}})}
-bind('p12','n1','a1');bind('mob','n2','a2');
-
-const plistMap = {
-  'ESign': 'https://rim-nex.vercel.app/ESign.plist',
-  'KSign': 'https://rim-nex.vercel.app/KSign.plist',
-  'Scarlet': 'https://rim-nex.vercel.app/Scarlet.plist',
-  'GBox': 'https://rim-nex.vercel.app/GBox.plist',
-  'Feather': 'https://rim-nex.vercel.app/Feather.plist'
-};
-
-$('go').onclick=()=>{
-  const a=$('p12').files[0],b=$('mob').files[0],p=$('pw').value.trim();
-  if(!a||!b){toast('يرجى رفع الملفين');return}
-  if(!p){toast('كلمة السر مطلوبة');$('pw').focus();return}
-  const btn=$('go');
-  const selectedApp = appName.textContent.trim();
-  const plistUrl = plistMap[selectedApp] || plistMap['ESign'];
-
-  btn.disabled=true;
-  btn.textContent='جاري التوقيع...';
-
-  setTimeout(()=>{
-    toast('تم التوقيع بواسطة '+selectedApp+' ✓ جاري التثبيت...');
-    $('note').style.display='block';
-    setTimeout(()=>{
-      window.location.href = 'itms-services://?action=download-manifest&url=' + encodeURIComponent(plistUrl);
-      btn.disabled=false;
-      btn.textContent='بدء التوقيع';
-    },700);
-  },1200);
-};
-</script>
-</body>
-</html>
+  <!-- Platform Selection -->
+  <div class="section">
+    <div class="section-title">اختر المنصة</div>
+    <div class="platforms">
+      <div class="platform glass" data-platform="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+        <div class="name">Instagram</div>
+      </div>
+      <div class="platform glass" data-platform="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.294h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+        <div class="name">Facebook</div>
+      </div>
+      <div class="platform glass" data-platform="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 2.038-3.72 3.316-6.152 3.266-1.23-.02-2.44-.35-3.5-.98-1.82-.93-3.21-2.53-3.89-4.46-.36-1.03-.52-2.12-.48-3.21.03-1.54.34-3.04 1.06-4.38.72-1.34 1.8-2.43 3.08-3.23.64-.4 1.34-.67 2.07-.89.72-.22 1.47-.32 2.22-.32.18 0 .35.01.53.01v4.02c-.53-.02-1.07.01-1.59.13-.64.14-1.22.49-1.7.94-.48.45-.82 1.03-.98 1.68-.16.64-.18 1.3-.1 1.95.11.64.35 1.24.67 1.77.32.53.73.97 1.22 1.32.48.35 1.04.58 1.63.66.6.08 1.2.01 1.77-.18.57-.2 1.08-.5 1.53-.89.45-.39.82-.87 1.1-1.4.28-.53.47-1.1.54-1.7.06-.6.02-1.2-.09-1.79-.11-.59-.3-1.15-.57-1.67-.27-.52-.6-.98-.99-1.39-.39-.41-.84-.75-1.35-1.02-.51-.27-1.06-.46-1.64-.56-.58-.1-1.17-.11-1.75-.01z"/></svg>
+        <div class="name">TikTok</div>
+      </div>
+      <div class="platform glass" data-platform="Snapchat">
+        <svg viewBox="0 0 24 24"><path d="M12.017 0c-4.725 0-8.56 3.816-8.56 8.539 0 1.495.419 2.932 1.208
