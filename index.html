@@ -660,79 +660,6 @@
             to { opacity: 0; transform: translateY(20px) scale(0.95); }
         }
 
-        /* Features Section */
-        .features-section {
-            margin-top: 120px;
-        }
-        .section-title {
-            text-align: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -1px;
-        }
-        .section-desc {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 16px;
-            margin-bottom: 60px;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 24px;
-        }
-        @media (min-width: 768px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 1024px) {
-            .features-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        .feature-card {
-            background: rgba(23, 23, 23, 0.5);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.3);
-            background: rgba(23, 23, 23, 0.8);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        .feature-check {
-            width: 40px;
-            height: 40px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--border-gold);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .feature-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .feature-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
         /* Statistics Section */
         .stats-section {
             margin-top: 120px;
@@ -771,6 +698,20 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+        }
+        .section-title {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+        .section-desc {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 60px;
         }
         .faq-accordion {
             display: flex;
@@ -1062,45 +1003,6 @@
                 </div>
             </form>
         </div>
-
-        <!-- Features Section -->
-        <section class="features-section reveal">
-            <h2 class="section-title">لماذا RIM_NEX؟</h2>
-            <p class="section-desc">نقدم لك حلولاً جذرية وآمنة بالكامل لاستعادة حساباتك الرقمية</p>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-check">✓</div>
-                    <h3>سرعة فائقة</h3>
-                    <p>استجابة فورية لطلبك والبدء في معالجة المشكلة خلال دقائق معدودة من الإرسال.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-check">✓</div>
-                    <h3>نسبة نجاح عالية</h3>
-                    <p>خبرة واسعة في التعامل مع خوارزميات المنصات ودعم العملاء الرسميين بنجاح تام.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-check">✓</div>
-                    <h3>أمان وحماية تامة</h3>
-                    <p>نحافظ على سرية بياناتك وخصوصية حساباتك بشكل كامل دون أي مخاطر.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-check">✓</div>
-                    <h3>دعم متواصل 24/7</h3>
-                    <p>فريق متخصص جاهز لمساعدتك في أي وقت على مدار الساعة طوال أيام الأسبوع.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-check">✓</div>
-                    <h3>حلول لجميع المنصات</h3>
-                    <p>دعم شامل لكل تطبيقات التواصل الاجتماعي ومنصات الألعاب وشبكات الإنترنت.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-check">✓</div>
-                    <h3>استشارة مجانية</h3>
-                    <p>تقييم مجاني لحالة حسابك وإرشادك لأفضل الطرق المتاحة لاسترجاعه بأمان.</p>
-                </div>
-            </div>
-        </section>
 
         <!-- Statistics Section -->
         <section class="stats-section reveal">
