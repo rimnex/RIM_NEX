@@ -9,7 +9,7 @@
             --primary: #6366f1;
             --primary-glow: rgba(99, 102, 241, 0.4);
             --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.75);
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
             --accent: #10b981;
@@ -26,10 +26,10 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             min-height: 100vh;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -38,7 +38,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -71,10 +71,10 @@
             color: var(--primary);
         }
 
-        /* Main Container & Spacing */
+        /* Main Container */
         main {
-            margin-top: 100px;
-            padding: 2rem 1rem;
+            margin-top: 90px;
+            padding: 3rem 1rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -123,8 +123,44 @@
             box-shadow: 0 6px 25px var(--primary-glow);
         }
 
-        /* Form / Service Section */
-        .service-card {
+        /* Features / Services Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 1rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Service Form Section */
+        .service-section {
             background: var(--card-bg);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -136,7 +172,7 @@
             text-align: center;
         }
 
-        .service-card h2 {
+        .service-section h2 {
             margin-bottom: 1.5rem;
             font-size: 2rem;
         }
@@ -186,7 +222,7 @@
 
         /* Footer */
         footer {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             padding: 1.5rem;
@@ -215,19 +251,38 @@
         <div class="logo">RIM_NEX</div>
         <ul class="nav-links">
             <li><a href="#">الرئيسية</a></li>
+            <li><a href="#features">المميزات</a></li>
             <li><a href="#service">فحص الحساب</a></li>
             <li><a href="https://t.me/YourTelegramChannel" target="_blank">دعم تليجرام</a></li>
         </ul>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero">
             <h1>استعد حسابك المحظور بكفاءة واحترافية</h1>
             <p>منصة RIM_NEX المتقدمة لحل مشاكل الحسابات وتقديم الدعم الفني السريع والآمن عبر قنوات اتصال مباشرة.</p>
             <a href="https://t.me/YourTelegramChannel" target="_blank" class="btn">تواصل عبر تليجرام</a>
         </section>
 
-        <section id="service" class="service-card">
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="feature-card">
+                <h3>دعم فوري</h3>
+                <p>متابعة سريعة لحل جميع مشاكل الحظر واستعادة الحسابات بدقة عالية.</p>
+            </div>
+            <div class="feature-card">
+                <h3>أمان تام</h3>
+                <p>حماية كاملة لبياناتك الشخصية وسرية تامة في التعامل مع الحالات.</p>
+            </div>
+            <div class="feature-card">
+                <h3>خبرة احترافية</h3>
+                <p>فريق متخصص لتقديم الاستشارات وحل عوائق منصات التواصل الاجتماعي.</p>
+            </div>
+        </section>
+
+        <!-- Service / Form Section -->
+        <section id="service" class="service-section">
             <h2>فحص حالة الحساب</h2>
             <form id="checkForm">
                 <div class="form-group">
